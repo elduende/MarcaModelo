@@ -20,6 +20,8 @@ namespace MarcaModelo.WinForm.Models
         private readonly IMarcaRepository marcaRepository;
         private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
         private readonly RelayCommand imprimirCommand;
+        private readonly RelayCommand agregarCommand;
+        private readonly RelayCommand modificarCommand;
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
         {
@@ -43,12 +45,24 @@ namespace MarcaModelo.WinForm.Models
             });
             
             imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
+            agregarCommand = new RelayCommand(Agregar);
+            modificarCommand = new RelayCommand(Modificar);
         }
 
         public RelayCommand CloseCommand { get; set; }
         public ICommand ImprimirCommand
         {
             get { return imprimirCommand; }
+        }
+
+        public ICommand AgregarCommand
+        {
+            get { return agregarCommand; }
+        }
+
+        public ICommand ModificarCommand
+        {
+            get { return modificarCommand; }
         }
 
         public BindingList<MarcaViewModel> Marcas
@@ -76,6 +90,22 @@ namespace MarcaModelo.WinForm.Models
         {
             var marca = new Marca();
             exposer.Expose<MarcaReportViewModel>(m => { m.Marca = marca; m.Initialize(); });
+        }
+
+        public void Agregar()
+        {
+            Marca marca = new Marca();
+            marca.Descripcion = "x";//txtDescripcion.Text
+            marca.Estado = "A";
+            marcaRepository.Persist(marca);
+        }
+
+        public void Modificar()
+        {
+            Marca marca = new Marca();
+            marca.Descripcion = "x";//txtDescripcion.Text
+            marca.Estado = "A";
+            marcaRepository.Persist(marca);
         }
     }
 }

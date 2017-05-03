@@ -10,8 +10,12 @@ namespace MarcaModelo.WinForm
         {
             InitializeComponent();
             this.Bind(model);
-            btnCerrar.Bind(model.CloseCommand);
+
+            btnAgregar.Bind(model.AgregarCommand);
+            btnModificar.Bind(model.ModificarCommand);
             btnImprimir.Bind(model.ImprimirCommand);
+            btnCerrar.Bind(model.CloseCommand);
+
             dGV.BindSource(model, m => m.Marcas);
         }
     }
