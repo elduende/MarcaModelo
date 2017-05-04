@@ -16,43 +16,29 @@ namespace MarcaModelo.WinForm.Models
         public int IDMarca { get; set; }
         [DisplayName("Descripción")]
         [ReadOnly(false)]
-        [MinLength(5, ErrorMessage = "Mínimo 5 caracteres, máximo 50")]
-        [MaxLength(50, ErrorMessage = "Mínimo 5 caracteres, máximo 50")]
+        [MinLength(2, ErrorMessage = "Mínimo 2 caracteres, máximo 50")]
+        [MaxLength(50, ErrorMessage = "Mínimo 2 caracteres, máximo 50")]
         public string Descripcion { get; set; }
         [DisplayName("Estado")]
         [ReadOnly(true)]
         [Hidden(true)]
         public string Estado { get; set; }
-
-        IEnumerable<Marca> GetMarcas { get; set; }
-
-        //[DisplayName("Estado")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public string IDUsuarioCreacion { get; set; }
-        //[DisplayName("Usuario de Creación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public int FechaCreacion { get; set; }
-        //[DisplayName("Fecha de Creación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public string HoraCreacion { get; set; }
-        //[DisplayName("Hora de Creación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public string IDUsuarioUltimaModificacion { get; set; }
-        //[DisplayName("Usuario de Última Modificación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public int FechaUltimaModificacion { get; set; }
-        //[DisplayName("Fecha de Última Modificación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public string HoraUltimaModificacion { get; set; }
-        //[DisplayName("Hora de Última Modificación")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
-        //public IList<Modelo> Modelos { get; set; }
+        public IList<Modelo> Modelos { get; }
+        public void Add(Modelo modelo)
+        {
+            throw new NotImplementedException();
+        }
+        public MarcaViewModel GetById(int IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+        public IEnumerable<Marca> GetMarcas()
+        {
+            throw new NotImplementedException();
+        }
+        public void Persist(Marca marca)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

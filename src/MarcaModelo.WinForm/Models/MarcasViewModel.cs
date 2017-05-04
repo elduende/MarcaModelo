@@ -16,6 +16,9 @@ namespace MarcaModelo.WinForm.Models
     public class MarcasViewModel : ViewModelBase
     {
         private bool cierreControlado;
+        
+        public string descripcion;
+
         private readonly IViewModelExposer exposer;
         private readonly IMarcaRepository marcaRepository;
         private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
@@ -36,17 +39,33 @@ namespace MarcaModelo.WinForm.Models
             this.exposer = exposer;
             this.marcaRepository = marcaRepository;
 
-            //marcas = new BindingList<MarcaViewModel>(() => marcaRepository.GetMarcas().ToArray());
-            
+            //[CMS]
+            foreach (var m in marcaRepository.GetMarcas())
+            {
+                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+            }
+            imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
+            agregarCommand = new RelayCommand(Agregar);
+            modificarCommand = new RelayCommand(Modificar);
             CloseCommand = new RelayCommand(() =>
             {
                 cierreControlado = true;
                 Close();
             });
-            
-            imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
-            agregarCommand = new RelayCommand(Agregar);
-            modificarCommand = new RelayCommand(Modificar);
+        }
+
+        public string Descripcion
+        {
+            get { return descripcion; }
+            set
+            {
+                if (!Equals(descripcion, value))
+                {
+                    descripcion = value;
+                    OnPropertyChanged("Descripcion");
+                    //ResetAnomalias();
+                }
+            }
         }
 
         public RelayCommand CloseCommand { get; set; }
@@ -65,10 +84,8 @@ namespace MarcaModelo.WinForm.Models
             get { return modificarCommand; }
         }
 
-        public BindingList<MarcaViewModel> Marcas
-        {
-            get { return marcas; }
-        }
+        public IEnumerable<MarcaViewModel> Marcas => marcas;
+
         public override bool CanClose()
         {
             if (cierreControlado)
@@ -89,13 +106,13 @@ namespace MarcaModelo.WinForm.Models
         public void Imprimir()
         {
             var marca = new Marca();
-            exposer.Expose<MarcaReportViewModel>(m => { m.Marca = marca; m.Initialize(); });
+            exposer.Expose<MarcaReportViewModel>((m => { m.Marca = marca; m.Initialize(); }));
         }
 
         public void Agregar()
         {
             Marca marca = new Marca();
-            marca.Descripcion = "x";//txtDescripcion.Text
+            marca.Descripcion = Descripcion;
             marca.Estado = "A";
             marcaRepository.Persist(marca);
         }
@@ -103,7 +120,7 @@ namespace MarcaModelo.WinForm.Models
         public void Modificar()
         {
             Marca marca = new Marca();
-            marca.Descripcion = "x";//txtDescripcion.Text
+            marca.Descripcion = Descripcion;
             marca.Estado = "A";
             marcaRepository.Persist(marca);
         }

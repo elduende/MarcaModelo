@@ -16,6 +16,12 @@ namespace MarcaModelo.WinForm
             btnImprimir.Bind(model.ImprimirCommand);
             btnCerrar.Bind(model.CloseCommand);
 
+            txtDescripcion.BindValue(model, m => m.Descripcion);
+
+            dGV.AutoGenerateColumns = false;
+            IDMarcaColumn.Bind<MarcaViewModel>(m => m.IDMarca);
+            DescripcionColumn.Bind<MarcaViewModel>(m => m.Descripcion);
+            EstadoColumn.Bind<MarcaViewModel>(m => m.Estado);
             dGV.BindSource(model, m => m.Marcas);
         }
     }

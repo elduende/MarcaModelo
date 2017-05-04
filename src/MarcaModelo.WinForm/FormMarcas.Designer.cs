@@ -37,6 +37,10 @@
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
+            this.IDMarcaColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DescripcionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EstadoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +57,12 @@
             // 
             // dGV
             // 
+            this.dGV.AllowUserToAddRows = false;
             this.dGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IDMarcaColumn,
+            this.DescripcionColumn,
+            this.EstadoColumn});
             this.dGV.Dock = System.Windows.Forms.DockStyle.Top;
             this.dGV.Location = new System.Drawing.Point(0, 0);
             this.dGV.Name = "dGV";
@@ -137,11 +146,37 @@
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
+            // txtDescripcion
+            // 
+            this.txtDescripcion.Location = new System.Drawing.Point(469, 285);
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(174, 20);
+            this.txtDescripcion.TabIndex = 11;
+            // 
+            // IDMarcaColumn
+            // 
+            this.IDMarcaColumn.HeaderText = "IDMarca";
+            this.IDMarcaColumn.Name = "IDMarcaColumn";
+            this.IDMarcaColumn.ReadOnly = true;
+            // 
+            // DescripcionColumn
+            // 
+            this.DescripcionColumn.HeaderText = "Descripción";
+            this.DescripcionColumn.Name = "DescripcionColumn";
+            this.DescripcionColumn.ReadOnly = true;
+            // 
+            // EstadoColumn
+            // 
+            this.EstadoColumn.HeaderText = "Estado";
+            this.EstadoColumn.Name = "EstadoColumn";
+            this.EstadoColumn.ReadOnly = true;
+            // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(719, 375);
+            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnActivar);
@@ -155,6 +190,7 @@
             this.Text = "FormMarcas";
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -169,5 +205,9 @@
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.TextBox txtDescripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IDMarcaColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DescripcionColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EstadoColumn;
     }
 }

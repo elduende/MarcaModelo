@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace MarcaModelo.Data
 {
-    public class Marca: IMarcaRepository
+    public class Marca : IMarcaRepository
     {
         private List<Modelo> modelos = new List<Modelo>();
 
@@ -33,10 +33,11 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=MarcaModelo;User Id=sa;Password=cms;"))
+            //using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=MarcaModelo;User Id=sa;Password=cms;"))
+            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
             {
                 connection.Open();
-                return SqlMapper.Query<Marca>(connection, "Select * From Marca Where Estado = 'A'");
+                return SqlMapper.Query<Marca>(connection, "Select IDMarca, Descripcion, Estado From Marca Where Estado = 'A' Order By Descripcion");
             }
         }
         void IMarcaRepository.Persist(Marca marca)
@@ -47,6 +48,21 @@ namespace MarcaModelo.Data
         IList<Modelo> IMarcaRepository.Modelos()
         {
             return modelos;
+        }
+
+        public Marca GetById(int IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Marca> GetMarcas()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Persist(Marca marca)
+        {
+            throw new NotImplementedException();
         }
     }
 }
