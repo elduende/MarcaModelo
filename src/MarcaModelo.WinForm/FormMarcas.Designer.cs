@@ -161,6 +161,7 @@
             // 
             // DescripcionColumn
             // 
+            this.DescripcionColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DescripcionColumn.HeaderText = "Descripción";
             this.DescripcionColumn.Name = "DescripcionColumn";
             this.DescripcionColumn.ReadOnly = true;
