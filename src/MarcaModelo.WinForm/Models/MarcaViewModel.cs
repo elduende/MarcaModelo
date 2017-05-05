@@ -10,19 +10,23 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcaViewModel : ViewModelBase
     {
-        [DisplayName("IDMarca")]
+        [DisplayName("ID Marca")]
         [ReadOnly(true)]
         [Hidden(true)]
         public int IDMarca { get; set; }
+
         [DisplayName("Descripción")]
         [ReadOnly(false)]
         [MinLength(2, ErrorMessage = "Mínimo 2 caracteres, máximo 50")]
         [MaxLength(50, ErrorMessage = "Mínimo 2 caracteres, máximo 50")]
+        [Required]
         public string Descripcion { get; set; }
+
         [DisplayName("Estado")]
         [ReadOnly(true)]
         [Hidden(true)]
         public string Estado { get; set; }
+
         public IList<Modelo> Modelos { get; }
         public void Add(Modelo modelo)
         {
