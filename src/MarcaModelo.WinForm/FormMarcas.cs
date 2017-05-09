@@ -11,8 +11,6 @@ namespace MarcaModelo.WinForm
             InitializeComponent();
             this.Bind(model);
 
-            btnConfirmar.Bind(model.AgregarCommand);
-            
             btnImprimir.Bind(model.ImprimirCommand);
             btnCerrar.Bind(model.CloseCommand);
             btnConfirmar
@@ -22,9 +20,9 @@ namespace MarcaModelo.WinForm
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             dGV.AutoGenerateColumns = false;
-            IDMarcaColumn.Bind<MarcaViewModel>(m => m.IDMarca);
-            DescripcionColumn.Bind<MarcaViewModel>(m => m.Descripcion);
-            EstadoColumn.Bind<MarcaViewModel>(m => m.Estado);
+            IDMarcaColumn.Bind<MarcasViewModel>(m => m.IDMarca);
+            DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
+            EstadoColumn.Bind<MarcasViewModel>(m => m.Estado);
             dGV.BindSource(model, m => m.Marcas);
 
             errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades

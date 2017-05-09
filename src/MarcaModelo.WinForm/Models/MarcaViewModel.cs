@@ -10,19 +10,20 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcaViewModel : ViewModelBase
     {
-        //private int idMarca;
-        //private string descripcion;
-        //private string estado;
-        
-        //public MarcaViewModel()
-        //{
-            
-        //}
+        private int idMarca;
+        private string descripcion;
+        private string estado;
+
+        public MarcaViewModel()
+        {
+
+        }
 
         //[DisplayName("ID Marca")]
         //[ReadOnly(true)]
         //[Hidden(true)]
-        //public int IDMarca
+        public int? IDMarca
+        { get; set; }
         //{
         //    get { return idMarca; }
         //    set { SetProperty(ref idMarca, value, nameof(IDMarca)); }
@@ -32,24 +33,26 @@ namespace MarcaModelo.WinForm.Models
         //[ReadOnly(false)]
         //[StringLength(100, MinimumLength = 2)]
         //[Required(ErrorMessage = "La Descripción es obligatoria")]
-        //public string Descripcion
+        public string Descripcion
+        { get; set; }
         //{
-        //    get { return descripcion; }
-        //    set
-        //    {
-        //        if (!Equals(descripcion, value))
-        //        {
-        //            descripcion = value;
-        //            OnPropertyChanged("Descripcion");
-        //            //ResetAnomalias();
-        //        }
-        //    }
+            //get { return descripcion; }
+            //set
+            //{
+            //    if (!Equals(descripcion, value))
+            //    {
+            //        descripcion = value;
+            //        OnPropertyChanged("Descripcion");
+            //        //ResetAnomalias();
+            //    }
+            //}
         //}
-        
+
         //[DisplayName("Estado")]
         //[ReadOnly(true)]
         //[Hidden(true)]
-        //public string Estado
+        public string Estado
+        { get; set; }
         //{
         //    get { return estado; }
         //    set { SetProperty(ref estado, value, nameof(Estado)); }

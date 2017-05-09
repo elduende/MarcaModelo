@@ -11,7 +11,7 @@ namespace MarcaModelo.Data
     {
         private List<Modelo> modelos = new List<Modelo>();
 
-        public int IDMarca { get; set; }
+        public int? IDMarca { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         public IList<Modelo> Modelos
@@ -37,12 +37,22 @@ namespace MarcaModelo.Data
             using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
             {
                 connection.Open();
-                return SqlMapper.Query<Marca>(connection, "Select IDMarca, Descripcion, Estado From Marca Where Estado = 'A' Order By Descripcion");
+                return SqlMapper.Query<Marca>(connection, 
+                                              "MarcaTraer", 
+                                              commandType: CommandType.StoredProcedure);
             }
         }
         void IMarcaRepository.Persist(Marca marca)
         {
-            throw new NotImplementedException();
+            IDbConnection connection;
+            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+            {
+                connection.Open();
+                SqlMapper.Query<Marca>(connection, 
+                                       marca.IDMarca == null? "MarcaAgregar" : "MarcaModificar", 
+                                       new { marca.Descripcion }, 
+                                       commandType: CommandType.StoredProcedure);
+            }
         }
 
         IList<Modelo> IMarcaRepository.Modelos()

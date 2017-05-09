@@ -13,12 +13,11 @@ using MarcaModelo.Sistema.Events;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Common.Attributes;
 
-
 namespace MarcaModelo.WinForm.Models
 {
-    public class MarcasViewModel : ViewModelBase
+    public class MarcasViewModel : ViewModelBase, IValidatableObject
     {
-        private int idMarca;
+        private int? idMarca;
         private string descripcion;
         private string estado;
 
@@ -30,7 +29,6 @@ namespace MarcaModelo.WinForm.Models
         private readonly IMarcaRepository marcaRepository;
         private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
         private readonly RelayCommand imprimirCommand;
-        private readonly RelayCommand agregarCommand;
         private readonly RelayCommand confirmarCommand;
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
@@ -46,13 +44,9 @@ namespace MarcaModelo.WinForm.Models
             this.exposer = exposer;
             this.marcaRepository = marcaRepository;
 
-            //[CMS]
-            foreach (var m in marcaRepository.GetMarcas())
-            {
-                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
-            }
+            RefreshGrid(marcaRepository);
+
             imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
-            agregarCommand = new RelayCommand(Agregar);
             
             CloseCommand = new RelayCommand(() =>
             {
@@ -61,14 +55,13 @@ namespace MarcaModelo.WinForm.Models
             });
 
             PropertyChanged += (sender, args) => { CheckIsValid(); };
-            //confirmarCommand = new RelayCommand(() => Close(), () => EsValido);
-            confirmarCommand = new RelayCommand(() => Agregar(), () => EsValido);
+            confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
         }
 
         [DisplayName("ID Marca")]
         [ReadOnly(true)]
         [Hidden(true)]
-        public int IDMarca
+        public int? IDMarca
         {
             get { return idMarca; }
             set { SetProperty(ref idMarca, value, nameof(IDMarca)); }
@@ -76,20 +69,19 @@ namespace MarcaModelo.WinForm.Models
 
         [DisplayName("Descripción")]
         [ReadOnly(false)]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 2)]
         [Required(ErrorMessage = "La Descripción es obligatoria")]
         public string Descripcion
         {
             get { return descripcion; }
             set
             {
+                SetProperty(ref descripcion, value, nameof(Descripcion));
                 if (!Equals(descripcion, value))
                 {
                     descripcion = value;
                     OnPropertyChanged("Descripcion");
-                    //ResetAnomalias();
                 }
-                SetProperty(ref descripcion, value, nameof(Descripcion));
             }
         }
 
@@ -115,21 +107,14 @@ namespace MarcaModelo.WinForm.Models
         {
             throw new NotImplementedException();
         }
-        public void Persist(Marca marca)
-        {
-            throw new NotImplementedException();
-        }
+
         public RelayCommand CloseCommand { get; set; }
         public ICommand ImprimirCommand
         {
             get { return imprimirCommand; }
         }
-
-        public ICommand AgregarCommand
-        {
-            get { return agregarCommand; }
-        }
-
+        public ICommand ConfirmarCommand => confirmarCommand;
+        
         public IEnumerable<MarcaViewModel> Marcas => marcas;
 
         public override bool CanClose()
@@ -155,25 +140,24 @@ namespace MarcaModelo.WinForm.Models
             exposer.Expose<MarcaReportViewModel>((m => { m.Marca = marca; m.Initialize(); }));
         }
 
-        public void Agregar()
+        public void Persist()
         {
             Marca marca = new Marca();
             marca.Descripcion = Descripcion;
-            marca.Estado = "A";
             marcaRepository.Persist(marca);
+            RefreshGrid(marcaRepository);
         }
 
-        public void Modificar()
+        private void RefreshGrid(IMarcaRepository marcaRepository)
         {
-            Marca marca = new Marca();
-            marca.Descripcion = Descripcion;
-            marca.Estado = "A";
-            marcaRepository.Persist(marca);
+            //[CMS]
+            marcas.Clear();
+            foreach (var m in marcaRepository.GetMarcas())
+            {
+                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+            }
         }
-
-        public ICommand ConfirmarCommand => confirmarCommand;
-
-
+        
         private void CheckIsValid()
         {
             EsValido = this.IsValid(ValidationContext);
@@ -191,26 +175,32 @@ namespace MarcaModelo.WinForm.Models
             }
         }
 
-
-
         public IEnumerable<ValidationResult> Validate(ValidationContext context)
         {
-            if (context.IsForModel())
+            if (Descripcion != null)
             {
-                // Validaciones que no se quiere que se refieran a una propiedad especifica
-                if (Descripcion.ToUpper() == Descripcion)
+                if (context.IsForModel())
                 {
-                    yield return new ValidationResult("La Descipción está en mayúsculas.");
+                    // Validaciones que no se quiere que se refieran a una propiedad especifica
+                    //El mensaje queda a la altura del botón Confirmar
+                }
+
+                if (Descripcion.ToLower() == Descripcion)
+                {
+                    yield return new ValidationResult("La Descipción está en minúsculas.", new[] { nameof(Descripcion) });
+                }
+
+                if (context.IsForModelOrForProperty(nameof(Descripcion)) && !string.IsNullOrEmpty(Descripcion) && Descripcion.StartsWith(" "))
+                {
+                    // Ejemplo: Agrega un error de una propiedad en Validate del objeto
+                    yield return new ValidationResult("La Descripción comienza con un espacio en blanco.", new[] { nameof(Descripcion) });
+                }
+
+                if (marcas.Where(x => x.Descripcion.ToUpper() == Descripcion.ToUpper()).Count() > 0)
+                {
+                    yield return new ValidationResult("Ya existe una marca con la misma Descripción.", new[] { nameof(Descripcion) });
                 }
             }
-
-            if (context.IsForModelOrForProperty(nameof(Descripcion)) && !string.IsNullOrEmpty(Descripcion) && Descripcion.StartsWith(" "))
-            {
-                // Ejemplo: Agrega un error de una propiedad en Validate del objeto
-                yield return new ValidationResult("La Descripcion comienza con un espacio.", new[] { nameof(Descripcion) });
-            }
-            //[CMS]
-            //¿Cómo valido que no haya otra marca con esa descripción?
         }
     }
 }

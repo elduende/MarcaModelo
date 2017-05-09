@@ -93,16 +93,12 @@
     </Compile>
     <Compile Include="MainViewModelExposer.cs" />
     <Compile Include="Models\AnomaliaInput.cs" />
-    <Compile Include="Models\AutocompleteViewModel.cs" />
-    <Compile Include="Models\CierreControladoViewModel.cs" />
     <Compile Include="Models\CustomModelBindingExtensions.cs" />
-    <Compile Include="Models\ErrorExampleViewModel.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Compile Include="Models\MarcaReportViewModel.cs" />
     <Compile Include="Models\MarcasViewModel.cs" />
     <Compile Include="Models\MarcaViewModel.cs" />
     <Compile Include="Models\ModeloViewModel.cs" />
-    <Compile Include="Models\NullablesModel.cs" />
     <Compile Include="Models\ReportViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
