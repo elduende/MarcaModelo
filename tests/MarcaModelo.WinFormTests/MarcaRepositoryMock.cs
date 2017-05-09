@@ -10,7 +10,7 @@ namespace MarcaModelo.WinFormTests
     {
         private readonly List<Modelo> modelos;
 
-        public int IDMarca { get; set; }
+        public int? IDMarca { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
 
