@@ -74,5 +74,41 @@ namespace MarcaModelo.Data
         {
             throw new NotImplementedException();
         }
+
+        //public void Inactivate(int IDMarca)
+        //{
+        //    IDbConnection connection;
+        //    using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+        //    {
+        //        connection.Open();
+        //        SqlMapper.Query<Marca>(connection,
+        //                               "MarcaEliminar",
+        //                               new { IDMarca },
+        //                               commandType: CommandType.StoredProcedure);
+        //    }
+        //}
+
+        //public void Activate(int IDMarca)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public void Activate(int? IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Inactivate(int? iDMarca)
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+            {
+                connection.Open();
+                SqlMapper.Query<Marca>(connection,
+                                       "MarcaEliminar",
+                                       new { iDMarca },
+                                       commandType: CommandType.StoredProcedure);
+            }
+        }
     }
 }

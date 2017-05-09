@@ -46,5 +46,25 @@ namespace MarcaModelo.WinFormTests
         {
             throw new NotImplementedException();
         }
+
+        public void Inactivate(int IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Activate(int IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Activate(int? IDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Inactivate(int? iDMarca)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace MarcaModelo.WinForm.Models
         private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
         private readonly RelayCommand imprimirCommand;
         private readonly RelayCommand confirmarCommand;
+        private readonly RelayCommand desactivarCommand;
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
         {
@@ -56,6 +57,8 @@ namespace MarcaModelo.WinForm.Models
 
             PropertyChanged += (sender, args) => { CheckIsValid(); };
             confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
+            //Implementar pregunta donde esta el true
+            desactivarCommand = new RelayCommand(() => Inactivate(), () => true);
         }
 
         [DisplayName("ID Marca")]
@@ -114,7 +117,13 @@ namespace MarcaModelo.WinForm.Models
             get { return imprimirCommand; }
         }
         public ICommand ConfirmarCommand => confirmarCommand;
-        
+
+        //public ICommand DesactivarCommand => desactivarCommand;
+        public ICommand DesactivarCommand
+        {
+            get { return desactivarCommand; }
+        }
+
         public IEnumerable<MarcaViewModel> Marcas => marcas;
 
         public override bool CanClose()
@@ -123,7 +132,7 @@ namespace MarcaModelo.WinForm.Models
             {
                 return true;
             }
-            var sn = new YesNoQuestionViewModel { Title = "Borrador", Question = "Realmente cerrar ?" };
+            var sn = new YesNoQuestionViewModel { Title = "Cerrar", Question = "¿Realmente quiere cerrar el formulario?" };
             exposer.ExposeSync(sn);
             return sn.Accepted;
         }
@@ -145,6 +154,14 @@ namespace MarcaModelo.WinForm.Models
             Marca marca = new Marca();
             marca.Descripcion = Descripcion;
             marcaRepository.Persist(marca);
+            RefreshGrid(marcaRepository);
+        }
+
+        public void Inactivate()
+        {
+            Marca marca = new Marca();
+            marca.Descripcion = Descripcion;
+            marcaRepository.Inactivate(IDMarca);
             RefreshGrid(marcaRepository);
         }
 
@@ -174,6 +191,18 @@ namespace MarcaModelo.WinForm.Models
                 }
             }
         }
+
+        //private bool EsInvalidable
+        //{
+        //    get { return esInvalidable; }
+        //    set
+        //    {
+        //        if (SetProperty(ref esInvalidable, value, () => EsInvalidable))
+        //        {
+        //            desactivarCommand.CheckCanExecute();
+        //        }
+        //    }
+        //}
 
         public IEnumerable<ValidationResult> Validate(ValidationContext context)
         {
