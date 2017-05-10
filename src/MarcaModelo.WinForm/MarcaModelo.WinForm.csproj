@@ -131,9 +131,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MarcaModelo.Reports\MarcaModelo.Reports.csproj">
       <Project>{b4b76ae0-cc0d-41a1-8fcb-dcb391aa165c}</Project>
       <Name>MarcaModelo.Reports</Name>

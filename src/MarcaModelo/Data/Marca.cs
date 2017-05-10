@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace MarcaModelo.Data
 {
@@ -33,19 +34,20 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
-            //using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=MarcaModelo;User Id=sa;Password=cms;"))
-            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                return SqlMapper.Query<Marca>(connection, 
-                                              "MarcaTraer", 
+                return SqlMapper.Query<Marca>(connection,
+                                              "MarcaTraer",
                                               commandType: CommandType.StoredProcedure);
             }
         }
         void IMarcaRepository.Persist(Marca marca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 if (marca.IDMarca == null)
@@ -81,24 +83,6 @@ namespace MarcaModelo.Data
             throw new NotImplementedException();
         }
 
-        //public void Inactivate(int IDMarca)
-        //{
-        //    IDbConnection connection;
-        //    using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
-        //    {
-        //        connection.Open();
-        //        SqlMapper.Query<Marca>(connection,
-        //                               "MarcaEliminar",
-        //                               new { IDMarca },
-        //                               commandType: CommandType.StoredProcedure);
-        //    }
-        //}
-
-        //public void Activate(int IDMarca)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public void Activate(int? IDMarca)
         {
             throw new NotImplementedException();
@@ -107,7 +91,8 @@ namespace MarcaModelo.Data
         public void Inactivate(int? iDMarca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
+            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,
