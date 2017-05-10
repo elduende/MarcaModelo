@@ -18,6 +18,7 @@ namespace MarcaModelo.WinForm
         private static void RegisterRepositories(GenericRepositoryFactory store)
         {
             store.RegisterSingleton<IMarcaRepository>(m => new Marca());
+            //[CMS]
             store.RegisterSingleton<IModeloRepository>(m => new Modelo(new Marca()));
         }
     }

@@ -162,10 +162,15 @@ namespace MarcaModelo.WinForm.Models
 
         public void Inactivate()
         {
-            Marca marca = new Marca();
-            marca.Descripcion = Descripcion;
-            marcaRepository.Inactivate(IDMarca);
-            RefreshGrid(marcaRepository);
+            var sn = new YesNoQuestionViewModel { Title = "Desactivar", Question = string.Format("¿Desea desactivar la marca {0}?", Descripcion) };
+            exposer.ExposeSync(sn);
+            if (sn.Accepted)
+            {
+                Marca marca = new Marca();
+                marca.Descripcion = Descripcion;
+                marcaRepository.Inactivate(IDMarca);
+                RefreshGrid(marcaRepository);
+            }
         }
 
         private void RefreshGrid(IMarcaRepository marcaRepository)
@@ -202,9 +207,6 @@ namespace MarcaModelo.WinForm.Models
             {
                 if (SetProperty(ref canInactivate, value, () => CanInactivate))
                 {
-                    var sn = new YesNoQuestionViewModel { Title = "Desactivar", Question = "¿Desea desactivar la marca?" };
-                    exposer.ExposeSync(sn);
-                    canInactivate = sn.Accepted;
                     desactivarCommand.CheckCanExecute();
                 }
             }
