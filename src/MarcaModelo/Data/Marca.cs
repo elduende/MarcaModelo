@@ -48,10 +48,16 @@ namespace MarcaModelo.Data
             using (connection = new SqlConnection(@"Data Source=REGULUS\SQLEXPRESS;Initial Catalog=HDF;User Id=sa;Password=cms;"))
             {
                 connection.Open();
-                SqlMapper.Query<Marca>(connection, 
-                                       marca.IDMarca == null? "MarcaAgregar" : "MarcaModificar", 
-                                       new { marca.Descripcion }, 
-                                       commandType: CommandType.StoredProcedure);
+                if (marca.IDMarca == null)
+                    SqlMapper.Query<Marca>(connection, 
+                                           "MarcaAgregar", 
+                                           new { marca.Descripcion }, 
+                                           commandType: CommandType.StoredProcedure);
+                else
+                    SqlMapper.Query<Marca>(connection,
+                                           "MarcaModificar",
+                                           new { marca.IDMarca, marca.Descripcion },
+                                           commandType: CommandType.StoredProcedure);
             }
         }
 

@@ -16,10 +16,8 @@ namespace MarcaModelo.WinForm
             btnConfirmar
                 .BindErrors(model, errorProvider)
                 .Bind(model.ConfirmarCommand);
-            //[CMS] ¿Cómo se bindea un bindingNavigator?
-            //bindingNavigatorDeleteItem.
-            
-            btnEliminar.Bind(model.DesactivarCommand);
+
+            btnDesactivar.Bind(model.DesactivarCommand);
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             dGV.AutoGenerateColumns = false;
@@ -27,8 +25,23 @@ namespace MarcaModelo.WinForm
             DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
             EstadoColumn.Bind<MarcasViewModel>(m => m.Estado);
             dGV.BindSource(model, m => m.Marcas);
+            
             //[CMS] ¿Se hace así esto?
-            dGV.Click += (sender, args) => { model.IDMarca = (int?)dGV.CurrentRow.Cells[0].Value; };
+            dGV.Click += (sender, args) => 
+            {
+                model.IDMarca = (int?)dGV.CurrentRow.Cells[0].Value;
+                model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
+                model.Estado = dGV.CurrentRow.Cells[2].Value.ToString(); 
+            };
+
+            btnAgregar.Click += (sender, args) =>
+            {
+                model.IDMarca = null;
+                model.Descripcion = "";
+                model.Estado = "A";
+                txtDescripcion.Focus();
+            };
+
             errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades
         }
     }

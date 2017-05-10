@@ -37,35 +37,23 @@
             this.EstadoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnActivos = new System.Windows.Forms.Button();
-            this.btnEliminados = new System.Windows.Forms.Button();
+            this.btnInactivos = new System.Windows.Forms.Button();
             this.btnActivar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
+            this.btnDesactivar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.bn = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bn)).BeginInit();
-            this.bn.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCerrar
             // 
             this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrar.Location = new System.Drawing.Point(581, 398);
+            this.btnCerrar.Location = new System.Drawing.Point(392, 373);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(72, 28);
@@ -76,14 +64,17 @@
             // dGV
             // 
             this.dGV.AllowUserToAddRows = false;
+            this.dGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDMarcaColumn,
             this.DescripcionColumn,
             this.EstadoColumn});
-            this.dGV.Location = new System.Drawing.Point(12, 37);
+            this.dGV.Location = new System.Drawing.Point(12, 2);
             this.dGV.Name = "dGV";
-            this.dGV.Size = new System.Drawing.Size(304, 248);
+            this.dGV.Size = new System.Drawing.Size(455, 324);
             this.dGV.TabIndex = 2;
             // 
             // IDMarcaColumn
@@ -108,7 +99,7 @@
             // btnImprimir
             // 
             this.btnImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImprimir.Location = new System.Drawing.Point(505, 398);
+            this.btnImprimir.Location = new System.Drawing.Point(316, 373);
             this.btnImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(72, 28);
@@ -119,7 +110,7 @@
             // btnActivos
             // 
             this.btnActivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActivos.Location = new System.Drawing.Point(353, 398);
+            this.btnActivos.Location = new System.Drawing.Point(88, 373);
             this.btnActivos.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivos.Name = "btnActivos";
             this.btnActivos.Size = new System.Drawing.Size(72, 28);
@@ -127,21 +118,21 @@
             this.btnActivos.Text = "Activos";
             this.btnActivos.UseVisualStyleBackColor = true;
             // 
-            // btnEliminados
+            // btnInactivos
             // 
-            this.btnEliminados.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEliminados.Location = new System.Drawing.Point(429, 398);
-            this.btnEliminados.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEliminados.Name = "btnEliminados";
-            this.btnEliminados.Size = new System.Drawing.Size(72, 28);
-            this.btnEliminados.TabIndex = 4;
-            this.btnEliminados.Text = "Eliminados";
-            this.btnEliminados.UseVisualStyleBackColor = true;
+            this.btnInactivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInactivos.Location = new System.Drawing.Point(164, 373);
+            this.btnInactivos.Margin = new System.Windows.Forms.Padding(2);
+            this.btnInactivos.Name = "btnInactivos";
+            this.btnInactivos.Size = new System.Drawing.Size(72, 28);
+            this.btnInactivos.TabIndex = 4;
+            this.btnInactivos.Text = "Inactivos";
+            this.btnInactivos.UseVisualStyleBackColor = true;
             // 
             // btnActivar
             // 
             this.btnActivar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActivar.Location = new System.Drawing.Point(201, 398);
+            this.btnActivar.Location = new System.Drawing.Point(12, 373);
             this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(72, 28);
@@ -149,31 +140,34 @@
             this.btnActivar.Text = "Activar";
             this.btnActivar.UseVisualStyleBackColor = true;
             // 
-            // btnEliminar
+            // btnDesactivar
             // 
-            this.btnEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEliminar.Location = new System.Drawing.Point(277, 398);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(2);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(72, 28);
-            this.btnEliminar.TabIndex = 6;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnDesactivar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDesactivar.Location = new System.Drawing.Point(12, 341);
+            this.btnDesactivar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDesactivar.Name = "btnDesactivar";
+            this.btnDesactivar.Size = new System.Drawing.Size(72, 28);
+            this.btnDesactivar.TabIndex = 6;
+            this.btnDesactivar.Text = "Desactivar";
+            this.btnDesactivar.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
             // 
             this.btnConfirmar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfirmar.Location = new System.Drawing.Point(395, 320);
+            this.btnConfirmar.FlatAppearance.BorderSize = 0;
+            this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnConfirmar.Image = ((System.Drawing.Image)(resources.GetObject("btnConfirmar.Image")));
+            this.btnConfirmar.Location = new System.Drawing.Point(439, 341);
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(72, 28);
+            this.btnConfirmar.Size = new System.Drawing.Size(30, 28);
             this.btnConfirmar.TabIndex = 9;
-            this.btnConfirmar.Text = "Confirmar";
             this.btnConfirmar.UseVisualStyleBackColor = true;
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Location = new System.Drawing.Point(142, 320);
+            this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDescripcion.Location = new System.Drawing.Point(242, 346);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(174, 20);
             this.txtDescripcion.TabIndex = 11;
@@ -185,140 +179,50 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(67, 323);
+            this.label1.Location = new System.Drawing.Point(167, 349);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 12;
             this.label1.Text = "Descripción: ";
             // 
-            // bn
+            // btnAgregar
             // 
-            this.bn.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bn.CountItem = this.bindingNavigatorCountItem;
-            this.bn.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bn.Dock = System.Windows.Forms.DockStyle.None;
-            this.bn.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem});
-            this.bn.Location = new System.Drawing.Point(12, 9);
-            this.bn.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bn.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bn.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bn.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bn.Name = "bn";
-            this.bn.PositionItem = this.bindingNavigatorPositionItem;
-            this.bn.Size = new System.Drawing.Size(255, 25);
-            this.bn.TabIndex = 13;
-            this.bn.Text = "bindingNavigator1";
+            this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAgregar.Location = new System.Drawing.Point(88, 341);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(72, 28);
+            this.btnAgregar.TabIndex = 14;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
             // 
-            // bindingNavigatorAddNewItem
+            // btnExcel
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
-            // 
-            // bindingNavigatorCountItem
-            // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
-            // 
-            // bindingNavigatorDeleteItem
-            // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorPositionItem
-            // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExcel.Location = new System.Drawing.Point(240, 373);
+            this.btnExcel.Margin = new System.Windows.Forms.Padding(2);
+            this.btnExcel.Name = "btnExcel";
+            this.btnExcel.Size = new System.Drawing.Size(72, 28);
+            this.btnExcel.TabIndex = 15;
+            this.btnExcel.Text = "Excel";
+            this.btnExcel.UseVisualStyleBackColor = true;
             // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 424);
-            this.Controls.Add(this.bn);
+            this.ClientSize = new System.Drawing.Size(479, 412);
+            this.Controls.Add(this.btnExcel);
+            this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnActivar);
-            this.Controls.Add(this.btnEliminar);
+            this.Controls.Add(this.btnDesactivar);
             this.Controls.Add(this.btnActivos);
-            this.Controls.Add(this.btnEliminados);
+            this.Controls.Add(this.btnInactivos);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.dGV);
             this.Controls.Add(this.btnCerrar);
@@ -326,9 +230,6 @@
             this.Text = "FormMarcas";
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bn)).EndInit();
-            this.bn.ResumeLayout(false);
-            this.bn.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -340,9 +241,9 @@
         private System.Windows.Forms.DataGridView dGV;
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnActivos;
-        private System.Windows.Forms.Button btnEliminados;
+        private System.Windows.Forms.Button btnInactivos;
         private System.Windows.Forms.Button btnActivar;
-        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.Button btnDesactivar;
         private System.Windows.Forms.Button btnConfirmar;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn IDMarcaColumn;
@@ -350,17 +251,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EstadoColumn;
         private System.Windows.Forms.ErrorProvider errorProvider;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.BindingNavigator bn;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnExcel;
     }
 }

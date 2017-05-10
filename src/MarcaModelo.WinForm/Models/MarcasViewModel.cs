@@ -12,6 +12,7 @@ using MarcaModelo.Services;
 using MarcaModelo.Sistema.Events;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Common.Attributes;
+using System.Windows.Forms;
 
 namespace MarcaModelo.WinForm.Models
 {
@@ -24,6 +25,7 @@ namespace MarcaModelo.WinForm.Models
         private bool cierreControlado;
         
         private bool esValido;
+        private bool canInactivate;
 
         private readonly IViewModelExposer exposer;
         private readonly IMarcaRepository marcaRepository;
@@ -57,8 +59,9 @@ namespace MarcaModelo.WinForm.Models
 
             PropertyChanged += (sender, args) => { CheckIsValid(); };
             confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
-            //Implementar pregunta donde esta el true
+            //[CMS] Implementar pregunta 
             desactivarCommand = new RelayCommand(() => Inactivate(), () => true);
+            //desactivarCommand = new RelayCommand(() => Inactivate(), () => CanInactivate);
         }
 
         [DisplayName("ID Marca")]
@@ -118,12 +121,11 @@ namespace MarcaModelo.WinForm.Models
         }
         public ICommand ConfirmarCommand => confirmarCommand;
 
-        //public ICommand DesactivarCommand => desactivarCommand;
         public ICommand DesactivarCommand
         {
             get { return desactivarCommand; }
         }
-
+        
         public IEnumerable<MarcaViewModel> Marcas => marcas;
 
         public override bool CanClose()
@@ -152,6 +154,7 @@ namespace MarcaModelo.WinForm.Models
         public void Persist()
         {
             Marca marca = new Marca();
+            marca.IDMarca = IDMarca;
             marca.Descripcion = Descripcion;
             marcaRepository.Persist(marca);
             RefreshGrid(marcaRepository);
@@ -191,18 +194,21 @@ namespace MarcaModelo.WinForm.Models
                 }
             }
         }
-
-        //private bool EsInvalidable
-        //{
-        //    get { return esInvalidable; }
-        //    set
-        //    {
-        //        if (SetProperty(ref esInvalidable, value, () => EsInvalidable))
-        //        {
-        //            desactivarCommand.CheckCanExecute();
-        //        }
-        //    }
-        //}
+        
+        private bool CanInactivate
+        {
+            get { return canInactivate; }
+            set
+            {
+                if (SetProperty(ref canInactivate, value, () => CanInactivate))
+                {
+                    var sn = new YesNoQuestionViewModel { Title = "Desactivar", Question = "¿Desea desactivar la marca?" };
+                    exposer.ExposeSync(sn);
+                    canInactivate = sn.Accepted;
+                    desactivarCommand.CheckCanExecute();
+                }
+            }
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext context)
         {
@@ -212,11 +218,6 @@ namespace MarcaModelo.WinForm.Models
                 {
                     // Validaciones que no se quiere que se refieran a una propiedad especifica
                     //El mensaje queda a la altura del botón Confirmar
-                }
-
-                if (Descripcion.ToLower() == Descripcion)
-                {
-                    yield return new ValidationResult("La Descipción está en minúsculas.", new[] { nameof(Descripcion) });
                 }
 
                 if (context.IsForModelOrForProperty(nameof(Descripcion)) && !string.IsNullOrEmpty(Descripcion) && Descripcion.StartsWith(" "))
