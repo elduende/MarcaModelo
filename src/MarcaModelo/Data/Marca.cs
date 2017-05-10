@@ -34,7 +34,7 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -46,7 +46,7 @@ namespace MarcaModelo.Data
         void IMarcaRepository.Persist(Marca marca)
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -91,7 +91,7 @@ namespace MarcaModelo.Data
         public void Inactivate(int? iDMarca)
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["MarcaModelo"].ConnectionString.ToString();
+            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
             using (connection = new SqlConnection(connectionString))
             {
                 connection.Open();
