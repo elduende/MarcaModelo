@@ -83,11 +83,6 @@ namespace MarcaModelo.Data
             throw new NotImplementedException();
         }
 
-        public void Activate(int? IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Inactivate(int? iDMarca)
         {
             IDbConnection connection;
@@ -97,6 +92,20 @@ namespace MarcaModelo.Data
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,
                                        "MarcaEliminar",
+                                       new { iDMarca },
+                                       commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void Activate(int? iDMarca)
+        {
+            IDbConnection connection;
+            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
+            using (connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlMapper.Query<Marca>(connection,
+                                       "MarcaActivar",
                                        new { iDMarca },
                                        commandType: CommandType.StoredProcedure);
             }

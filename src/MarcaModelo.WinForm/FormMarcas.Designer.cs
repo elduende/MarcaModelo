@@ -36,8 +36,8 @@
             this.DescripcionColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EstadoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnImprimir = new System.Windows.Forms.Button();
-            this.btnActivos = new System.Windows.Forms.Button();
-            this.btnInactivos = new System.Windows.Forms.Button();
+            this.btnActivas = new System.Windows.Forms.Button();
+            this.btnInactivas = new System.Windows.Forms.Button();
             this.btnActivar = new System.Windows.Forms.Button();
             this.btnDesactivar = new System.Windows.Forms.Button();
             this.btnConfirmar = new System.Windows.Forms.Button();
@@ -107,27 +107,27 @@
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = true;
             // 
-            // btnActivos
+            // btnActivas
             // 
-            this.btnActivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActivos.Location = new System.Drawing.Point(88, 373);
-            this.btnActivos.Margin = new System.Windows.Forms.Padding(2);
-            this.btnActivos.Name = "btnActivos";
-            this.btnActivos.Size = new System.Drawing.Size(72, 28);
-            this.btnActivos.TabIndex = 5;
-            this.btnActivos.Text = "Activos";
-            this.btnActivos.UseVisualStyleBackColor = true;
+            this.btnActivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnActivas.Location = new System.Drawing.Point(88, 373);
+            this.btnActivas.Margin = new System.Windows.Forms.Padding(2);
+            this.btnActivas.Name = "btnActivas";
+            this.btnActivas.Size = new System.Drawing.Size(72, 28);
+            this.btnActivas.TabIndex = 5;
+            this.btnActivas.Text = "Activas";
+            this.btnActivas.UseVisualStyleBackColor = true;
             // 
-            // btnInactivos
+            // btnInactivas
             // 
-            this.btnInactivos.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInactivos.Location = new System.Drawing.Point(164, 373);
-            this.btnInactivos.Margin = new System.Windows.Forms.Padding(2);
-            this.btnInactivos.Name = "btnInactivos";
-            this.btnInactivos.Size = new System.Drawing.Size(72, 28);
-            this.btnInactivos.TabIndex = 4;
-            this.btnInactivos.Text = "Inactivos";
-            this.btnInactivos.UseVisualStyleBackColor = true;
+            this.btnInactivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInactivas.Location = new System.Drawing.Point(164, 373);
+            this.btnInactivas.Margin = new System.Windows.Forms.Padding(2);
+            this.btnInactivas.Name = "btnInactivas";
+            this.btnInactivas.Size = new System.Drawing.Size(72, 28);
+            this.btnInactivas.TabIndex = 4;
+            this.btnInactivas.Text = "Inactivas";
+            this.btnInactivas.UseVisualStyleBackColor = true;
             // 
             // btnActivar
             // 
@@ -221,8 +221,8 @@
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnActivar);
             this.Controls.Add(this.btnDesactivar);
-            this.Controls.Add(this.btnActivos);
-            this.Controls.Add(this.btnInactivos);
+            this.Controls.Add(this.btnActivas);
+            this.Controls.Add(this.btnInactivas);
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.dGV);
             this.Controls.Add(this.btnCerrar);
@@ -240,8 +240,8 @@
         private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.DataGridView dGV;
         private System.Windows.Forms.Button btnImprimir;
-        private System.Windows.Forms.Button btnActivos;
-        private System.Windows.Forms.Button btnInactivos;
+        private System.Windows.Forms.Button btnActivas;
+        private System.Windows.Forms.Button btnInactivas;
         private System.Windows.Forms.Button btnActivar;
         private System.Windows.Forms.Button btnDesactivar;
         private System.Windows.Forms.Button btnConfirmar;

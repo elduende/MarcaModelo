@@ -18,6 +18,9 @@ namespace MarcaModelo.WinForm
                 .Bind(model.ConfirmarCommand);
 
             btnDesactivar.Bind(model.DesactivarCommand);
+            btnActivar.Bind(model.ActivarCommand);
+            btnActivas.Bind(model.ActivasCommand);
+            btnInactivas.Bind(model.InactivasCommand);
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             dGV.AutoGenerateColumns = false;

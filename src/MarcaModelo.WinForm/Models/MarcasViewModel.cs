@@ -25,14 +25,17 @@ namespace MarcaModelo.WinForm.Models
         private bool cierreControlado;
         
         private bool esValido;
-        private bool canInactivate;
-
+        
         private readonly IViewModelExposer exposer;
         private readonly IMarcaRepository marcaRepository;
-        private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
+        // private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
+        private BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
         private readonly RelayCommand imprimirCommand;
         private readonly RelayCommand confirmarCommand;
         private readonly RelayCommand desactivarCommand;
+        private readonly RelayCommand activarCommand;
+        private readonly RelayCommand activasCommand;
+        private readonly RelayCommand inactivasCommand;
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
         {
@@ -46,10 +49,6 @@ namespace MarcaModelo.WinForm.Models
             }
             this.exposer = exposer;
             this.marcaRepository = marcaRepository;
-
-            RefreshGrid(marcaRepository);
-
-            imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
             
             CloseCommand = new RelayCommand(() =>
             {
@@ -58,10 +57,15 @@ namespace MarcaModelo.WinForm.Models
             });
 
             PropertyChanged += (sender, args) => { CheckIsValid(); };
+
+            imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
             confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
-            //[CMS] Implementar pregunta 
-            desactivarCommand = new RelayCommand(() => Inactivate(), () => true);
-            //desactivarCommand = new RelayCommand(() => Inactivate(), () => CanInactivate);
+            desactivarCommand = new RelayCommand(() => Inactivate(), () => MuestraMarcasActivas);
+            inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
+            activarCommand = new RelayCommand(() => Activate(), () => !MuestraMarcasActivas);
+            activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
+            
+            RefreshGrid(marcaRepository);
         }
 
         [DisplayName("ID Marca")]
@@ -101,32 +105,43 @@ namespace MarcaModelo.WinForm.Models
         }
 
         public IList<Modelo> Modelos { get; }
-        public void Add(Modelo modelo)
-        {
-            throw new NotImplementedException();
-        }
-        public MarcaViewModel GetById(int IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<Marca> GetMarcas()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public RelayCommand CloseCommand { get; set; }
+
         public ICommand ImprimirCommand
         {
             get { return imprimirCommand; }
         }
+
         public ICommand ConfirmarCommand => confirmarCommand;
 
         public ICommand DesactivarCommand
         {
             get { return desactivarCommand; }
         }
-        
-        public IEnumerable<MarcaViewModel> Marcas => marcas;
+
+        public ICommand ActivarCommand
+        {
+            get { return activarCommand; }
+        }
+
+        public ICommand ActivasCommand
+        {
+            get { return activasCommand; }
+        }
+
+        public ICommand InactivasCommand
+        {
+            get { return inactivasCommand; }
+        }
+
+        private bool MuestraMarcasActivas { get; set; }
+
+        //[CMS] - Indicación de Fabio
+        //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
+        //public IEnumerable<MarcaViewModel> Marcas => marcas;
+        public IEnumerable<MarcaViewModel> Marcas => marcas ?? (marcas = new BindingList<MarcaViewModel>(marcaRepository.GetMarcas().Select(m => new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
+
 
         public override bool CanClose()
         {
@@ -173,6 +188,19 @@ namespace MarcaModelo.WinForm.Models
             }
         }
 
+        public void Activate()
+        {
+            var sn = new YesNoQuestionViewModel { Title = "Activar", Question = string.Format("¿Desea activar la marca {0}?", Descripcion) };
+            exposer.ExposeSync(sn);
+            if (sn.Accepted)
+            {
+                Marca marca = new Marca();
+                marca.Descripcion = Descripcion;
+                marcaRepository.Activate(IDMarca);
+                RefreshGrid(marcaRepository);
+            }
+        }
+
         private void RefreshGrid(IMarcaRepository marcaRepository)
         {
             //[CMS]
@@ -181,8 +209,21 @@ namespace MarcaModelo.WinForm.Models
             {
                 marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
+
+            MuestraMarcasActivas = true;
         }
-        
+
+        private void RefreshGridInactivas(IMarcaRepository marcaRepository)
+        {
+            //[CMS]
+            marcas.Clear();
+            foreach (var m in marcaRepository.GetMarcas())
+            {
+                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+            }
+            MuestraMarcasActivas = false;
+        }
+
         private void CheckIsValid()
         {
             EsValido = this.IsValid(ValidationContext);
@@ -200,18 +241,6 @@ namespace MarcaModelo.WinForm.Models
             }
         }
         
-        private bool CanInactivate
-        {
-            get { return canInactivate; }
-            set
-            {
-                if (SetProperty(ref canInactivate, value, () => CanInactivate))
-                {
-                    desactivarCommand.CheckCanExecute();
-                }
-            }
-        }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext context)
         {
             if (Descripcion != null)
