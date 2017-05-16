@@ -19,13 +19,11 @@ namespace MarcaModelo.Data
         {
             get
             {
-                //throw new NotImplementedException();
                 return marca;
             }
 
             set
             {
-                //throw new NotImplementedException();
                 marca = marca;
             }
         }

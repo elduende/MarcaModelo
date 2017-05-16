@@ -1,0 +1,27 @@
+﻿@model IEnumerable<MarcaModelo.Web.Models.MarcasModel>
+
+<p>
+    @Html.ActionLink("Agregar una Marca", "MarcasAgregar")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Modificar", "MarcasModificar", new { idMarca = item.IDMarca }) |
+            @Html.ActionLink("Eliminar", "MarcasEliminar", new { idMarca = item.IDMarca }, new { onclick = "return confirm('¿Está seguro de eliminar la Marca?');" })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+    </tr>
+}
+
+</table>

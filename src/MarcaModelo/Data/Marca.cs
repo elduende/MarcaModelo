@@ -2,16 +2,16 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Dapper;
 using System.Collections.Generic;
 using System.Configuration;
+using Dapper;
 
 namespace MarcaModelo.Data
 {
     public class Marca : IMarcaRepository
     {
         private List<Modelo> modelos = new List<Modelo>();
-
+        
         public int? IDMarca { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
@@ -27,15 +27,24 @@ namespace MarcaModelo.Data
             }
             modelos.Add(modelo);
         }
-        Marca IMarcaRepository.GetById(int IDMarca)
+        Marca IMarcaRepository.GetById(int idMarca)
         {
-            throw new NotImplementedException();
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            {
+                connection.Open();
+                DynamicParameters param = new DynamicParameters();
+                param.Add("@IDMarca", idMarca);
+                return SqlMapper.Query<Marca>(connection,
+                                              "MarcaTraer",
+                                              param,
+                                              commandType: CommandType.StoredProcedure).First();
+            }
         }
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
-            using (connection = new SqlConnection(connectionString))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
@@ -46,8 +55,7 @@ namespace MarcaModelo.Data
         void IMarcaRepository.Persist(Marca marca)
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
-            using (connection = new SqlConnection(connectionString))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
                 if (marca.IDMarca == null)
@@ -68,26 +76,10 @@ namespace MarcaModelo.Data
             return modelos;
         }
 
-        public Marca GetById(int IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Marca> GetMarcas()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Persist(Marca marca)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Inactivate(int? iDMarca)
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
-            using (connection = new SqlConnection(connectionString))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,
@@ -100,8 +92,7 @@ namespace MarcaModelo.Data
         public void Activate(int? iDMarca)
         {
             IDbConnection connection;
-            string connectionString = ConfigurationManager.ConnectionStrings["HDF"].ConnectionString.ToString();
-            using (connection = new SqlConnection(connectionString))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,

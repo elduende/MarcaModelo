@@ -10,10 +10,6 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcaViewModel : ViewModelBase
     {
-        private int idMarca;
-        private string descripcion;
-        private string estado;
-
         public MarcaViewModel()
         {
 
