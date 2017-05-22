@@ -42,6 +42,11 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Marca> GetMarcasInactivas()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Persist(Marca marca)
         {
             throw new NotImplementedException();
