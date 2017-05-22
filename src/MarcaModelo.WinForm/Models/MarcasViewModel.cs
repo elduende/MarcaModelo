@@ -62,9 +62,9 @@ namespace MarcaModelo.WinForm.Models
 
             imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
             confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
-            desactivarCommand = new RelayCommand(() => Inactivate(), () => MuestraMarcasActivas);
+            desactivarCommand = new RelayCommand(() => Inactivate(), () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
-            activarCommand = new RelayCommand(() => Activate(), () => !MuestraMarcasActivas);
+            activarCommand = new RelayCommand(() => Activate(), () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
             
             RefreshGrid(marcaRepository);
@@ -94,6 +94,8 @@ namespace MarcaModelo.WinForm.Models
                     descripcion = value;
                     OnPropertyChanged("Descripcion");
                 }
+                desactivarCommand.CheckCanExecute();
+                activarCommand.CheckCanExecute();
             }
         }
 
@@ -213,7 +215,7 @@ namespace MarcaModelo.WinForm.Models
                 Marca marca = new Marca();
                 marca.Descripcion = Descripcion;
                 marcaRepository.Activate(IDMarca);
-                RefreshGrid(marcaRepository);
+                RefreshGridInactivas(marcaRepository);
             }
         }
 
@@ -233,7 +235,7 @@ namespace MarcaModelo.WinForm.Models
         {
             //[CMS]
             marcas.Clear();
-            foreach (var m in marcaRepository.GetMarcas())
+            foreach (var m in marcaRepository.GetMarcasInactivas())
             {
                 marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }

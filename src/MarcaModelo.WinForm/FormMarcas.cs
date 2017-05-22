@@ -37,10 +37,20 @@ namespace MarcaModelo.WinForm
                 model.Estado = dGV.CurrentRow.Cells[2].Value.ToString(); 
             };
 
+            dGV.DataBindingComplete += (sender, args) =>
+            {
+                if (dGV.CurrentRow != null)
+                {
+                    model.IDMarca = (int?)dGV.CurrentRow.Cells[0].Value;
+                    model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
+                    model.Estado = dGV.CurrentRow.Cells[2].Value.ToString();
+                }
+            };
+
             btnAgregar.Click += (sender, args) =>
             {
                 model.IDMarca = null;
-                model.Descripcion = "";
+                model.Descripcion = null;
                 model.Estado = "A";
                 txtDescripcion.Focus();
             };

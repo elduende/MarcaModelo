@@ -11,6 +11,7 @@ namespace MarcaModelo.Data
         string Estado { get; set; }
         Marca GetById(int IDMarca);
         IEnumerable<Marca> GetMarcas();
+        IEnumerable<Marca> GetMarcasInactivas();
         void Persist(Marca marca);
         void Add(Modelo modelo);
         void Activate(int? IDMarca);

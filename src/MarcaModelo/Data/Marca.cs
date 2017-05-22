@@ -41,20 +41,34 @@ namespace MarcaModelo.Data
                                               commandType: CommandType.StoredProcedure).First();
             }
         }
+
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
-                return SqlMapper.Query<Marca>(connection,
-                                              "MarcaTraer",
-                                              commandType: CommandType.StoredProcedure).Skip((3 - 1) * 10).Take(10);
                 //return SqlMapper.Query<Marca>(connection,
                 //                              "MarcaTraer",
-                //                              commandType: CommandType.StoredProcedure);
+                //                              commandType: CommandType.StoredProcedure).Skip((3 - 1) * 10).Take(10);
+                return SqlMapper.Query<Marca>(connection,
+                                              "MarcaTraer",
+                                              commandType: CommandType.StoredProcedure);
             }
         }
+
+        IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas()
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            {
+                connection.Open();
+                return SqlMapper.Query<Marca>(connection,
+                                              "MarcaInactivaTraer",
+                                              commandType: CommandType.StoredProcedure);
+            }
+        }
+
         void IMarcaRepository.Persist(Marca marca)
         {
             IDbConnection connection;
