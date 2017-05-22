@@ -49,7 +49,10 @@ namespace MarcaModelo.Data
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
                                               "MarcaTraer",
-                                              commandType: CommandType.StoredProcedure);
+                                              commandType: CommandType.StoredProcedure).Skip((3 - 1) * 10).Take(10);
+                //return SqlMapper.Query<Marca>(connection,
+                //                              "MarcaTraer",
+                //                              commandType: CommandType.StoredProcedure);
             }
         }
         void IMarcaRepository.Persist(Marca marca)

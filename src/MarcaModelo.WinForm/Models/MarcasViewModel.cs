@@ -25,7 +25,9 @@ namespace MarcaModelo.WinForm.Models
         private bool cierreControlado;
         
         private bool esValido;
-        
+        private bool muestraMarcasActivas;
+
+
         private readonly IViewModelExposer exposer;
         private readonly IMarcaRepository marcaRepository;
         // private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
@@ -135,7 +137,21 @@ namespace MarcaModelo.WinForm.Models
             get { return inactivasCommand; }
         }
 
-        private bool MuestraMarcasActivas { get; set; }
+        //private bool MuestraMarcasActivas { get; set; }
+        private bool MuestraMarcasActivas 
+        {
+            get { return muestraMarcasActivas; }
+            set
+            {
+                if (SetProperty(ref muestraMarcasActivas, value, () => MuestraMarcasActivas))
+                {
+                    inactivasCommand.CheckCanExecute();
+                    activasCommand.CheckCanExecute();
+                    desactivarCommand.CheckCanExecute();
+                    activarCommand.CheckCanExecute();
+                }
+            }
+        }
 
         //[CMS] - Indicación de Fabio
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
