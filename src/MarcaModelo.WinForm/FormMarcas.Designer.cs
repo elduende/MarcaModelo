@@ -49,10 +49,10 @@
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.tSBComienzo = new System.Windows.Forms.ToolStripButton();
             this.tSBAtras = new System.Windows.Forms.ToolStripButton();
-            this.tSBAdelante = new System.Windows.Forms.ToolStripButton();
-            this.tSBFinal = new System.Windows.Forms.ToolStripButton();
             this.tSBTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.tSBLabel = new System.Windows.Forms.ToolStripLabel();
+            this.tSBAdelante = new System.Windows.Forms.ToolStripButton();
+            this.tSBFinal = new System.Windows.Forms.ToolStripButton();
             this.tSBAgregar = new System.Windows.Forms.ToolStripButton();
             this.tSBConfirmar = new System.Windows.Forms.ToolStripButton();
             this.tSBDesactivar = new System.Windows.Forms.ToolStripButton();
@@ -60,6 +60,9 @@
             this.tSBImprimir = new System.Windows.Forms.ToolStripButton();
             this.tSBExcel = new System.Windows.Forms.ToolStripButton();
             this.tSBSalir = new System.Windows.Forms.ToolStripButton();
+            this.tSBActivas = new System.Windows.Forms.ToolStripButton();
+            this.tSBInactivas = new System.Windows.Forms.ToolStripButton();
+            this.tSBInactivar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -236,7 +239,10 @@
             this.tSBAgregar,
             this.tSBConfirmar,
             this.tSBDesactivar,
+            this.tSBActivas,
+            this.tSBInactivas,
             this.tSBActivar,
+            this.tSBInactivar,
             this.tSBImprimir,
             this.tSBExcel,
             this.tSBSalir});
@@ -264,6 +270,17 @@
             this.tSBAtras.Size = new System.Drawing.Size(23, 22);
             this.tSBAtras.Text = "Atrás";
             // 
+            // tSBTextBox
+            // 
+            this.tSBTextBox.Name = "tSBTextBox";
+            this.tSBTextBox.Size = new System.Drawing.Size(55, 25);
+            // 
+            // tSBLabel
+            // 
+            this.tSBLabel.Name = "tSBLabel";
+            this.tSBLabel.Size = new System.Drawing.Size(37, 22);
+            this.tSBLabel.Text = "de {0}";
+            // 
             // tSBAdelante
             // 
             this.tSBAdelante.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -281,17 +298,6 @@
             this.tSBFinal.Name = "tSBFinal";
             this.tSBFinal.Size = new System.Drawing.Size(23, 22);
             this.tSBFinal.Text = "Final";
-            // 
-            // tSBTextBox
-            // 
-            this.tSBTextBox.Name = "tSBTextBox";
-            this.tSBTextBox.Size = new System.Drawing.Size(55, 25);
-            // 
-            // tSBLabel
-            // 
-            this.tSBLabel.Name = "tSBLabel";
-            this.tSBLabel.Size = new System.Drawing.Size(37, 22);
-            this.tSBLabel.Text = "de {0}";
             // 
             // tSBAgregar
             // 
@@ -356,6 +362,33 @@
             this.tSBSalir.Size = new System.Drawing.Size(23, 22);
             this.tSBSalir.Text = "Salir";
             // 
+            // tSBActivas
+            // 
+            this.tSBActivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBActivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivas.Image")));
+            this.tSBActivas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBActivas.Name = "tSBActivas";
+            this.tSBActivas.Size = new System.Drawing.Size(23, 22);
+            this.tSBActivas.Text = "Activas";
+            // 
+            // tSBInactivas
+            // 
+            this.tSBInactivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBInactivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivas.Image")));
+            this.tSBInactivas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBInactivas.Name = "tSBInactivas";
+            this.tSBInactivas.Size = new System.Drawing.Size(23, 22);
+            this.tSBInactivas.Text = "Inactivas";
+            // 
+            // tSBInactivar
+            // 
+            this.tSBInactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBInactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivar.Image")));
+            this.tSBInactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBInactivar.Name = "tSBInactivar";
+            this.tSBInactivar.Size = new System.Drawing.Size(23, 22);
+            this.tSBInactivar.Text = "Inactivar";
+            // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -417,5 +450,8 @@
         private System.Windows.Forms.ToolStripButton tSBImprimir;
         private System.Windows.Forms.ToolStripButton tSBExcel;
         private System.Windows.Forms.ToolStripButton tSBSalir;
+        private System.Windows.Forms.ToolStripButton tSBActivas;
+        private System.Windows.Forms.ToolStripButton tSBInactivas;
+        private System.Windows.Forms.ToolStripButton tSBInactivar;
     }
 }

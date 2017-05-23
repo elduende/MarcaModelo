@@ -13,7 +13,7 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> GetMarcas();
         IEnumerable<Marca> GetMarcasInactivas();
         void Persist(Marca marca);
-        void Add(Modelo modelo);
+        void AddModelo(Modelo modelo);
         void Activate(int? IDMarca);
         void Inactivate(int? iDMarca);
     }

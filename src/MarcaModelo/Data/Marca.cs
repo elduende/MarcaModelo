@@ -18,7 +18,7 @@ namespace MarcaModelo.Data
         {
             get { return modelos.ToList(); }
         }
-        public void Add(Modelo modelo)
+        public void AddModelo(Modelo modelo)
         {
             if (modelo == null)
             {

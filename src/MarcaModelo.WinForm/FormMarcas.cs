@@ -13,7 +13,7 @@ namespace MarcaModelo.WinForm
 
             btnImprimir.Bind(model.ImprimirCommand);
             btnCerrar.Bind(model.CloseCommand);
-            //tSBSalir.Bind(model.CloseCommand);
+            tSBSalir.Click += (sender, args) => model.Close();
             btnConfirmar
                 .BindErrors(model, errorProvider)
                 .Bind(model.ConfirmarCommand);
@@ -21,7 +21,9 @@ namespace MarcaModelo.WinForm
             btnDesactivar.Bind(model.DesactivarCommand);
             btnActivar.Bind(model.ActivarCommand);
             btnActivas.Bind(model.ActivasCommand);
+            //tSBActivas.Click += (sender, args) => model.ActivasCommand();
             btnInactivas.Bind(model.InactivasCommand);
+            //tSBInactivas.Click += (sender, args) => model.InactivasCommand();
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             dGV.AutoGenerateColumns = false;
