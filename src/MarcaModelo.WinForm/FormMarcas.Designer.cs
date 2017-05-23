@@ -46,23 +46,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnExcel = new System.Windows.Forms.Button();
-            this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
-            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorPositionItem = new System.Windows.Forms.ToolStripTextBox();
-            this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
-            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
-            this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
-            this.button1 = new System.Windows.Forms.Button();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.tSBComienzo = new System.Windows.Forms.ToolStripButton();
+            this.tSBAtras = new System.Windows.Forms.ToolStripButton();
+            this.tSBAdelante = new System.Windows.Forms.ToolStripButton();
+            this.tSBFinal = new System.Windows.Forms.ToolStripButton();
+            this.tSBTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.tSBLabel = new System.Windows.Forms.ToolStripLabel();
+            this.tSBAgregar = new System.Windows.Forms.ToolStripButton();
+            this.tSBConfirmar = new System.Windows.Forms.ToolStripButton();
+            this.tSBDesactivar = new System.Windows.Forms.ToolStripButton();
+            this.tSBActivar = new System.Windows.Forms.ToolStripButton();
+            this.tSBImprimir = new System.Windows.Forms.ToolStripButton();
+            this.tSBExcel = new System.Windows.Forms.ToolStripButton();
+            this.tSBSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
-            this.bindingNavigator1.SuspendLayout();
+            this.toolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCerrar
@@ -87,9 +87,9 @@
             this.IDMarcaColumn,
             this.DescripcionColumn,
             this.EstadoColumn});
-            this.dGV.Location = new System.Drawing.Point(12, 66);
+            this.dGV.Location = new System.Drawing.Point(12, 28);
             this.dGV.Name = "dGV";
-            this.dGV.Size = new System.Drawing.Size(479, 246);
+            this.dGV.Size = new System.Drawing.Size(479, 284);
             this.dGV.TabIndex = 2;
             // 
             // IDMarcaColumn
@@ -224,135 +224,144 @@
             this.btnExcel.Text = "Excel";
             this.btnExcel.UseVisualStyleBackColor = true;
             // 
-            // bindingNavigator1
+            // toolStrip
             // 
-            this.bindingNavigator1.AddNewItem = this.bindingNavigatorAddNewItem;
-            this.bindingNavigator1.CountItem = this.bindingNavigatorCountItem;
-            this.bindingNavigator1.DeleteItem = this.bindingNavigatorDeleteItem;
-            this.bindingNavigator1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.bindingNavigatorPositionItem,
-            this.bindingNavigatorCountItem,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2,
-            this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem});
-            this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
-            this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.bindingNavigator1.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.bindingNavigator1.Name = "bindingNavigator1";
-            this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(503, 25);
-            this.bindingNavigator1.TabIndex = 16;
-            this.bindingNavigator1.Text = "bindingNavigator1";
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSBComienzo,
+            this.tSBAtras,
+            this.tSBTextBox,
+            this.tSBLabel,
+            this.tSBAdelante,
+            this.tSBFinal,
+            this.tSBAgregar,
+            this.tSBConfirmar,
+            this.tSBDesactivar,
+            this.tSBActivar,
+            this.tSBImprimir,
+            this.tSBExcel,
+            this.tSBSalir});
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.Size = new System.Drawing.Size(503, 25);
+            this.toolStrip.TabIndex = 18;
+            this.toolStrip.Text = "toolStrip1";
             // 
-            // bindingNavigatorMoveFirstItem
+            // tSBComienzo
             // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveFirstItem.Text = "Move first";
+            this.tSBComienzo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBComienzo.Image = ((System.Drawing.Image)(resources.GetObject("tSBComienzo.Image")));
+            this.tSBComienzo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBComienzo.Name = "tSBComienzo";
+            this.tSBComienzo.Size = new System.Drawing.Size(23, 22);
+            this.tSBComienzo.Text = "Comienzo";
             // 
-            // bindingNavigatorMovePreviousItem
+            // tSBAtras
             // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMovePreviousItem.Text = "Move previous";
+            this.tSBAtras.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBAtras.Image = ((System.Drawing.Image)(resources.GetObject("tSBAtras.Image")));
+            this.tSBAtras.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBAtras.Name = "tSBAtras";
+            this.tSBAtras.Size = new System.Drawing.Size(23, 22);
+            this.tSBAtras.Text = "Atrás";
             // 
-            // bindingNavigatorSeparator
+            // tSBAdelante
             // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 25);
+            this.tSBAdelante.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBAdelante.Image = ((System.Drawing.Image)(resources.GetObject("tSBAdelante.Image")));
+            this.tSBAdelante.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBAdelante.Name = "tSBAdelante";
+            this.tSBAdelante.Size = new System.Drawing.Size(23, 22);
+            this.tSBAdelante.Text = "Adelante";
             // 
-            // bindingNavigatorPositionItem
+            // tSBFinal
             // 
-            this.bindingNavigatorPositionItem.AccessibleName = "Position";
-            this.bindingNavigatorPositionItem.AutoSize = false;
-            this.bindingNavigatorPositionItem.Name = "bindingNavigatorPositionItem";
-            this.bindingNavigatorPositionItem.Size = new System.Drawing.Size(50, 23);
-            this.bindingNavigatorPositionItem.Text = "0";
-            this.bindingNavigatorPositionItem.ToolTipText = "Current position";
+            this.tSBFinal.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBFinal.Image = ((System.Drawing.Image)(resources.GetObject("tSBFinal.Image")));
+            this.tSBFinal.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBFinal.Name = "tSBFinal";
+            this.tSBFinal.Size = new System.Drawing.Size(23, 22);
+            this.tSBFinal.Text = "Final";
             // 
-            // bindingNavigatorCountItem
+            // tSBTextBox
             // 
-            this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(35, 22);
-            this.bindingNavigatorCountItem.Text = "of {0}";
-            this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
+            this.tSBTextBox.Name = "tSBTextBox";
+            this.tSBTextBox.Size = new System.Drawing.Size(55, 25);
             // 
-            // bindingNavigatorSeparator1
+            // tSBLabel
             // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.tSBLabel.Name = "tSBLabel";
+            this.tSBLabel.Size = new System.Drawing.Size(37, 22);
+            this.tSBLabel.Text = "de {0}";
             // 
-            // bindingNavigatorMoveNextItem
+            // tSBAgregar
             // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveNextItem.Text = "Move next";
+            this.tSBAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBAgregar.Image = ((System.Drawing.Image)(resources.GetObject("tSBAgregar.Image")));
+            this.tSBAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBAgregar.Name = "tSBAgregar";
+            this.tSBAgregar.Size = new System.Drawing.Size(23, 22);
+            this.tSBAgregar.Text = "Agregar";
             // 
-            // bindingNavigatorMoveLastItem
+            // tSBConfirmar
             // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorMoveLastItem.Text = "Move last";
+            this.tSBConfirmar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBConfirmar.Image = ((System.Drawing.Image)(resources.GetObject("tSBConfirmar.Image")));
+            this.tSBConfirmar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBConfirmar.Name = "tSBConfirmar";
+            this.tSBConfirmar.Size = new System.Drawing.Size(23, 22);
+            this.tSBConfirmar.Text = "Confirmar";
             // 
-            // bindingNavigatorSeparator2
+            // tSBDesactivar
             // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.tSBDesactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBDesactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBDesactivar.Image")));
+            this.tSBDesactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBDesactivar.Name = "tSBDesactivar";
+            this.tSBDesactivar.Size = new System.Drawing.Size(23, 22);
+            this.tSBDesactivar.Text = "Desactivar";
             // 
-            // bindingNavigatorAddNewItem
+            // tSBActivar
             // 
-            this.bindingNavigatorAddNewItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
-            this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
-            this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.tSBActivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBActivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivar.Image")));
+            this.tSBActivar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBActivar.Name = "tSBActivar";
+            this.tSBActivar.Size = new System.Drawing.Size(23, 22);
+            this.tSBActivar.Text = "Activar";
             // 
-            // bindingNavigatorDeleteItem
+            // tSBImprimir
             // 
-            this.bindingNavigatorDeleteItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
-            this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
-            this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
-            this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.tSBImprimir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBImprimir.Image = ((System.Drawing.Image)(resources.GetObject("tSBImprimir.Image")));
+            this.tSBImprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBImprimir.Name = "tSBImprimir";
+            this.tSBImprimir.Size = new System.Drawing.Size(23, 22);
+            this.tSBImprimir.Text = "Imprimir";
             // 
-            // button1
+            // tSBExcel
             // 
-            this.button1.Location = new System.Drawing.Point(43, 37);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(42, 29);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.tSBExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBExcel.Image = ((System.Drawing.Image)(resources.GetObject("tSBExcel.Image")));
+            this.tSBExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBExcel.Name = "tSBExcel";
+            this.tSBExcel.Size = new System.Drawing.Size(23, 22);
+            this.tSBExcel.Text = "Excel";
+            // 
+            // tSBSalir
+            // 
+            this.tSBSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBSalir.Image = ((System.Drawing.Image)(resources.GetObject("tSBSalir.Image")));
+            this.tSBSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBSalir.Name = "tSBSalir";
+            this.tSBSalir.Size = new System.Drawing.Size(23, 22);
+            this.tSBSalir.Text = "Salir";
             // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 398);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.bindingNavigator1);
+            this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.label1);
@@ -369,9 +378,8 @@
             this.Text = "FormMarcas";
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
-            this.bindingNavigator1.ResumeLayout(false);
-            this.bindingNavigator1.PerformLayout();
+            this.toolStrip.ResumeLayout(false);
+            this.toolStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -395,18 +403,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnExcel;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.BindingNavigator bindingNavigator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorAddNewItem;
-        private System.Windows.Forms.ToolStripLabel bindingNavigatorCountItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorDeleteItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveFirstItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMovePreviousItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator;
-        private System.Windows.Forms.ToolStripTextBox bindingNavigatorPositionItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator1;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
-        private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
-        private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
+        private System.Windows.Forms.ToolStrip toolStrip;
+        private System.Windows.Forms.ToolStripButton tSBComienzo;
+        private System.Windows.Forms.ToolStripButton tSBAtras;
+        private System.Windows.Forms.ToolStripTextBox tSBTextBox;
+        private System.Windows.Forms.ToolStripLabel tSBLabel;
+        private System.Windows.Forms.ToolStripButton tSBAdelante;
+        private System.Windows.Forms.ToolStripButton tSBFinal;
+        private System.Windows.Forms.ToolStripButton tSBAgregar;
+        private System.Windows.Forms.ToolStripButton tSBConfirmar;
+        private System.Windows.Forms.ToolStripButton tSBDesactivar;
+        private System.Windows.Forms.ToolStripButton tSBActivar;
+        private System.Windows.Forms.ToolStripButton tSBImprimir;
+        private System.Windows.Forms.ToolStripButton tSBExcel;
+        private System.Windows.Forms.ToolStripButton tSBSalir;
     }
 }

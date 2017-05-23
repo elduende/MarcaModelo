@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using MarcaModelo.Data;
 using MarcaModelo.Services;
-using MarcaModelo.WinForm.Common;
 using Microsoft.Reporting.WinForms;
 
 namespace MarcaModelo.WinForm.Models

@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
-using System.Transactions;
 using MarcaModelo.Data;
-using MarcaModelo.Events;
-using MarcaModelo.Services;
-using MarcaModelo.Sistema.Events;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Common.Attributes;
-using System.Windows.Forms;
 
 namespace MarcaModelo.WinForm.Models
 {
@@ -62,11 +55,11 @@ namespace MarcaModelo.WinForm.Models
 
             imprimirCommand = new RelayCommand(Imprimir, () => marcas.Count > 0);
             confirmarCommand = new RelayCommand(() => Persist(), () => EsValido);
-            desactivarCommand = new RelayCommand(() => Inactivate(), () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
+            activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
             inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
             activarCommand = new RelayCommand(() => Activate(), () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
-            activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
-            
+            desactivarCommand = new RelayCommand(() => Inactivate(), () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
+
             RefreshGrid(marcaRepository);
         }
 

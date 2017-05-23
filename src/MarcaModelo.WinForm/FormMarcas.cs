@@ -13,6 +13,7 @@ namespace MarcaModelo.WinForm
 
             btnImprimir.Bind(model.ImprimirCommand);
             btnCerrar.Bind(model.CloseCommand);
+            //tSBSalir.Bind(model.CloseCommand);
             btnConfirmar
                 .BindErrors(model, errorProvider)
                 .Bind(model.ConfirmarCommand);

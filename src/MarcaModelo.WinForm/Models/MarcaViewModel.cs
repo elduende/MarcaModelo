@@ -1,10 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using MarcaModelo.Data;
-using MarcaModelo.WinForm.Common;
-using MarcaModelo.WinForm.Common.Attributes;
-using System.Collections.Generic;
+﻿using MarcaModelo.WinForm.Common;
 
 namespace MarcaModelo.WinForm.Models
 {

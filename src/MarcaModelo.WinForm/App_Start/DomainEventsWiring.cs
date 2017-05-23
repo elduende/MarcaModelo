@@ -1,5 +1,4 @@
 ﻿using MarcaModelo.Services;
-using MarcaModelo.WinForm.DomainEventsHandlers;
 using MarcaModelo.Sistema.Events;
 
 namespace MarcaModelo.WinForm
