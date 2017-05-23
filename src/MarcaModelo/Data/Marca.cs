@@ -7,7 +7,7 @@ using Dapper;
 
 namespace MarcaModelo.Data
 {
-    public class Marca : IMarcaRepository
+    public class Marca : BaseEntity, IMarcaRepository
     {
         private List<Modelo> modelos = new List<Modelo>();
         

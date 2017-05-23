@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MarcaModelo.Data
 {
-    public class Modelo: IModeloRepository
+    public class Modelo : BaseEntity, IModeloRepository
     {
         private Marca marca { get; set; }
 

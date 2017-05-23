@@ -45,7 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\AbstractEntity.cs" />
+    <Compile Include="Data\BaseEntity.cs" />
     <Compile Include="Data\GenericRepositoryFactory.cs" />
+    <Compile Include="Data\IEntity.cs" />
     <Compile Include="Data\IMarcaRepository.cs" />
     <Compile Include="Data\IModeloRepository.cs" />
     <Compile Include="Data\IRepositoryFactory.cs" />
