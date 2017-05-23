@@ -30,11 +30,6 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        IEnumerable<Modelo> IModeloRepository.GetModelos(int IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
         void IModeloRepository.Persist(Modelo modelo)
         {
             throw new NotImplementedException();

@@ -9,7 +9,6 @@ namespace MarcaModelo.Data
         string Descripcion { get; set; }
         string Estado { get; set; }
         Modelo GetById(int IDModelo);
-        IEnumerable<Modelo> GetModelos(int IDMarca);
         void Persist(Modelo modelo);
     }
 }

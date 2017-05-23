@@ -46,11 +46,6 @@ namespace MarcaModelo.Data
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Modelo> GetModelos(int IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Persist(Modelo modelo)
         {
             throw new NotImplementedException();
