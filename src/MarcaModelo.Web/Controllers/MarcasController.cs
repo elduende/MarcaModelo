@@ -15,7 +15,7 @@ namespace MarcaModelo.Web.Controllers
             BindingList<MarcasModel> marcas = new BindingList<MarcasModel>();
             foreach (Marca m in marca.GetMarcas())
             {
-                marcas.Add(new MarcasModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+                marcas.Add(new MarcasModel(marca) { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
             return View(marcas);
         }
@@ -49,7 +49,7 @@ namespace MarcaModelo.Web.Controllers
         {
             IMarcaRepository marca = new Marca();
             marca = marca.GetById(idMarca);
-            return View(new MarcasModel { IDMarca = marca.IDMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
+            return View(new MarcasModel(marca) { IDMarca = marca.IDMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
         }
         // POST:Update the details into database
         [HttpPost]
