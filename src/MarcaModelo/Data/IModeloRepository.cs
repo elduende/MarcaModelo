@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MarcaModelo.Data
+﻿namespace MarcaModelo.Data
 {
     public interface IModeloRepository
     {

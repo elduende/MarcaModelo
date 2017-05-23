@@ -6,11 +6,18 @@ namespace MarcaModelo.Data
     public class Modelo: IModeloRepository
     {
         private Marca marca { get; set; }
-        public Modelo(Marca _marca)
+
+        //[CMS] - Le tuve que sacar el constructor que recibe Marca como parámetro
+        //public Modelo(Marca _marca)
+        //{
+        //    marca = _marca;
+        //    marca.IDMarca = _marca.IDMarca;
+        //}
+        public Modelo()
         {
-            marca = _marca;
-            marca.IDMarca = _marca.IDMarca;
+            
         }
+
         public int IDModelo { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }

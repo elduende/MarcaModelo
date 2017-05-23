@@ -1,69 +1,31 @@
-﻿using MarcaModelo.WinForm.Common;
+﻿using MarcaModelo.Data;
+using MarcaModelo.WinForm.Common;
+using System;
+using System.Linq;
 
 namespace MarcaModelo.WinForm.Models
 {
     public class MarcaViewModel : ViewModelBase
     {
-        public MarcaViewModel()
-        {
+        private readonly IMarcaRepository marcaRepository;
+        private readonly Lazy<ModeloViewModel[]> modelos;
 
+        public MarcaViewModel(IMarcaRepository marcaRepository)
+        {
+            //[CMS] - Lazyload ¿Está bien así?
+            modelos = new Lazy<ModeloViewModel[]>(() =>
+            marcaRepository.Modelos().ToArray()
+            .Select(x => new ModeloViewModel { IDMarca = marcaRepository.IDMarca }).ToArray());
+            this.marcaRepository = marcaRepository;
         }
 
-        //[DisplayName("ID Marca")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
         public int? IDMarca
         { get; set; }
-        //{
-        //    get { return idMarca; }
-        //    set { SetProperty(ref idMarca, value, nameof(IDMarca)); }
-        //}
-
-        //[DisplayName("Descripción")]
-        //[ReadOnly(false)]
-        //[StringLength(100, MinimumLength = 2)]
-        //[Required(ErrorMessage = "La Descripción es obligatoria")]
+        
         public string Descripcion
         { get; set; }
-        //{
-            //get { return descripcion; }
-            //set
-            //{
-            //    if (!Equals(descripcion, value))
-            //    {
-            //        descripcion = value;
-            //        OnPropertyChanged("Descripcion");
-            //        //ResetAnomalias();
-            //    }
-            //}
-        //}
-
-        //[DisplayName("Estado")]
-        //[ReadOnly(true)]
-        //[Hidden(true)]
+        
         public string Estado
         { get; set; }
-        //{
-        //    get { return estado; }
-        //    set { SetProperty(ref estado, value, nameof(Estado)); }
-        //}
-
-        //public IList<Modelo> Modelos { get; }
-        //public void Add(Modelo modelo)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public MarcaViewModel GetById(int IDMarca)
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public IEnumerable<Marca> GetMarcas()
-        //{
-        //    throw new NotImplementedException();
-        //}
-        //public void Persist(Marca marca)
-        //{
-        //    throw new NotImplementedException();
-        //}
     }
 }

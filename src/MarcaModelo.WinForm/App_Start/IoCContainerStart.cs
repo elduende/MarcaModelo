@@ -19,7 +19,8 @@ namespace MarcaModelo.WinForm
         {
             store.RegisterSingleton<IMarcaRepository>(m => new Marca());
             //[CMS]
-            store.RegisterSingleton<IModeloRepository>(m => new Modelo(new Marca()));
+            //store.RegisterSingleton<IModeloRepository>(m => new Modelo(new Marca()));
+            store.RegisterSingleton<IModeloRepository>(m => new Modelo());
         }
     }
 }

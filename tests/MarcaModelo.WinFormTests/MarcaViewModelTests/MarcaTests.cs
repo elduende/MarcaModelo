@@ -42,7 +42,8 @@ namespace MarcaModelo.WinFormTests.MarcaViewModelTests
             MarcaRepository = new Data.Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
 
             IModeloRepository ModeloRepository = new ModeloRepositoryMock();
-            ModeloRepository = new Modelo((Data.Marca)MarcaRepository) { IDModelo = 1, Descripcion = "Genérico", Estado = "A" };
+            //ModeloRepository = new Modelo((Data.Marca)MarcaRepository) { IDModelo = 1, Descripcion = "Genérico", Estado = "A" };
+            ModeloRepository = new Modelo() { IDModelo = 1, Descripcion = "Genérico", Estado = "A" };
 
             MarcaRepository.AddModelo((Modelo)ModeloRepository);
             MarcaRepository.Modelos().Select(x => x.Descripcion).Should().Contain("Genérico");

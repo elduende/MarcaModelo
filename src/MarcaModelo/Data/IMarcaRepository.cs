@@ -4,8 +4,7 @@ namespace MarcaModelo.Data
 {
     public interface IMarcaRepository
     {
-        //ISet<Modelo> modelos = new HashSet<Modelo>();
-        IList<Modelo> Modelos();
+        IEnumerable<Modelo> Modelos();
         int? IDMarca { get; set; }
         string Descripcion { get; set; }
         string Estado { get; set; }

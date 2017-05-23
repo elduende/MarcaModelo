@@ -26,7 +26,8 @@ namespace MarcaModelo.WinForm
             //    c.GetInstance<IViewModelExposer>()
             //    , c.GetInstance<IMarcaRepository>()
             //    , c.GetInstance<IModeloRepository>()));
-            store.RegisterTransient(c => new MarcaViewModel());
+            //store.RegisterTransient(c => new MarcaViewModel());
+            store.RegisterTransient(c => new MarcaViewModel(c.GetInstance<IMarcaRepository>()));
             store.RegisterTransient(c => new ModeloViewModel());
         }
 

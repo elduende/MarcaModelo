@@ -16,8 +16,21 @@ namespace MarcaModelo.Data
         public string Estado { get; set; }
         public IList<Modelo> Modelos
         {
-            get { return modelos.ToList(); }
+            get
+            {
+                IDbConnection connection;
+                using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+                {
+                    connection.Open();
+                    modelos = SqlMapper.Query<Modelo>(connection,
+                                                      "ModeloTraer",
+                                                      new { IDMarca },
+                                                      commandType: CommandType.StoredProcedure).ToList();
+                    return modelos;
+                }
+            }
         }
+
         public void AddModelo(Modelo modelo)
         {
             if (modelo == null)
@@ -26,6 +39,7 @@ namespace MarcaModelo.Data
             }
             modelos.Add(modelo);
         }
+
         Marca IMarcaRepository.GetById(int idMarca)
         {
             IDbConnection connection;
@@ -55,7 +69,7 @@ namespace MarcaModelo.Data
                                               commandType: CommandType.StoredProcedure);
             }
         }
-
+        
         IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas()
         {
             IDbConnection connection;
@@ -87,7 +101,7 @@ namespace MarcaModelo.Data
             }
         }
 
-        IList<Modelo> IMarcaRepository.Modelos()
+        IEnumerable<Modelo> IMarcaRepository.Modelos()
         {
             return modelos;
         }

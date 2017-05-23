@@ -132,7 +132,6 @@ namespace MarcaModelo.WinForm.Models
             get { return inactivasCommand; }
         }
 
-        //private bool MuestraMarcasActivas { get; set; }
         private bool MuestraMarcasActivas 
         {
             get { return muestraMarcasActivas; }
@@ -151,9 +150,8 @@ namespace MarcaModelo.WinForm.Models
         //[CMS] - Indicación de Fabio
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
         //public IEnumerable<MarcaViewModel> Marcas => marcas;
-        public IEnumerable<MarcaViewModel> Marcas => marcas ?? (marcas = new BindingList<MarcaViewModel>(marcaRepository.GetMarcas().Select(m => new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
-
-
+        public IEnumerable<MarcaViewModel> Marcas => marcas ?? (marcas = new BindingList<MarcaViewModel>(marcaRepository.GetMarcas().Select(m => new MarcaViewModel(marcaRepository) { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
+        
         public override bool CanClose()
         {
             if (cierreControlado)
@@ -218,7 +216,8 @@ namespace MarcaModelo.WinForm.Models
             marcas.Clear();
             foreach (var m in marcaRepository.GetMarcas())
             {
-                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+                marcaRepository.IDMarca = m.IDMarca;
+                marcas.Add(new MarcaViewModel(marcaRepository) { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
 
             MuestraMarcasActivas = true;
@@ -230,7 +229,7 @@ namespace MarcaModelo.WinForm.Models
             marcas.Clear();
             foreach (var m in marcaRepository.GetMarcasInactivas())
             {
-                marcas.Add(new MarcaViewModel { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+                marcas.Add(new MarcaViewModel(marcaRepository) { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
             MuestraMarcasActivas = false;
         }
