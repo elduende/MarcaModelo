@@ -16,7 +16,7 @@ namespace MarcaModelo.TestDataBuilders
         {
             return StartRec().
                 WithId(1).
-                With(m => m.Descripcion = "Marca").
+                With(m => m.Descripcion = "Descripcion 1").
                 With(m => m.Estado = "A").
                 Build();
         }
@@ -24,7 +24,7 @@ namespace MarcaModelo.TestDataBuilders
         public static Marca Default()
         {
             return StartRec().
-                With(m => m.Descripcion = "Marca").
+                With(m => m.Descripcion = "Descripcion 1").
                 With(m => m.Estado = "A").
                 Build();
         }

@@ -11,10 +11,15 @@ namespace MarcaModelo.Data
     {
         private List<Modelo> modelos = new List<Modelo>();
         
+        public Marca()
+        {
+            modelos = new List<Modelo>();
+        }
+
         public int? IDMarca { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
-        public IList<Modelo> Modelos
+        public List<Modelo> Modelos
         {
             get
             {
@@ -129,6 +134,30 @@ namespace MarcaModelo.Data
                                        "MarcaActivar",
                                        new { iDMarca },
                                        commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public virtual bool Equals(Marca that)
+        {
+            if (base.Equals(that))
+            {
+                return true;
+            }
+            if (ReferenceEquals(null, that)) return false;
+            return Equals(that.Descripcion, Descripcion);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Marca);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int result = (Descripcion != null ? Descripcion.GetHashCode() : 0);
+                return result;
             }
         }
     }
