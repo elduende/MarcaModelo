@@ -1,6 +1,7 @@
-﻿using SharpTestsEx;
-using MarcaModelo.TestDataBuilders;
+﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SharpTestsEx;
+using MarcaModelo.TestDataBuilders;
 
 namespace MarcaModelo.Data.Tests
 {
@@ -79,19 +80,14 @@ namespace MarcaModelo.Data.Tests
         //[TestMethod]
         //public void AddModeloAreAggregates()
         //{
-        //    var marca = MarcaBuilder.DefaultPersistent();
-        //    marca.AddModelo(ModeloBuilder.DefaultPersistent());
-        //    //[CMS] marca.Modelos como List, no tiene Count
-        //    //como IEnumerable, no tengo Add
-        //    //Iesi.Collection no anda
-        //    marca.Modelos.Count().Should().Be(1);
-        //    //marca.Modelos.GetEnumerator().Should().Be(1);
-        //    marca.AddModelo(ModeloBuilder.StartRec().
-        //        With(m => m.Descripcion = "Descripcion 1").
-        //        With(m => m.Estado = "A").
-        //        Build());
-        //    marca.Modelos.Count().Should().Be(2);
-        //    //marca.Modelos.GetEnumerator().Should().Be(2);
+        //var marca = MarcaBuilder.DefaultPersistent();
+        //marca.AddModelo(ModeloBuilder.DefaultPersistent());
+        //marca.Modelos.Count().Should().Be(1);
+        //marca.AddModelo(ModeloBuilder.StartRec().
+        //    With(m => m.Descripcion = "Descripcion 1").
+        //    With(m => m.Estado = "A").
+        //    Build());
+        //marca.Modelos.Count().Should().Be(2);
         //}
 
         //[TestMethod]
@@ -103,15 +99,17 @@ namespace MarcaModelo.Data.Tests
         //    marca.Modelos.Count().Should().Be(1);
         //}
 
-        //[TestMethod]
-        //public void DeleteInstanceContactDeleteIt()
-        //{
-        //    var marca = MarcaBuilder.Default();
-        //    var modelo = ModeloBuilder.Default();
-        //    marca.AddModelo(modelo);
-        //    marca.RemoveModelo(modelo);
-        //    marca.Modelos.Should().Be.Empty();
-        //}
+        [TestMethod]
+        public void DeleteInstanceModeloDeleteIt()
+        {
+            var marca = MarcaBuilder.Default();
+            var modelo = ModeloBuilder.Default();
+            
+            modelo.Marca = marca;
+            marca.AddModelo(modelo);
+            marca.RemoveModelo(modelo);
+            marca.Modelos.Should().Be.Empty();
+        }
 
         [TestMethod]
         public void ChangeDescripcionToNullMayCalculateTheHash()

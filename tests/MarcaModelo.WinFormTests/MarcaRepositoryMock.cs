@@ -8,63 +8,46 @@ namespace MarcaModelo.WinFormTests
 {
     public class MarcaRepositoryMock : IMarcaRepository
     {
-        private readonly List<Modelo> modelos;
+        Marca marca = new Marca();
+        //private readonly List<Modelo> modelos;
+        private Iesi.Collections.Generic.ISet<Modelo> modelos;
 
-        public int? IDMarca { get; set; }
-        public string Descripcion { get; set; }
-        public string Estado { get; set; }
+        int? IMarcaRepository.IDMarca { get; set; }
+        string IMarcaRepository.Descripcion { get; set; }
+        string IMarcaRepository.Estado { get; set; }
 
-        public IList<Modelo> Modelos
+        //public IEnumerable<Modelo> Modelos
+        //{
+        //    get { return modelos.ToList(); }
+        //}
+
+        IEnumerable<Modelo> IMarcaRepository.Modelos()
         {
-            get { return modelos.ToList(); }
+            //get { return modelos.ToList(); }
+            return modelos.ToList();
         }
 
-        int? IMarcaRepository.IDMarca
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
+        //public int? IDMarca { get; set; }
+        //public string Descripcion { get; set; }
+        //public string Estado { get; set; }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
+        //public void AddModelo(Modelo modelo)
+        //{
+        //    if (modelo == null)
+        //    {
+        //        return;
+        //    }
+        //    modelos.Add(modelo);
+        //}
+
+        void IMarcaRepository.AddModelo(Modelo modelo)
+        {
+            marca.AddModelo(modelo);
         }
 
-        string IMarcaRepository.Descripcion
+        public void RemoveModelo(Modelo modelo)
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        string IMarcaRepository.Estado
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void AddModelo(Modelo modelo)
-        {
-            if (modelo == null)
-            {
-                return;
-            }
-            modelos.Add(modelo);
+            marca.RemoveModelo(modelo);
         }
 
         //IList<Modelo> IMarcaRepository.Modelos()
@@ -72,6 +55,11 @@ namespace MarcaModelo.WinFormTests
         //    return modelos;
         //}
 
+        public static IMarcaRepository Empty()
+        {
+            return new MarcaRepositoryMock();
+        }
+        
         public Marca GetById(int IDMarca)
         {
             throw new NotImplementedException();
@@ -112,11 +100,6 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        IEnumerable<Modelo> IMarcaRepository.Modelos()
-        {
-            throw new NotImplementedException();
-        }
-
         Marca IMarcaRepository.GetById(int IDMarca)
         {
             throw new NotImplementedException();
@@ -133,11 +116,6 @@ namespace MarcaModelo.WinFormTests
         }
 
         void IMarcaRepository.Persist(Marca marca)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IMarcaRepository.AddModelo(Modelo modelo)
         {
             throw new NotImplementedException();
         }

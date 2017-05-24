@@ -3,46 +3,59 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
+using Iesi.Collections.Generic;
 using Dapper;
 
 namespace MarcaModelo.Data
 {
     public class Marca : BaseEntity, IMarcaRepository
     {
-        private List<Modelo> modelos = new List<Modelo>();
-        
+        private Iesi.Collections.Generic.ISet<Modelo> modelos;
+
         public Marca()
         {
-            modelos = new List<Modelo>();
+            modelos = new HashedSet<Modelo>();
         }
 
-        public int? IDMarca { get; set; }
-        public string Descripcion { get; set; }
-        public string Estado { get; set; }
-        public List<Modelo> Modelos
+        public virtual int? IDMarca { get; set; }
+        public virtual string Descripcion { get; set; }
+        public virtual string Estado { get; set; }
+        public virtual IEnumerable<Modelo> Modelos
         {
-            get
-            {
-                IDbConnection connection;
-                using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
-                {
-                    connection.Open();
-                    modelos = SqlMapper.Query<Modelo>(connection,
-                                                      "ModeloTraer",
-                                                      new { IDMarca },
-                                                      commandType: CommandType.StoredProcedure).ToList();
-                    return modelos;
-                }
-            }
+            //get
+            //{
+            //    IDbConnection connection;
+            //    using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            //    {
+            //        connection.Open();
+            //        modelos = (Iesi.Collections.Generic.ISet<Modelo>)SqlMapper.Query<Modelo>(connection,
+            //                                          "ModeloTraer",
+            //                                          new { IDMarca },
+            //                                          commandType: CommandType.StoredProcedure).ToList();
+            //        return modelos;
+            //    }
+            //}
+            get { return modelos; }
         }
 
-        public void AddModelo(Modelo modelo)
+        public virtual void AddModelo(Modelo modelo)
         {
-            if (modelo == null)
+            if (modelo.Marca != null && modelo.Marca != this)
             {
-                return;
+                modelo.Marca.RemoveModelo(modelo);
             }
+
+            modelo.Marca = this;
             modelos.Add(modelo);
+        }
+
+        public virtual void RemoveModelo(Modelo modelo)
+        {
+            if (modelo.Marca != null && modelo.Marca == this)
+            {
+                modelos.Remove(modelo);
+                modelo.Marca = null;
+            }
         }
 
         Marca IMarcaRepository.GetById(int idMarca)
@@ -111,7 +124,7 @@ namespace MarcaModelo.Data
             return modelos;
         }
 
-        public void Inactivate(int? iDMarca)
+        public virtual void Inactivate(int? iDMarca)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
@@ -124,7 +137,7 @@ namespace MarcaModelo.Data
             }
         }
 
-        public void Activate(int? iDMarca)
+        public virtual void Activate(int? iDMarca)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
