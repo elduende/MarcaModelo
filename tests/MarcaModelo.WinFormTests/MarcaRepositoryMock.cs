@@ -12,7 +12,7 @@ namespace MarcaModelo.WinFormTests
         //private readonly List<Modelo> modelos;
         private Iesi.Collections.Generic.ISet<Modelo> modelos;
 
-        int? IMarcaRepository.IDMarca { get; set; }
+        int IMarcaRepository.IDMarca { get; set; }
         string IMarcaRepository.Descripcion { get; set; }
         string IMarcaRepository.Estado { get; set; }
 
@@ -27,7 +27,7 @@ namespace MarcaModelo.WinFormTests
             return modelos.ToList();
         }
 
-        //public int? IDMarca { get; set; }
+        //public int IDMarca { get; set; }
         //public string Descripcion { get; set; }
         //public string Estado { get; set; }
 
@@ -90,16 +90,6 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        public void Activate(int? IDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Inactivate(int? iDMarca)
-        {
-            throw new NotImplementedException();
-        }
-
         Marca IMarcaRepository.GetById(int IDMarca)
         {
             throw new NotImplementedException();
@@ -120,12 +110,12 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        void IMarcaRepository.Activate(int? IDMarca)
+        void IMarcaRepository.Activate(int IDMarca)
         {
             throw new NotImplementedException();
         }
 
-        void IMarcaRepository.Inactivate(int? iDMarca)
+        void IMarcaRepository.Inactivate(int iDMarca)
         {
             throw new NotImplementedException();
         }

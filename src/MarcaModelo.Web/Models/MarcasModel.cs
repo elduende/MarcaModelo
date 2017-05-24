@@ -23,7 +23,7 @@ namespace MarcaModelo.Web.Models
 
         [Display(Name = "IDMarca")]
         [HiddenInput(DisplayValue = false)]
-        public int? IDMarca { get; set; }
+        public int IDMarca { get; set; }
 
         [Display(Name = "Marca")]
         [Required(ErrorMessage = "La Marca es requerida.")]

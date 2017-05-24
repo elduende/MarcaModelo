@@ -16,7 +16,7 @@ namespace MarcaModelo.WinForm.Models
         [DisplayName("ID Marca")]
         [ReadOnly(true)]
         [Hidden(true)]
-        public int? IDMarca { get; set; }
+        public int IDMarca { get; set; }
 
         [DisplayName("Descripción")]
         [ReadOnly(true)]

@@ -17,7 +17,7 @@ namespace MarcaModelo.Data
             modelos = new HashedSet<Modelo>();
         }
 
-        public virtual int? IDMarca { get; set; }
+        public virtual int IDMarca { get; set; }
         public virtual string Descripcion { get; set; }
         public virtual string Estado { get; set; }
         public virtual IEnumerable<Modelo> Modelos
@@ -124,7 +124,7 @@ namespace MarcaModelo.Data
             return modelos;
         }
 
-        public virtual void Inactivate(int? iDMarca)
+        public virtual void Inactivate(int iDMarca)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
@@ -137,7 +137,7 @@ namespace MarcaModelo.Data
             }
         }
 
-        public virtual void Activate(int? iDMarca)
+        public virtual void Activate(int iDMarca)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))

@@ -11,7 +11,7 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcasViewModel : ViewModelBase, IValidatableObject
     {
-        private int? idMarca;
+        private int idMarca;
         private string descripcion;
         private string estado;
 
@@ -66,7 +66,7 @@ namespace MarcaModelo.WinForm.Models
         [DisplayName("ID Marca")]
         [ReadOnly(true)]
         [Hidden(true)]
-        public int? IDMarca
+        public int IDMarca
         {
             get { return idMarca; }
             set { SetProperty(ref idMarca, value, nameof(IDMarca)); }

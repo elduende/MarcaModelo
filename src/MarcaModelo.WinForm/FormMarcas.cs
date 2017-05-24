@@ -35,7 +35,7 @@ namespace MarcaModelo.WinForm
             //[CMS] ¿Se hace así esto?
             dGV.Click += (sender, args) => 
             {
-                model.IDMarca = (int?)dGV.CurrentRow.Cells[0].Value;
+                model.IDMarca = (int)dGV.CurrentRow.Cells[0].Value;
                 model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
                 model.Estado = dGV.CurrentRow.Cells[2].Value.ToString(); 
             };
@@ -44,7 +44,7 @@ namespace MarcaModelo.WinForm
             {
                 if (dGV.CurrentRow != null)
                 {
-                    model.IDMarca = (int?)dGV.CurrentRow.Cells[0].Value;
+                    model.IDMarca = (int)dGV.CurrentRow.Cells[0].Value;
                     model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
                     model.Estado = dGV.CurrentRow.Cells[2].Value.ToString();
                 }
@@ -52,7 +52,7 @@ namespace MarcaModelo.WinForm
 
             btnAgregar.Click += (sender, args) =>
             {
-                model.IDMarca = null;
+                //model.IDMarca = null;
                 model.Descripcion = null;
                 model.Estado = "A";
                 txtDescripcion.Focus();

@@ -19,7 +19,7 @@ namespace MarcaModelo.WinForm.Models
             this.marcaRepository = marcaRepository;
         }
 
-        public int? IDMarca
+        public int IDMarca
         { get; set; }
         
         public string Descripcion
