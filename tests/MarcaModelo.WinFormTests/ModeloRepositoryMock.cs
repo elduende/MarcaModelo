@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MarcaModelo.Data;
-//using MarcaModelo.WinFormTests.MarcaViewModelTests;
+using MarcaModelo.WinFormTests.MarcaViewModelTests;
 
 namespace MarcaModelo.WinFormTests
 {

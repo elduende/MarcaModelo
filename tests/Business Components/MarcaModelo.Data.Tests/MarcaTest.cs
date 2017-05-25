@@ -9,14 +9,14 @@ namespace MarcaModelo.Data.Tests
     public class MarcaTest
     {
         [TestMethod]
-        public void CtrProtection()
+        public void MarcaCtrProtection()
         {
             //ActionAssert.NotThrow(() => new Marca());
             Executing.This(() => new Marca());
         }
 
         [TestMethod]
-        public void WhenChangeDescripcionAsignItToProperty()
+        public void MarcaWhenChangeDescripcionAsignItToProperty()
         {
             var marca = MarcaBuilder.Default();
             marca.Descripcion = "Descripcion 2";
@@ -24,7 +24,7 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void WhenChangeEstadoAsignItToProperty()
+        public void MarcaWhenChangeEstadoAsignItToProperty()
         {
             var marca = MarcaBuilder.Default();
             marca.Estado = "B";
@@ -32,7 +32,7 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void WhenSameDescripcionAreEquals()
+        public void MarcaWhenSameDescripcionAreEquals()
         {
             var oldMarca = new Marca { Descripcion = "Descripcion 1" };
             var newMarca = new Marca { Descripcion = "Descripcion 1" };
@@ -40,14 +40,14 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void WhenAnotherObjetAreNotEquals()
+        public void MarcaWhenAnotherObjetAreNotEquals()
         {
             (MarcaBuilder.Default())
                 .Should().Not.Be(new object());
         }
 
         [TestMethod]
-        public void WhenDiferentDescripcionAreNotEquals()
+        public void MarcaWhenDiferentDescripcionAreNotEquals()
         {
             var newMarca = new Marca { Descripcion = "Descripcion 2" };
             MarcaBuilder.Default()
@@ -55,7 +55,7 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void WhenSameDescripcionSameHashCode()
+        public void MarcaWhenSameDescripcionSameHashCode()
         {
             var oldMarca = new Marca { Descripcion = "Descripcion 1" };
             var newMarca = new Marca { Descripcion = "Descripcion 1" };
@@ -63,14 +63,14 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void WhenDiferentDescripcionDiferentHashCode()
+        public void MarcaWhenDiferentDescripcionDiferentHashCode()
         {
             MarcaBuilder.Default().GetHashCode()
                 .Should().Not.Be(new Marca { Descripcion = "Descripcion 2" }.GetHashCode());
         }
 
         [TestMethod]
-        public void MayAddModeloImmediately()
+        public void MarcaMayAddModeloImmediately()
         {
             var marca = MarcaBuilder.DefaultPersistent();
             //ActionAssert.NotThrow(() => marca.AddModelo(ModeloBuilder.DefaultPersistent()));
@@ -78,7 +78,7 @@ namespace MarcaModelo.Data.Tests
         }
 
         //[TestMethod]
-        //public void AddModeloAreAggregates()
+        //public void MarcaAddModeloAreAggregates()
         //{
         //var marca = MarcaBuilder.DefaultPersistent();
         //marca.AddModelo(ModeloBuilder.DefaultPersistent());
@@ -91,7 +91,7 @@ namespace MarcaModelo.Data.Tests
         //}
 
         //[TestMethod]
-        //public void ModelosNotAdmitDuplicates()
+        //public void MarcaModelosNotAdmitDuplicates()
         //{
         //    var marca = MarcaBuilder.DefaultPersistent();
         //    marca.AddModelo(ModeloBuilder.Default());
@@ -100,7 +100,7 @@ namespace MarcaModelo.Data.Tests
         //}
 
         [TestMethod]
-        public void DeleteInstanceModeloDeleteIt()
+        public void MarcaDeleteInstanceModeloDeleteIt()
         {
             var marca = MarcaBuilder.Default();
             var modelo = ModeloBuilder.Default();
@@ -112,7 +112,7 @@ namespace MarcaModelo.Data.Tests
         }
 
         [TestMethod]
-        public void ChangeDescripcionToNullMayCalculateTheHash()
+        public void MarcaChangeDescripcionToNullMayCalculateTheHash()
         {
             var marca = MarcaBuilder.Default();
             marca.Descripcion = null;
