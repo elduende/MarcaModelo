@@ -10,14 +10,14 @@ namespace MarcaModelo.Data
 {
     public class Marca : BaseEntity, IMarcaRepository
     {
-        private Iesi.Collections.Generic.ISet<Modelo> modelos;
+        private Iesi.Collections.Generic.ISet<Modelo> _modelos;
 
         public Marca()
         {
-            modelos = new HashedSet<Modelo>();
+            _modelos = new HashedSet<Modelo>();
         }
 
-        public virtual int IDMarca { get; set; }
+        public virtual int IdMarca { get; set; }
         public virtual string Descripcion { get; set; }
         public virtual string Estado { get; set; }
         public virtual IEnumerable<Modelo> Modelos
@@ -35,7 +35,7 @@ namespace MarcaModelo.Data
             //        return modelos;
             //    }
             //}
-            get { return modelos; }
+            get { return _modelos; }
         }
 
         public virtual void AddModelo(Modelo modelo)
@@ -46,14 +46,14 @@ namespace MarcaModelo.Data
             }
 
             modelo.Marca = this;
-            modelos.Add(modelo);
+            _modelos.Add(modelo);
         }
 
         public virtual void RemoveModelo(Modelo modelo)
         {
             if (modelo.Marca != null && modelo.Marca == this)
             {
-                modelos.Remove(modelo);
+                _modelos.Remove(modelo);
                 modelo.Marca = null;
             }
         }
@@ -106,7 +106,7 @@ namespace MarcaModelo.Data
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
-                if (marca.IDMarca == null)
+                if (marca.IdMarca == null)
                     SqlMapper.Query<Marca>(connection, 
                                            "MarcaAgregar", 
                                            new { marca.Descripcion }, 
@@ -114,14 +114,14 @@ namespace MarcaModelo.Data
                 else
                     SqlMapper.Query<Marca>(connection,
                                            "MarcaModificar",
-                                           new { marca.IDMarca, marca.Descripcion },
+                                           new { IDMarca = marca.IdMarca, marca.Descripcion },
                                            commandType: CommandType.StoredProcedure);
             }
         }
 
         IEnumerable<Modelo> IMarcaRepository.Modelos()
         {
-            return modelos;
+            return _modelos;
         }
 
         public virtual void Inactivate(int iDMarca)

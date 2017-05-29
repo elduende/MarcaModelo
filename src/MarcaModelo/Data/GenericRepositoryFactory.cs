@@ -5,14 +5,14 @@ namespace MarcaModelo.Data
 {
     public class GenericRepositoryFactory : IRepositoryFactory
     {
-        private readonly IServiceContainer container;
-        private readonly IServiceStore serviceStore;
+        private readonly IServiceContainer _container;
+        private readonly IServiceStore _serviceStore;
 
         public GenericRepositoryFactory()
         {
             var simple = new SimpleServiceContainer();
-            container = simple;
-            serviceStore = simple;
+            _container = simple;
+            _serviceStore = simple;
         }
 
         public GenericRepositoryFactory(IServiceContainer container, IServiceStore serviceStore)
@@ -25,23 +25,23 @@ namespace MarcaModelo.Data
             {
                 throw new ArgumentNullException(nameof(serviceStore));
             }
-            this.container = container;
-            this.serviceStore = serviceStore;
+            this._container = container;
+            this._serviceStore = serviceStore;
         }
 
         public void RegisterSingleton<T>(Func<GenericRepositoryFactory, T> ctor) where T : class
         {
-            serviceStore.RegisterSingleton(x => ctor(this));
+            _serviceStore.RegisterSingleton(x => ctor(this));
         }
 
         public void RegisterTransient<T>(Func<GenericRepositoryFactory, T> ctor) where T : class
         {
-            serviceStore.RegisterTransient(x => ctor(this));
+            _serviceStore.RegisterTransient(x => ctor(this));
         }
 
         public TRepository GetRepository<TRepository>() where TRepository : class
         {
-            var instance = container.GetInstance<TRepository>();
+            var instance = _container.GetInstance<TRepository>();
             if (instance == null)
             {
                 throw new ArgumentOutOfRangeException("TRepository", string.Format("El constructor para {0} no fue registrado", typeof(TRepository).FullName));

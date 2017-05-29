@@ -7,11 +7,11 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcaReportViewModel : ReportViewModel
     {
-        private readonly IReportsProvider reportsProvider;
+        private readonly IReportsProvider _reportsProvider;
 
         public MarcaReportViewModel(IReportsProvider reportsProvider)
         {
-            this.reportsProvider = reportsProvider;
+            _reportsProvider = reportsProvider;
         }
 
         public IEnumerable<Marca> Marcas { get; private set; }
@@ -25,7 +25,7 @@ namespace MarcaModelo.WinForm.Models
 
         public override void SetReport(LocalReport report)
         {
-            report.LoadReportDefinition(reportsProvider.GetResourceByReportName("Marcas.rdlc"));
+            report.LoadReportDefinition(_reportsProvider.GetResourceByReportName("Marcas.rdlc"));
             report.DataSources.Add(new ReportDataSource("Marcas", Marcas));
         }
 
@@ -36,7 +36,7 @@ namespace MarcaModelo.WinForm.Models
             {
                for (int i = 0; i < 1000; i++)
                 {
-                    yield return new Marca { IDMarca = i, Descripcion = i.ToString(), Estado = "A" };
+                    yield return new Marca { IdMarca = i, Descripcion = i.ToString(), Estado = "A" };
                     //.Set(new[] { new DocumentoDeRemito { DocumentoId = 1 }, new DocumentoDeRemito { DocumentoId = 2 } });
                 }
             }

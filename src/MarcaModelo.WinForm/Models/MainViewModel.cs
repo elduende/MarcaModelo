@@ -7,7 +7,7 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MainViewModel : ViewModelBase
     {
-        private string usuario;
+        private string _usuario;
        
 
         public MainViewModel(IViewModelExposer exposer)
@@ -30,13 +30,13 @@ namespace MarcaModelo.WinForm.Models
         
         public string Usuario
         {
-            get { return usuario; }
+            get { return _usuario; }
             set
             {
-                if (!Equals(usuario, value))
+                if (!Equals(_usuario, value))
                 {
-                    usuario = value;
-                    Thread.CurrentPrincipal = new Usuario { Name = usuario };
+                    _usuario = value;
+                    Thread.CurrentPrincipal = new Usuario { Name = _usuario };
                     CheckAllMenuActions();
                 }
             }

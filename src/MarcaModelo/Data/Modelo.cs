@@ -18,7 +18,7 @@ namespace MarcaModelo.Data
             
         }
 
-        public int IDModelo { get; set; }
+        public int IdModelo { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         public virtual Marca Marca { get; set; }
@@ -36,7 +36,7 @@ namespace MarcaModelo.Data
             }
         }
 
-        public Modelo GetById(int IDModelo)
+        public Modelo GetById(int idModelo)
         {
             throw new NotImplementedException();
         }

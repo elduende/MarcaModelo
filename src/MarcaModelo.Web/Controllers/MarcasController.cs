@@ -15,7 +15,7 @@ namespace MarcaModelo.Web.Controllers
             BindingList<MarcasModel> marcas = new BindingList<MarcasModel>();
             foreach (Marca m in marca.GetMarcas())
             {
-                marcas.Add(new MarcasModel(marca) { IDMarca = m.IDMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+                marcas.Add(new MarcasModel(marca) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
             return View(marcas);
         }
@@ -49,7 +49,7 @@ namespace MarcaModelo.Web.Controllers
         {
             IMarcaRepository marca = new Marca();
             marca = marca.GetById(idMarca);
-            return View(new MarcasModel(marca) { IDMarca = marca.IDMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
+            return View(new MarcasModel(marca) { IdMarca = marca.IdMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
         }
         // POST:Update the details into database
         [HttpPost]
@@ -58,7 +58,7 @@ namespace MarcaModelo.Web.Controllers
             try
             {
                 IMarcaRepository marcaRepo = new Marca();
-                marcaRepo.IDMarca = idMarca;
+                marcaRepo.IdMarca = idMarca;
                 marcaRepo.Descripcion = marca.Descripcion;
                 marcaRepo.Persist((Marca)marcaRepo);
                 return RedirectToAction("MarcasTraer");
@@ -73,8 +73,8 @@ namespace MarcaModelo.Web.Controllers
         {
             try
             {
-                Marca MarcaRepo = new Marca();
-                MarcaRepo.Inactivate(idMarca);
+                Marca marcaRepo = new Marca();
+                marcaRepo.Inactivate(idMarca);
                 ViewBag.AlertMsg = "Marca eliminada exitosamente.";
                 return RedirectToAction("MarcasTraer");
             }

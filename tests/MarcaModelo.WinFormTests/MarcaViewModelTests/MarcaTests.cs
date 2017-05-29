@@ -9,40 +9,40 @@ namespace MarcaModelo.WinFormTests.MarcaViewModelTests
     public class MarcaTests
     {
         [TestMethod]
-        public void AfterCreationMarcaThenIDMarcaAvailable()
+        public void AfterCreationMarcaThenIdMarcaAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
-            MarcaRepository.IDMarca.Should().Be(19);
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
+            marcaRepository.IdMarca.Should().Be(19);
         }
 
         [TestMethod]
         public void AfterCreationMarcaThenDescripcionAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
-            MarcaRepository.Descripcion.Should().Be("Epson");
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
+            marcaRepository.Descripcion.Should().Be("Epson");
         }
 
         [TestMethod]
         public void AfterCreationMarcaThenEstadoAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
-            MarcaRepository.Estado.Should().Be("A");
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
+            marcaRepository.Estado.Should().Be("A");
         }
 
         [TestMethod]
         public void AfterCreationMarcaAddModeloThenListModeloAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
-            IModeloRepository ModeloRepository = new ModeloRepositoryMock();
-            ModeloRepository = new Modelo() { IDModelo = 1, Descripcion = "Genérico", Estado = "A" };
+            IModeloRepository modeloRepository = new ModeloRepositoryMock();
+            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "Genérico", Estado = "A" };
 
-            MarcaRepository.AddModelo((Modelo)ModeloRepository);
-            MarcaRepository.Modelos().Select(x => x.Descripcion).Should().Contain("Genérico");
+            marcaRepository.AddModelo((Modelo)modeloRepository);
+            marcaRepository.Modelos().Select(x => x.Descripcion).Should().Contain("Genérico");
         }
     }
 }

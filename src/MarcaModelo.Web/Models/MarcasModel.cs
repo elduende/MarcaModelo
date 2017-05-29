@@ -9,21 +9,21 @@ namespace MarcaModelo.Web.Models
 {
     public class MarcasModel : ViewModelBase
     {
-        private readonly IMarcaRepository marcaRepository;
-        private readonly Lazy<ModeloModel[]> modelos;
+        private readonly IMarcaRepository _marcaRepository;
+        private readonly Lazy<ModeloModel[]> _modelos;
 
         public MarcasModel(IMarcaRepository marcaRepository)
         {
             //[CMS] - Lazyload ¿Está bien así?
-            modelos = new Lazy<ModeloModel[]>(() =>
+            _modelos = new Lazy<ModeloModel[]>(() =>
             marcaRepository.Modelos().ToArray()
-            .Select(x => new ModeloModel { IDMarca = marcaRepository.IDMarca }).ToArray());
-            this.marcaRepository = marcaRepository;
+            .Select(x => new ModeloModel { IdMarca = marcaRepository.IdMarca }).ToArray());
+            this._marcaRepository = marcaRepository;
         }
 
         [Display(Name = "IDMarca")]
         [HiddenInput(DisplayValue = false)]
-        public int IDMarca { get; set; }
+        public int IdMarca { get; set; }
 
         [Display(Name = "Marca")]
         [Required(ErrorMessage = "La Marca es requerida.")]

@@ -12,7 +12,7 @@ namespace MarcaModelo.WinForm.Common
 {
     public static class WindowsControlsBindingExtensions
     {
-        private static readonly NumberStyles integerNumberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowLeadingWhite;
+        private static readonly NumberStyles IntegerNumberStyles = NumberStyles.AllowLeadingSign | NumberStyles.AllowLeadingWhite;
 
         public static void Bind(this Form control, ViewModelBase model)
         {
@@ -240,7 +240,7 @@ namespace MarcaModelo.WinForm.Common
             }
             var toconvert = PrepareStringToConvertNumber(source);
             int result;
-            return int.TryParse(toconvert, integerNumberStyles, CultureInfo.CurrentUICulture, out result) ? result : (int?)null;
+            return int.TryParse(toconvert, IntegerNumberStyles, CultureInfo.CurrentUICulture, out result) ? result : (int?)null;
         }
 
         private static double? TextToDoubleTransformer(string source)
@@ -251,7 +251,7 @@ namespace MarcaModelo.WinForm.Common
             }
             var toconvert = PrepareStringToConvertNumber(source);
             double result;
-            return double.TryParse(toconvert, integerNumberStyles, CultureInfo.CurrentUICulture, out result) ? result : (double?)null;
+            return double.TryParse(toconvert, IntegerNumberStyles, CultureInfo.CurrentUICulture, out result) ? result : (double?)null;
         }
 
         private static string PrepareStringToConvertNumber(string source)

@@ -13,27 +13,27 @@ namespace MarcaModelo.Services
             Transient
         }
 
-        private readonly ConcurrentDictionary<string, LifeStyle> lifeStyles = new ConcurrentDictionary<string, LifeStyle>();
-        private readonly Dictionary<string, Func<IServiceContainer, object>> ctors = new Dictionary<string, Func<IServiceContainer, object>>();
-        private readonly ConcurrentDictionary<string, object> singletons = new ConcurrentDictionary<string, object>();
+        private readonly ConcurrentDictionary<string, LifeStyle> _lifeStyles = new ConcurrentDictionary<string, LifeStyle>();
+        private readonly Dictionary<string, Func<IServiceContainer, object>> _ctors = new Dictionary<string, Func<IServiceContainer, object>>();
+        private readonly ConcurrentDictionary<string, object> _singletons = new ConcurrentDictionary<string, object>();
 
         public void RegisterSingleton<T>(Func<IServiceContainer, T> ctor) where T : class
         {
-            lifeStyles[KeyForType<T>()] = LifeStyle.Singleton;
-            ctors[KeyForType<T>()] = ctor;
+            _lifeStyles[KeyForType<T>()] = LifeStyle.Singleton;
+            _ctors[KeyForType<T>()] = ctor;
         }
 
         public void RegisterSingleton<T>(T instance) where T : class
         {
             var keyForType = KeyForType<T>();
-            lifeStyles[keyForType] = LifeStyle.Singleton;
-            singletons[keyForType] = instance;
+            _lifeStyles[keyForType] = LifeStyle.Singleton;
+            _singletons[keyForType] = instance;
         }
 
         public void RegisterTransient<T>(Func<IServiceContainer, T> ctor) where T : class
         {
-            lifeStyles[KeyForType<T>()] = LifeStyle.Transient;
-            ctors[KeyForType<T>()] = ctor;
+            _lifeStyles[KeyForType<T>()] = LifeStyle.Transient;
+            _ctors[KeyForType<T>()] = ctor;
         }
 
         public T GetInstance<T>() where T : class
@@ -45,21 +45,21 @@ namespace MarcaModelo.Services
         {
             LifeStyle lifeStyle;
             var keyForType = type.FullName;
-            if (!lifeStyles.TryGetValue(keyForType, out lifeStyle))
+            if (!_lifeStyles.TryGetValue(keyForType, out lifeStyle))
             {
                 return null;
             }
             if (LifeStyle.Transient == lifeStyle)
             {
-                var ctorFunc = ctors[keyForType];
+                var ctorFunc = _ctors[keyForType];
                 return ctorFunc(this);
             }
             object sigleInstance;
-            if (!singletons.TryGetValue(keyForType, out sigleInstance))
+            if (!_singletons.TryGetValue(keyForType, out sigleInstance))
             {
-                var ctorFunc = ctors[keyForType];
+                var ctorFunc = _ctors[keyForType];
                 sigleInstance = ctorFunc(this);
-                singletons[keyForType] = sigleInstance;
+                _singletons[keyForType] = sigleInstance;
             }
             return sigleInstance;
         }
@@ -71,13 +71,13 @@ namespace MarcaModelo.Services
 
         public void Dispose()
         {
-            foreach (var disposableSingleton in singletons
+            foreach (var disposableSingleton in _singletons
                 .Select(x => x.Value as IDisposable)
                 .Where(x => x != null))
             {
                 disposableSingleton.Dispose();
             }
-            singletons.Clear();
+            _singletons.Clear();
         }
     }
 }

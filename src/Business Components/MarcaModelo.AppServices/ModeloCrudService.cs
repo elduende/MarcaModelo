@@ -24,20 +24,20 @@ namespace MarcaModelo.AppServices
             _modeloDao = modeloaDao;
         }
 
-        public IEnumerable<Modelo> GetAll(int IdMarca, int pageNumber, int pageSize)
+        public IEnumerable<Modelo> GetAll(int idMarca, int pageNumber, int pageSize)
         {
             //return _daoFactory.GetDao<IEntityDao<Modelo>>().GetAll(IdMarca, pageSize, pageNumber);
             throw new NotImplementedException();
         }
 
-        public Modelo Get(int IdModelo)
+        public Modelo Get(int idModelo)
         {
-            return _modeloDao.Get(IdModelo);
+            return _modeloDao.Get(idModelo);
         }
 
-        public void Remove(int IdModelo)
+        public void Remove(int idModelo)
         {
-            var saved = _modeloDao.Get(IdModelo);
+            var saved = _modeloDao.Get(idModelo);
             if (saved != null)
             {
                 _modeloDao.MakeTransient(saved);
@@ -67,7 +67,7 @@ namespace MarcaModelo.AppServices
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Modelo> GetAll(int IdMarca)
+        public IEnumerable<Modelo> GetAll(int idMarca)
         {
             throw new NotImplementedException();
         }

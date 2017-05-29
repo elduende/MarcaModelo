@@ -4,7 +4,7 @@ namespace MarcaModelo.Web.Common
 {
     public class ViewModelBase : ValidatablePropertiesObject, IDisposable
     {
-        private bool isBusy;
+        private bool _isBusy;
 
         public virtual string Code
         {
@@ -13,8 +13,8 @@ namespace MarcaModelo.Web.Common
 
         public bool IsBusy
         {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value, nameof(IsBusy)); }
+            get { return _isBusy; }
+            set { SetProperty(ref _isBusy, value, nameof(IsBusy)); }
         }
 
         public void Dispose()

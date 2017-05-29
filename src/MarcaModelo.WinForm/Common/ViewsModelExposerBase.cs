@@ -7,22 +7,22 @@ namespace MarcaModelo.WinForm.Common
 {
     public class ViewsModelExposerBase : IViewModelExposer
     {
-        private readonly Dictionary<string, Func<ViewModelBase>> modelCtors =
+        private readonly Dictionary<string, Func<ViewModelBase>> _modelCtors =
             new Dictionary<string, Func<ViewModelBase>>();
 
-        private readonly Dictionary<string, Func<ViewModelBase, Form>> formCtors =
+        private readonly Dictionary<string, Func<ViewModelBase, Form>> _formCtors =
             new Dictionary<string, Func<ViewModelBase, Form>>();
 
-        private readonly Dictionary<string, Action<ViewModelBase>> messageBoxesCtors =
+        private readonly Dictionary<string, Action<ViewModelBase>> _messageBoxesCtors =
             new Dictionary<string, Action<ViewModelBase>>();
 
-        private ConcurrentDictionary<Type, Form> singletons = new ConcurrentDictionary<Type, Form>();
-        private Func<Type, ViewModelBase> generaViewModelsFactory;
+        private ConcurrentDictionary<Type, Form> _singletons = new ConcurrentDictionary<Type, Form>();
+        private Func<Type, ViewModelBase> _generaViewModelsFactory;
 
         public ViewsModelExposerBase()
         {
-            messageBoxesCtors.Add(typeof(ErrorMessageViewModel).Name, x => ShowErrorMessageBox((ErrorMessageViewModel)x));
-            messageBoxesCtors.Add(typeof(YesNoQuestionViewModel).Name, x => ShowQuestionMessageBox((YesNoQuestionViewModel)x));
+            _messageBoxesCtors.Add(typeof(ErrorMessageViewModel).Name, x => ShowErrorMessageBox((ErrorMessageViewModel)x));
+            _messageBoxesCtors.Add(typeof(YesNoQuestionViewModel).Name, x => ShowQuestionMessageBox((YesNoQuestionViewModel)x));
         }
 
         public void UseViewModelsFactory(Func<Type, ViewModelBase> ctor)
@@ -31,11 +31,11 @@ namespace MarcaModelo.WinForm.Common
             {
                 throw new ArgumentNullException(nameof(ctor));
             }
-            if (generaViewModelsFactory != null)
+            if (_generaViewModelsFactory != null)
             {
                 throw new NotSupportedException("No es posible registrar más de un object factory.");
             }
-            generaViewModelsFactory = ctor;
+            _generaViewModelsFactory = ctor;
         }
 
         public void Register<TViewModel>(Func<TViewModel, Form> formCtor) where TViewModel : ViewModelBase
@@ -44,7 +44,7 @@ namespace MarcaModelo.WinForm.Common
             {
                 throw new ArgumentNullException(nameof(formCtor));
             }
-            formCtors.Add(typeof(TViewModel).Name, x => formCtor((TViewModel)x));
+            _formCtors.Add(typeof(TViewModel).Name, x => formCtor((TViewModel)x));
         }
 
         public void Register<TViewModel, TForm>()
@@ -56,14 +56,14 @@ namespace MarcaModelo.WinForm.Common
             {
                 throw new NotSupportedException($"Intenta registrar un Form que no pose un constructor con solo '{typeof(TViewModel).Name}'. Use otro metodo de registración que le permite especificar el constructor del Form '{typeof(TForm).Name}'.");
             }
-            formCtors.Add(typeof(TViewModel).Name, x => (TForm)Activator.CreateInstance(typeof(TForm), x));
+            _formCtors.Add(typeof(TViewModel).Name, x => (TForm)Activator.CreateInstance(typeof(TForm), x));
         }
 
         public ViewsModelExposerBase RegisterSingletonForm<TViewModel, TForm>(Func<TViewModel, TForm> ctor)
             where TViewModel : ViewModelBase
             where TForm : Form
         {
-            formCtors.Add(typeof(TViewModel).Name, viewModel => ActivateForm(() => ctor((TViewModel)viewModel)));
+            _formCtors.Add(typeof(TViewModel).Name, viewModel => ActivateForm(() => ctor((TViewModel)viewModel)));
             return this;
         }
 
@@ -78,8 +78,8 @@ namespace MarcaModelo.WinForm.Common
                 throw new ArgumentNullException(nameof(formCtor));
             }
             var key = typeof(TViewModel).Name;
-            modelCtors.Add(key, modelCtor);
-            formCtors.Add(key, x => formCtor((TViewModel)x));
+            _modelCtors.Add(key, modelCtor);
+            _formCtors.Add(key, x => formCtor((TViewModel)x));
         }
 
         public void Register<TViewModel, TForm>(Func<TViewModel> modelCtor)
@@ -96,8 +96,8 @@ namespace MarcaModelo.WinForm.Common
                 throw new NotSupportedException($"Intenta registrar un Form que no pose un constructor con solo '{typeof(TViewModel).Name}'. Use otro metodo de registración que le permite especificar el constructor del Form '{typeof(TForm).Name}'.");
             }
             var key = typeof(TViewModel).Name;
-            modelCtors.Add(key, modelCtor);
-            formCtors.Add(key, x => (TForm)Activator.CreateInstance(typeof(TForm), x));
+            _modelCtors.Add(key, modelCtor);
+            _formCtors.Add(key, x => (TForm)Activator.CreateInstance(typeof(TForm), x));
         }
 
         public Form Owner { get; set; }
@@ -109,7 +109,7 @@ namespace MarcaModelo.WinForm.Common
                 throw new ArgumentNullException("viewModel");
             }
             Func<ViewModelBase, Form> ctor;
-            if (!formCtors.TryGetValue(viewModel.Code, out ctor))
+            if (!_formCtors.TryGetValue(viewModel.Code, out ctor))
             {
                 throw new ArgumentOutOfRangeException("viewModel",
                     string.Format("ViewModel no gestionado.(Code='{0}')", viewModel.Code));
@@ -148,13 +148,13 @@ namespace MarcaModelo.WinForm.Common
                 throw new ArgumentNullException("viewModel");
             }
             Action<ViewModelBase> msgBoxExposer;
-            if (messageBoxesCtors.TryGetValue(viewModel.Code, out msgBoxExposer))
+            if (_messageBoxesCtors.TryGetValue(viewModel.Code, out msgBoxExposer))
             {
                 msgBoxExposer(viewModel);
                 return;
             }
             Func<ViewModelBase, Form> ctor;
-            if (!formCtors.TryGetValue(viewModel.Code, out ctor))
+            if (!_formCtors.TryGetValue(viewModel.Code, out ctor))
             {
                 throw new ArgumentOutOfRangeException("viewModel",
                     string.Format("ViewModel no gestionado.(Code='{0}')", viewModel.Code));
@@ -203,12 +203,12 @@ namespace MarcaModelo.WinForm.Common
         private TViewModel GetViewModelInstace<TViewModel>() where TViewModel : ViewModelBase
         {
             Func<ViewModelBase> ctor;
-            if (modelCtors.TryGetValue(typeof(TViewModel).Name, out ctor))
+            if (_modelCtors.TryGetValue(typeof(TViewModel).Name, out ctor))
             {
                 return (TViewModel)ctor();
             }
             // Usa el general factory o intenta crear el viewmodel usando el constructor sin parametros
-            return (TViewModel)generaViewModelsFactory?.Invoke(typeof(TViewModel)) ?? Activator.CreateInstance<TViewModel>();
+            return (TViewModel)_generaViewModelsFactory?.Invoke(typeof(TViewModel)) ?? Activator.CreateInstance<TViewModel>();
         }
 
         private void ShowErrorMessageBox(ErrorMessageViewModel errorMessageViewModel)
@@ -224,15 +224,15 @@ namespace MarcaModelo.WinForm.Common
         private Form ActivateForm<TForm>(Func<TForm> ctor) where TForm : Form
         {
             Form activateForm;
-            var exists = singletons.TryGetValue(typeof(TForm), out activateForm);
+            var exists = _singletons.TryGetValue(typeof(TForm), out activateForm);
             if (!exists || activateForm.IsDisposed)
             {
                 activateForm = ctor();
-                singletons.TryAdd(typeof(TForm), activateForm);
+                _singletons.TryAdd(typeof(TForm), activateForm);
                 activateForm.Closed += (sender, args) =>
                 {
                     Form trush;
-                    singletons.TryRemove(typeof(TForm), out trush);
+                    _singletons.TryRemove(typeof(TForm), out trush);
                 };
             }
             return activateForm;
@@ -248,9 +248,9 @@ namespace MarcaModelo.WinForm.Common
         {
             if (disposing)
             {
-                if (singletons != null)
+                if (_singletons != null)
                 {
-                    foreach (var singleton in singletons.Values)
+                    foreach (var singleton in _singletons.Values)
                     {
                         try
                         {
@@ -262,7 +262,7 @@ namespace MarcaModelo.WinForm.Common
                             // TODO: trace possible leaks
                         }
                     }
-                    singletons = null;
+                    _singletons = null;
                 }
             }
         }

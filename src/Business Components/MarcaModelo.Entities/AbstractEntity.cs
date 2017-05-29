@@ -2,7 +2,7 @@
 {
     public abstract class AbstractEntity<TIdentity> : IEntity<TIdentity>
     {
-        protected int? requestedHashCode;
+        protected int? RequestedHashCode;
 
         #region IEntity Members
 
@@ -53,11 +53,11 @@
 
         public override int GetHashCode()
         {
-            if (!requestedHashCode.HasValue)
+            if (!RequestedHashCode.HasValue)
             {
-                requestedHashCode = IsTransient() ? base.GetHashCode() : Id.GetHashCode();
+                RequestedHashCode = IsTransient() ? base.GetHashCode() : Id.GetHashCode();
             }
-            return requestedHashCode.Value;
+            return RequestedHashCode.Value;
         }
     }
 }

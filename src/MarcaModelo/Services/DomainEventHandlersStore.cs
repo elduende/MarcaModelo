@@ -7,13 +7,13 @@ namespace MarcaModelo.Services
 {
     public class DomainEventHandlersStore : IDomainEventHandlersStore
     {
-        private readonly ConcurrentDictionary<Type, List<Func<object>>> store =
+        private readonly ConcurrentDictionary<Type, List<Func<object>>> _store =
             new ConcurrentDictionary<Type, List<Func<object>>>();
 
         public IEnumerable<IDomainEventHandler<T>> GetHandlersOf<T>() where T : IDomainEvent
         {
             List<Func<object>> eventHandlersFactories;
-            if (store.TryGetValue(typeof(T), out eventHandlersFactories))
+            if (_store.TryGetValue(typeof(T), out eventHandlersFactories))
             {
                 foreach (var func in eventHandlersFactories)
                 {
@@ -30,10 +30,10 @@ namespace MarcaModelo.Services
         private List<Func<object>> GetEventHandlersFactoriesFor<T>()
         {
             List<Func<object>> list;
-            if (!store.TryGetValue(typeof(T), out list))
+            if (!_store.TryGetValue(typeof(T), out list))
             {
                 list = new List<Func<object>>();
-                store[typeof(T)] = list;
+                _store[typeof(T)] = list;
             }
             return list;
         }

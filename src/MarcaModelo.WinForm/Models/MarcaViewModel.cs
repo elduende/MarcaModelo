@@ -7,19 +7,19 @@ namespace MarcaModelo.WinForm.Models
 {
     public class MarcaViewModel : ViewModelBase
     {
-        private readonly IMarcaRepository marcaRepository;
-        private readonly Lazy<ModeloViewModel[]> modelos;
+        private readonly IMarcaRepository _marcaRepository;
+        private readonly Lazy<ModeloViewModel[]> _modelos;
 
         public MarcaViewModel(IMarcaRepository marcaRepository)
         {
             //[CMS] - Lazyload ¿Está bien así?
-            modelos = new Lazy<ModeloViewModel[]>(() =>
+            _modelos = new Lazy<ModeloViewModel[]>(() =>
             marcaRepository.Modelos().ToArray()
-            .Select(x => new ModeloViewModel { IDMarca = marcaRepository.IDMarca }).ToArray());
-            this.marcaRepository = marcaRepository;
+            .Select(x => new ModeloViewModel { IdMarca = marcaRepository.IdMarca }).ToArray());
+            _marcaRepository = marcaRepository;
         }
 
-        public int IDMarca
+        public int IdMarca
         { get; set; }
         
         public string Descripcion

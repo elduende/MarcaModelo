@@ -5,11 +5,11 @@ namespace MarcaModelo.TestDataBuilders
 {
     public class MarcaBuilder
     {
-        private Marca marca;
+        private Marca _marca;
 
         private MarcaBuilder(Marca marca)
         {
-            this.marca = marca;
+            this._marca = marca;
         }
 
         public static Marca DefaultPersistent()
@@ -37,19 +37,19 @@ namespace MarcaModelo.TestDataBuilders
 
         public MarcaBuilder WithId(int id)
         {
-            marca.SetId(id);
+            _marca.SetId(id);
             return this;
         }
 
         public MarcaBuilder With(Action<Marca> action)
         {
-            action(marca);
+            action(_marca);
             return this;
         }
 
         public Marca Build()
         {
-            return marca;
+            return _marca;
         }
     }
 }

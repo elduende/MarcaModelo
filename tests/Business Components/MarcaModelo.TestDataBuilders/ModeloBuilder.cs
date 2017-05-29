@@ -4,11 +4,11 @@ namespace MarcaModelo.TestDataBuilders
 {
     public class ModeloBuilder
     {
-        private Modelo modelo;
+        private Modelo _modelo;
 
         private ModeloBuilder(Modelo modelo)
         {
-            this.modelo = modelo;
+            this._modelo = modelo;
         }
 
         public static Modelo DefaultPersistent()
@@ -38,19 +38,19 @@ namespace MarcaModelo.TestDataBuilders
 
         public ModeloBuilder WithId(int id)
         {
-            modelo.SetId(id);
+            _modelo.SetId(id);
             return this;
         }
 
         public ModeloBuilder With(Action<Modelo> action)
         {
-            action(modelo);
+            action(_modelo);
             return this;
         }
 
         public Modelo Build()
         {
-            return modelo;
+            return _modelo;
         }
     }
 }

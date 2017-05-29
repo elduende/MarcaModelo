@@ -12,7 +12,7 @@ namespace MarcaModelo.WinForm
         {
             InitializeComponent();
             this.Bind(model);
-            this.Text = model.Titulo;
+            Text = model.Titulo;
             reportViewer.ProcessingMode = ProcessingMode.Local;
             model.SetReport(reportViewer.LocalReport);
         }

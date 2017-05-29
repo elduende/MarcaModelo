@@ -8,36 +8,36 @@ namespace MarcaModelo.WinFormTests.ModeloViewModelTests
     public class ModeloTests
     {
         [TestMethod]
-        public void AfterCreationModeloThenIDModeloAvailable()
+        public void AfterCreationModeloThenIdModeloAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
-            IModeloRepository ModeloRepository = new ModeloRepositoryMock();
-            ModeloRepository = new Modelo() { IDModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
-            ModeloRepository.IDModelo.Should().Be(1);
+            IModeloRepository modeloRepository = new ModeloRepositoryMock();
+            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository.IdModelo.Should().Be(1);
         }
 
         [TestMethod]
         public void AfterCreationModeloThenDescripcionAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
-            IModeloRepository ModeloRepository = new ModeloRepositoryMock();
-            ModeloRepository = new Modelo() { IDModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
-            ModeloRepository.Descripcion.Should().Be("2050 PLUS");
+            IModeloRepository modeloRepository = new ModeloRepositoryMock();
+            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository.Descripcion.Should().Be("2050 PLUS");
         }
 
         [TestMethod]
         public void AfterCreationModeloThenEstadoAvailable()
         {
-            IMarcaRepository MarcaRepository = new MarcaRepositoryMock();
-            MarcaRepository = new Marca { IDMarca = 19, Descripcion = "Epson", Estado = "A" };
+            IMarcaRepository marcaRepository = new MarcaRepositoryMock();
+            marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
-            IModeloRepository ModeloRepository = new ModeloRepositoryMock();
-            ModeloRepository = new Modelo() { IDModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
-            ModeloRepository.Estado.Should().Be("A");
+            IModeloRepository modeloRepository = new ModeloRepositoryMock();
+            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository.Estado.Should().Be("A");
         }
 
         //[CMS] - Tuve que sacar el test cuando saqué Marca como parámetro de entrada del constructor de Modelo

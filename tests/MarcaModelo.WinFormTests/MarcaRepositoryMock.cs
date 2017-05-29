@@ -8,11 +8,11 @@ namespace MarcaModelo.WinFormTests
 {
     public class MarcaRepositoryMock : IMarcaRepository
     {
-        Marca marca = new Marca();
+        Marca _marca = new Marca();
         //private readonly List<Modelo> modelos;
-        private Iesi.Collections.Generic.ISet<Modelo> modelos;
+        private Iesi.Collections.Generic.ISet<Modelo> _modelos;
 
-        int IMarcaRepository.IDMarca { get; set; }
+        int IMarcaRepository.IdMarca { get; set; }
         string IMarcaRepository.Descripcion { get; set; }
         string IMarcaRepository.Estado { get; set; }
 
@@ -24,7 +24,7 @@ namespace MarcaModelo.WinFormTests
         IEnumerable<Modelo> IMarcaRepository.Modelos()
         {
             //get { return modelos.ToList(); }
-            return modelos.ToList();
+            return _modelos.ToList();
         }
 
         //public int IDMarca { get; set; }
@@ -42,12 +42,12 @@ namespace MarcaModelo.WinFormTests
 
         void IMarcaRepository.AddModelo(Modelo modelo)
         {
-            marca.AddModelo(modelo);
+            _marca.AddModelo(modelo);
         }
 
         public void RemoveModelo(Modelo modelo)
         {
-            marca.RemoveModelo(modelo);
+            _marca.RemoveModelo(modelo);
         }
 
         //IList<Modelo> IMarcaRepository.Modelos()
@@ -60,7 +60,7 @@ namespace MarcaModelo.WinFormTests
             return new MarcaRepositoryMock();
         }
         
-        public Marca GetById(int IDMarca)
+        public Marca GetById(int idMarca)
         {
             throw new NotImplementedException();
         }
@@ -80,17 +80,17 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        public void Inactivate(int IDMarca)
+        public void Inactivate(int idMarca)
         {
             throw new NotImplementedException();
         }
 
-        public void Activate(int IDMarca)
+        public void Activate(int idMarca)
         {
             throw new NotImplementedException();
         }
 
-        Marca IMarcaRepository.GetById(int IDMarca)
+        Marca IMarcaRepository.GetById(int idMarca)
         {
             throw new NotImplementedException();
         }
@@ -110,7 +110,7 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        void IMarcaRepository.Activate(int IDMarca)
+        void IMarcaRepository.Activate(int idMarca)
         {
             throw new NotImplementedException();
         }

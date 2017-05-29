@@ -26,12 +26,12 @@ namespace MarcaModelo.Services
             public Assembly Assembly { get; }
             public string Name { get; }
         }
-        private readonly ConcurrentDictionary<string, ReportResource> pathIndex = new ConcurrentDictionary<string, ReportResource>();
-        private readonly ConcurrentDictionary<string, ReportResource> nameIndex = new ConcurrentDictionary<string, ReportResource>();
+        private readonly ConcurrentDictionary<string, ReportResource> _pathIndex = new ConcurrentDictionary<string, ReportResource>();
+        private readonly ConcurrentDictionary<string, ReportResource> _nameIndex = new ConcurrentDictionary<string, ReportResource>();
 
         public IEnumerable<string> ReportsPaths()
         {
-            return pathIndex.Keys;
+            return _pathIndex.Keys;
         }
 
         public string ReportPathByReportName(string reportName)
@@ -41,7 +41,7 @@ namespace MarcaModelo.Services
                 return null;
             }
             ReportResource resource;
-            if (nameIndex.TryGetValue(reportName, out resource))
+            if (_nameIndex.TryGetValue(reportName, out resource))
             {
                 return resource.Path;
             }
@@ -55,7 +55,7 @@ namespace MarcaModelo.Services
                 throw new ArgumentNullException(nameof(reportName));
             }
             ReportResource resource;
-            if (nameIndex.TryGetValue(reportName, out resource))
+            if (_nameIndex.TryGetValue(reportName, out resource))
             {
                 return resource.Assembly.GetManifestResourceStream(resource.Path);
             }
@@ -69,7 +69,7 @@ namespace MarcaModelo.Services
                 throw new ArgumentNullException(nameof(reportPath));
             }
             ReportResource resource;
-            if (pathIndex.TryGetValue(reportPath, out resource))
+            if (_pathIndex.TryGetValue(reportPath, out resource))
             {
                 return resource.Assembly.GetManifestResourceStream(resource.Path);
             }
@@ -87,8 +87,8 @@ namespace MarcaModelo.Services
                 return this;
             }
             var reportResource = new ReportResource(assembly, reportResourcePath);
-            pathIndex[reportResource.Path] = reportResource;
-            nameIndex[reportResource.Name] = reportResource;
+            _pathIndex[reportResource.Path] = reportResource;
+            _nameIndex[reportResource.Name] = reportResource;
             return this;
         }
 

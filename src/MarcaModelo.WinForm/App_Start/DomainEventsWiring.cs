@@ -5,13 +5,13 @@ namespace MarcaModelo.WinForm
 {
     public class DomainEventsWiring
     {
-        private static DomainEventHandlersStore store;
+        private static DomainEventHandlersStore _store;
 
         public static void RegisterHandlers(IServiceContainer container)
         {
-            store = new DomainEventHandlersStore();
+            _store = new DomainEventHandlersStore();
             RegisterAllEvents(container);
-            DomainEvents.Initialize(store);
+            DomainEvents.Initialize(_store);
         }
 
         private static void RegisterAllEvents(IServiceContainer container)

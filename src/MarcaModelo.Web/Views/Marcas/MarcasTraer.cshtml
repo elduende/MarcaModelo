@@ -15,8 +15,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink("Modificar", "MarcasModificar", new { idMarca = item.IDMarca }) |
-            @Html.ActionLink("Eliminar", "MarcasEliminar", new { idMarca = item.IDMarca }, new { onclick = "return confirm('¿Está seguro de eliminar la Marca?');" })
+            @Html.ActionLink("Modificar", "MarcasModificar", new { idMarca = item.IdMarca }) |
+            @Html.ActionLink("Eliminar", "MarcasEliminar", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de eliminar la Marca?');" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Descripcion)

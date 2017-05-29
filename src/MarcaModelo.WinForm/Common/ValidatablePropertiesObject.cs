@@ -7,7 +7,7 @@ namespace MarcaModelo.WinForm.Common
 {
     public class ValidatablePropertiesObject : ObservableObject, IDataErrorInfo
     {
-        private string error;
+        private string _error;
 
         public ValidatablePropertiesObject()
         {
@@ -21,8 +21,8 @@ namespace MarcaModelo.WinForm.Common
         [Hidden]
         public string Error
         {
-            get { return error; }
-            set { base.SetProperty(ref error, value, nameof(Error)); }
+            get { return _error; }
+            set { base.SetProperty(ref _error, value, nameof(Error)); }
         }
 
         protected override bool SetProperty<TProperty>(ref TProperty fieldOfProperty, TProperty value, [CallerMemberName] string propertyName = null)

@@ -8,7 +8,7 @@ namespace MarcaModelo.WinFormTests
 {
     public class ModeloRepositoryMock : IModeloRepository
     {
-        public int IDModelo { get; set; }
+        public int IdModelo { get; set; }
         public string Descripcion { get; set; }
         public string Estado { get; set; }
         
@@ -25,7 +25,7 @@ namespace MarcaModelo.WinFormTests
             }
         }
 
-        Modelo IModeloRepository.GetById(int IDModelo)
+        Modelo IModeloRepository.GetById(int idModelo)
         {
             throw new NotImplementedException();
         }

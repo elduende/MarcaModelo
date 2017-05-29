@@ -27,7 +27,7 @@ namespace MarcaModelo.WinForm
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             dGV.AutoGenerateColumns = false;
-            IDMarcaColumn.Bind<MarcasViewModel>(m => m.IDMarca);
+            IDMarcaColumn.Bind<MarcasViewModel>(m => m.IdMarca);
             DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
             EstadoColumn.Bind<MarcasViewModel>(m => m.Estado);
             dGV.BindSource(model, m => m.Marcas);
@@ -35,16 +35,19 @@ namespace MarcaModelo.WinForm
             //[CMS] ¿Se hace así esto?
             dGV.Click += (sender, args) => 
             {
-                model.IDMarca = (int)dGV.CurrentRow.Cells[0].Value;
-                model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
-                model.Estado = dGV.CurrentRow.Cells[2].Value.ToString(); 
+                if (dGV.CurrentRow != null)
+                {
+                    model.IdMarca = (int)dGV.CurrentRow.Cells[0].Value;
+                    model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
+                    model.Estado = dGV.CurrentRow.Cells[2].Value.ToString();
+                }
             };
 
             dGV.DataBindingComplete += (sender, args) =>
             {
                 if (dGV.CurrentRow != null)
                 {
-                    model.IDMarca = (int)dGV.CurrentRow.Cells[0].Value;
+                    model.IdMarca = (int)dGV.CurrentRow.Cells[0].Value;
                     model.Descripcion = dGV.CurrentRow.Cells[1].Value.ToString();
                     model.Estado = dGV.CurrentRow.Cells[2].Value.ToString();
                 }

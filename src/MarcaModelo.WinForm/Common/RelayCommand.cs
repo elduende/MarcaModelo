@@ -5,9 +5,9 @@ namespace MarcaModelo.WinForm.Common
 {
     public class RelayCommand : ICommand
     {
-        private readonly Func<bool> canExecute;
-        private readonly Action execute;
-        private bool? canExecuteState;
+        private readonly Func<bool> _canExecute;
+        private readonly Action _execute;
+        private bool? _canExecuteState;
 
         public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
@@ -15,25 +15,25 @@ namespace MarcaModelo.WinForm.Common
             {
                 throw new ArgumentNullException("execute");
             }
-            this.execute = execute;
-            this.canExecute = canExecute ?? (() => true);
+            this._execute = execute;
+            this._canExecute = canExecute ?? (() => true);
         }
 
         public bool CanExecute
         {
             get
             {
-                if (!canExecuteState.HasValue)
+                if (!_canExecuteState.HasValue)
                 {
-                    canExecuteState = canExecute();
+                    _canExecuteState = _canExecute();
                 }
-                return canExecuteState.Value;
+                return _canExecuteState.Value;
             }
             private set
             {
-                if (!canExecuteState.HasValue || !Equals(canExecuteState, value))
+                if (!_canExecuteState.HasValue || !Equals(_canExecuteState, value))
                 {
-                    canExecuteState = value;
+                    _canExecuteState = value;
                     OnPropertyChanged("CanExecute");
                 }
             }
@@ -44,7 +44,7 @@ namespace MarcaModelo.WinForm.Common
             CheckCanExecute();
             if (CanExecute)
             {
-                execute();
+                _execute();
             }
         }
 
@@ -52,7 +52,7 @@ namespace MarcaModelo.WinForm.Common
 
         public void CheckCanExecute()
         {
-            CanExecute = canExecute();
+            CanExecute = _canExecute();
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

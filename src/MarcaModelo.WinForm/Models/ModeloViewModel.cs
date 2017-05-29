@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using MarcaModelo.Data;
 using MarcaModelo.WinForm.Common.Attributes;
@@ -10,13 +9,13 @@ namespace MarcaModelo.WinForm.Models
     {
         [DisplayName("ID Modelo")]
         [ReadOnly(true)]
-        [Hidden(true)]
-        public int IDModelo { get; set; }
+        [Hidden]
+        public int IdModelo { get; set; }
 
         [DisplayName("ID Marca")]
         [ReadOnly(true)]
-        [Hidden(true)]
-        public int IDMarca { get; set; }
+        [Hidden]
+        public int IdMarca { get; set; }
 
         [DisplayName("Descripción")]
         [ReadOnly(true)]
@@ -27,12 +26,12 @@ namespace MarcaModelo.WinForm.Models
 
         [DisplayName("Estado")]
         [ReadOnly(true)]
-        [Hidden(true)]
+        [Hidden]
         public string Estado { get; set; }
 
         [DisplayName("Marca")]
         [ReadOnly(true)]
-        [Hidden(true)]
-        private Marca marca { get; set; }
+        [Hidden]
+        private Marca Marca { get; set; }
     }
 }

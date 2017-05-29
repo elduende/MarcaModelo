@@ -10,7 +10,7 @@ namespace MarcaModelo.WinForm
 {
     static class Program
     {
-        private static readonly SimpleServiceContainer container = new SimpleServiceContainer();
+        private static readonly SimpleServiceContainer Container = new SimpleServiceContainer();
 
         [STAThread]
         internal static void Main()
@@ -20,18 +20,18 @@ namespace MarcaModelo.WinForm
             InitializeDefaultFormIcon();
 
             AuthenticationStart.Initialize();
-            container.RegisterAllServices();
-            DomainEventsWiring.RegisterHandlers(container);
-            ReportsConfig.RegisterAllReports(container.GetInstance<IReportsStore>());
-            container.RegisterApplicationViewModels(container);
+            Container.RegisterAllServices();
+            DomainEventsWiring.RegisterHandlers(Container);
+            ReportsConfig.RegisterAllReports(Container.GetInstance<IReportsStore>());
+            Container.RegisterApplicationViewModels(Container);
 
-            var mainExposer = container.GetInstance<IViewModelExposer>();
+            var mainExposer = Container.GetInstance<IViewModelExposer>();
             var mainForm = new FormMain(new MainViewModel(mainExposer));
             Application.Run(mainForm);
             Application.ThreadExit += (sender, args) =>
             {
                 mainExposer.Dispose();
-                container.Dispose();
+                Container.Dispose();
             };
         }
 
@@ -39,15 +39,21 @@ namespace MarcaModelo.WinForm
         {
             try
             {
-                Icon appIcon;
                 using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("MarcaModelo.WinForm.favicon.ico"))
                 {
-                    appIcon = new Icon(stream);
+                    if (stream != null)
+                    {
+                        var appIcon = new Icon(stream);
+                        var memberInfo = typeof(Form).GetField("defaultIcon", BindingFlags.NonPublic | BindingFlags.Static);
+                        if (memberInfo != null)
+                            memberInfo
+                                .SetValue(null, appIcon);
+                    }
                 }
-                typeof(Form).GetField("defaultIcon", BindingFlags.NonPublic | BindingFlags.Static).SetValue(null, appIcon);
             }
             catch (Exception)
             {
+                // ignored
             }
         }
     }
