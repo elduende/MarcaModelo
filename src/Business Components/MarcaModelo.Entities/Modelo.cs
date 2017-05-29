@@ -2,9 +2,9 @@
 {
     public class Modelo : BaseEntity
     {
-        public Modelo()
+        public Modelo(Marca marca)
         {
-
+            Marca = marca;
         }
 
         public virtual Marca Marca { get; set; }
