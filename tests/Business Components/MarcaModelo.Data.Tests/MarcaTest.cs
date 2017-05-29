@@ -80,24 +80,24 @@ namespace MarcaModelo.Data.Tests
         //[TestMethod]
         //public void MarcaAddModeloAreAggregates()
         //{
-        //var marca = MarcaBuilder.DefaultPersistent();
-        //marca.AddModelo(ModeloBuilder.DefaultPersistent());
-        //marca.Modelos.Count().Should().Be(1);
-        //marca.AddModelo(ModeloBuilder.StartRec().
-        //    With(m => m.Descripcion = "Descripcion 1").
-        //    With(m => m.Estado = "A").
-        //    Build());
-        //marca.Modelos.Count().Should().Be(2);
+        //    var marca = MarcaBuilder.DefaultPersistent();
+        //    marca.AddModelo(ModeloBuilder.DefaultPersistent());
+        //    marca.Modelos.Count().Should().Be(1);
+        //    marca.AddModelo(ModeloBuilder.StartRec().
+        //        With(m => m.Descripcion = "Descripcion 1").
+        //        With(m => m.Estado = "A").
+        //        Build());
+        //    marca.Modelos.Count().Should().Be(2);
         //}
 
-        //[TestMethod]
-        //public void MarcaModelosNotAdmitDuplicates()
-        //{
-        //    var marca = MarcaBuilder.DefaultPersistent();
-        //    marca.AddModelo(ModeloBuilder.Default());
-        //    marca.AddModelo(ModeloBuilder.Default());
-        //    marca.Modelos.Count().Should().Be(1);
-        //}
+        [TestMethod]
+        public void MarcaModelosNotAdmitDuplicates()
+        {
+            var marca = MarcaBuilder.DefaultPersistent();
+            marca.AddModelo(ModeloBuilder.Default());
+            marca.AddModelo(ModeloBuilder.Default());
+            marca.Modelos.Count().Should().Be(1);
+        }
 
         [TestMethod]
         public void MarcaDeleteInstanceModeloDeleteIt()
@@ -116,7 +116,7 @@ namespace MarcaModelo.Data.Tests
         {
             var marca = MarcaBuilder.Default();
             marca.Descripcion = null;
-            //ActionAssert.NotThrow(() => branch.GetHashCode());
+            //ActionAssert.NotThrow(() => marca.GetHashCode());
             Executing.This(() => marca.GetHashCode());
         }
     }
