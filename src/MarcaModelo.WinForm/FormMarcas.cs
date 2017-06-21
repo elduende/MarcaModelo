@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Models;
 
@@ -62,6 +63,15 @@ namespace MarcaModelo.WinForm
             };
 
             errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades
+
+            int a = 0;
+            Enums.EstadoRegistros b = Enums.EstadoRegistros.Habilitados;
+            FormConfigurationXmlHelper.LeerXml(this, ref a, ref a, ref b, dGV);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            FormConfigurationXmlHelper.GuardarXml(this,0,0, Enums.EstadoRegistros.Habilitados,dGV);
         }
     }
 }

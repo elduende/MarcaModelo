@@ -56,13 +56,13 @@
             this.tSBAgregar = new System.Windows.Forms.ToolStripButton();
             this.tSBConfirmar = new System.Windows.Forms.ToolStripButton();
             this.tSBDesactivar = new System.Windows.Forms.ToolStripButton();
+            this.tSBActivas = new System.Windows.Forms.ToolStripButton();
+            this.tSBInactivas = new System.Windows.Forms.ToolStripButton();
             this.tSBActivar = new System.Windows.Forms.ToolStripButton();
+            this.tSBInactivar = new System.Windows.Forms.ToolStripButton();
             this.tSBImprimir = new System.Windows.Forms.ToolStripButton();
             this.tSBExcel = new System.Windows.Forms.ToolStripButton();
             this.tSBSalir = new System.Windows.Forms.ToolStripButton();
-            this.tSBActivas = new System.Windows.Forms.ToolStripButton();
-            this.tSBInactivas = new System.Windows.Forms.ToolStripButton();
-            this.tSBInactivar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -82,10 +82,12 @@
             // dGV
             // 
             this.dGV.AllowUserToAddRows = false;
+            this.dGV.AllowUserToDeleteRows = false;
+            this.dGV.AllowUserToOrderColumns = true;
+            this.dGV.AllowUserToResizeRows = false;
             this.dGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDMarcaColumn,
             this.DescripcionColumn,
@@ -326,6 +328,24 @@
             this.tSBDesactivar.Size = new System.Drawing.Size(23, 22);
             this.tSBDesactivar.Text = "Desactivar";
             // 
+            // tSBActivas
+            // 
+            this.tSBActivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBActivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivas.Image")));
+            this.tSBActivas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBActivas.Name = "tSBActivas";
+            this.tSBActivas.Size = new System.Drawing.Size(23, 22);
+            this.tSBActivas.Text = "Activas";
+            // 
+            // tSBInactivas
+            // 
+            this.tSBInactivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBInactivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivas.Image")));
+            this.tSBInactivas.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBInactivas.Name = "tSBInactivas";
+            this.tSBInactivas.Size = new System.Drawing.Size(23, 22);
+            this.tSBInactivas.Text = "Inactivas";
+            // 
             // tSBActivar
             // 
             this.tSBActivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -334,6 +354,15 @@
             this.tSBActivar.Name = "tSBActivar";
             this.tSBActivar.Size = new System.Drawing.Size(23, 22);
             this.tSBActivar.Text = "Activar";
+            // 
+            // tSBInactivar
+            // 
+            this.tSBInactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tSBInactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivar.Image")));
+            this.tSBInactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tSBInactivar.Name = "tSBInactivar";
+            this.tSBInactivar.Size = new System.Drawing.Size(23, 22);
+            this.tSBInactivar.Text = "Inactivar";
             // 
             // tSBImprimir
             // 
@@ -362,33 +391,6 @@
             this.tSBSalir.Size = new System.Drawing.Size(23, 22);
             this.tSBSalir.Text = "Salir";
             // 
-            // tSBActivas
-            // 
-            this.tSBActivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBActivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivas.Image")));
-            this.tSBActivas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBActivas.Name = "tSBActivas";
-            this.tSBActivas.Size = new System.Drawing.Size(23, 22);
-            this.tSBActivas.Text = "Activas";
-            // 
-            // tSBInactivas
-            // 
-            this.tSBInactivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBInactivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivas.Image")));
-            this.tSBInactivas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBInactivas.Name = "tSBInactivas";
-            this.tSBInactivas.Size = new System.Drawing.Size(23, 22);
-            this.tSBInactivas.Text = "Inactivas";
-            // 
-            // tSBInactivar
-            // 
-            this.tSBInactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBInactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivar.Image")));
-            this.tSBInactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBInactivar.Name = "tSBInactivar";
-            this.tSBInactivar.Size = new System.Drawing.Size(23, 22);
-            this.tSBInactivar.Text = "Inactivar";
-            // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,6 +410,7 @@
             this.Controls.Add(this.dGV);
             this.Controls.Add(this.btnCerrar);
             this.Name = "FormMarcas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormMarcas";
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();

@@ -39,6 +39,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,7 +60,9 @@
     <Compile Include="Common\BindingListExtensions.cs" />
     <Compile Include="Common\DataErrorInfoExtensions.cs" />
     <Compile Include="Common\DataGridViewFluidExtensions.cs" />
+    <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\ErrorMessageViewModel.cs" />
+    <Compile Include="Common\FormConfigurationXmlHelper.cs" />
     <Compile Include="Common\ICommand.cs" />
     <Compile Include="Common\ICommandText.cs" />
     <Compile Include="Common\IViewModelExposer.cs" />
