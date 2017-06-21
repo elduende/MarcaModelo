@@ -14,7 +14,7 @@ namespace MarcaModelo.Web.Models
 
         public MarcasModel(IMarcaRepository marcaRepository)
         {
-            //[CMS] - Lazyload ¿Está bien así?
+            //TODO - Lazyload ¿Está bien así?
             _modelos = new Lazy<ModeloModel[]>(() =>
             marcaRepository.Modelos().ToArray()
             .Select(x => new ModeloModel { IdMarca = marcaRepository.IdMarca }).ToArray());

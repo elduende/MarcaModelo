@@ -40,7 +40,7 @@ namespace MarcaModelo.WinFormTests.ModeloViewModelTests
             modeloRepository.Estado.Should().Be("A");
         }
 
-        //[CMS] - Tuve que sacar el test cuando saqué Marca como parámetro de entrada del constructor de Modelo
+        //TODO - Tuve que sacar el test cuando saqué Marca como parámetro de entrada del constructor de Modelo
         //[TestMethod]
         //public void AfterCreationModeloThenMarcaAvailable()
         //{

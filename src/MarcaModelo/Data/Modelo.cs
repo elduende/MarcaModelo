@@ -7,7 +7,7 @@ namespace MarcaModelo.Data
     {
         private Marca marca { get; set; }
 
-        //[CMS] - Le tuve que sacar el constructor que recibe Marca como parámetro
+        //TODO - Le tuve que sacar el constructor que recibe Marca como parámetro
         //public Modelo(Marca _marca)
         //{
         //    marca = _marca;

@@ -12,7 +12,7 @@ namespace MarcaModelo.WinForm.Models
 
         public MarcaViewModel(IMarcaRepository marcaRepository)
         {
-            //[CMS] - Lazyload ¿Está bien así?
+            //TODO - Lazyload ¿Está bien así?
             _modelos = new Lazy<ModeloViewModel[]>(() =>
             marcaRepository.Modelos().ToArray()
             .Select(x => new ModeloViewModel { IdMarca = marcaRepository.IdMarca }).ToArray());

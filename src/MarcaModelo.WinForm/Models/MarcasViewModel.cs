@@ -53,12 +53,13 @@ namespace MarcaModelo.WinForm.Models
 
             PropertyChanged += (sender, args) => { CheckIsValid(); };
 
-            _imprimirCommand = new RelayCommand(Imprimir, () => _marcas.Count > 0);
             _confirmarCommand = new RelayCommand(Persist, () => EsValido);
             _activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
             _inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
+            //TODO - No se entera cuando la grilla queda vacía
+            _imprimirCommand = new RelayCommand(Imprimir, () => _marcas.Count > 0);
         }
 
         [DisplayName("ID Marca")]
@@ -130,7 +131,7 @@ namespace MarcaModelo.WinForm.Models
             }
         }
 
-        //[CMS] - Indicación de Fabio
+        //TODO - Indicación de Fabio
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
         //public IEnumerable<MarcaViewModel> Marcas => marcas;
         public IEnumerable<MarcaViewModel> Marcas => _marcas ?? (_marcas = new BindingList<MarcaViewModel>
@@ -205,7 +206,7 @@ namespace MarcaModelo.WinForm.Models
 
         private void RefreshGrid(IMarcaRepository marcaRepository)
         {
-            //[CMS]
+            //TODO - ¿Está bien así?
             _marcas.Clear();
             foreach (var m in marcaRepository.GetMarcas())
             {
@@ -218,7 +219,7 @@ namespace MarcaModelo.WinForm.Models
 
         private void RefreshGridInactivas(IMarcaRepository marcaRepository)
         {
-            //[CMS]
+            //TODO - ¿Está bien así?
             _marcas.Clear();
             foreach (var m in marcaRepository.GetMarcasInactivas())
             {

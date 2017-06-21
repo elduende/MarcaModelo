@@ -1,6 +1,6 @@
 ﻿namespace MarcaModelo.WinForm
 {
-    partial class FormMarcas
+    sealed partial class FormMarcas
     {
         /// <summary>
         /// Required designer variable.
