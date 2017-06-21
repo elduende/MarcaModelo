@@ -33,7 +33,7 @@
         {
             unchecked
             {
-                int result = (Marca != null ? Marca.GetHashCode() : 0);
+                var result = (Marca != null ? Marca.GetHashCode() : 0);
                 result = (result * 397) ^ (Descripcion != null ? Descripcion.GetHashCode() : 0);
                 return result;
             }
