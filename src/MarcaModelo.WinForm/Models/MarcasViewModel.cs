@@ -59,15 +59,6 @@ namespace MarcaModelo.WinForm.Models
             _inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
-
-            //if (MuestraMarcasActivas)
-            //{
-            //    RefreshGrid(_marcaRepository);
-            //}
-            //else
-            //{
-            //    RefreshGridInactivas(_marcaRepository);
-            //}
         }
 
         [DisplayName("ID Marca")]
@@ -142,7 +133,9 @@ namespace MarcaModelo.WinForm.Models
         //[CMS] - Indicación de Fabio
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
         //public IEnumerable<MarcaViewModel> Marcas => marcas;
-        public IEnumerable<MarcaViewModel> Marcas => _marcas ?? (_marcas = new BindingList<MarcaViewModel>(_marcaRepository.GetMarcas().Select(m => new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
+        public IEnumerable<MarcaViewModel> Marcas => _marcas ?? (_marcas = new BindingList<MarcaViewModel>
+            (_marcaRepository.GetMarcas().Select(m => new MarcaViewModel(_marcaRepository)
+            { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
         
         public override bool CanClose()
         {

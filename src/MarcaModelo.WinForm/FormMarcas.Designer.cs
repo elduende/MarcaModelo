@@ -53,16 +53,6 @@
             this.tSBLabel = new System.Windows.Forms.ToolStripLabel();
             this.tSBAdelante = new System.Windows.Forms.ToolStripButton();
             this.tSBFinal = new System.Windows.Forms.ToolStripButton();
-            this.tSBAgregar = new System.Windows.Forms.ToolStripButton();
-            this.tSBConfirmar = new System.Windows.Forms.ToolStripButton();
-            this.tSBDesactivar = new System.Windows.Forms.ToolStripButton();
-            this.tSBActivas = new System.Windows.Forms.ToolStripButton();
-            this.tSBInactivas = new System.Windows.Forms.ToolStripButton();
-            this.tSBActivar = new System.Windows.Forms.ToolStripButton();
-            this.tSBInactivar = new System.Windows.Forms.ToolStripButton();
-            this.tSBImprimir = new System.Windows.Forms.ToolStripButton();
-            this.tSBExcel = new System.Windows.Forms.ToolStripButton();
-            this.tSBSalir = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.toolStrip.SuspendLayout();
@@ -70,13 +60,14 @@
             // 
             // btnCerrar
             // 
-            this.btnCerrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCerrar.Location = new System.Drawing.Point(416, 359);
+            this.btnCerrar.FlatAppearance.BorderSize = 0;
+            this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
+            this.btnCerrar.Location = new System.Drawing.Point(318, 5);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCerrar.Name = "btnCerrar";
-            this.btnCerrar.Size = new System.Drawing.Size(72, 28);
+            this.btnCerrar.Size = new System.Drawing.Size(20, 20);
             this.btnCerrar.TabIndex = 1;
-            this.btnCerrar.Text = "Cerrar";
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
             // dGV
@@ -118,57 +109,66 @@
             // 
             // btnImprimir
             // 
-            this.btnImprimir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnImprimir.Location = new System.Drawing.Point(340, 359);
+            this.btnImprimir.FlatAppearance.BorderSize = 0;
+            this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnImprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimir.Image")));
+            this.btnImprimir.Location = new System.Drawing.Point(262, 5);
             this.btnImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(72, 28);
+            this.btnImprimir.Size = new System.Drawing.Size(20, 20);
             this.btnImprimir.TabIndex = 3;
-            this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = true;
             // 
             // btnActivas
             // 
-            this.btnActivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActivas.Location = new System.Drawing.Point(112, 359);
+            this.btnActivas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnActivas.FlatAppearance.BorderSize = 0;
+            this.btnActivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActivas.Image = ((System.Drawing.Image)(resources.GetObject("btnActivas.Image")));
+            this.btnActivas.Location = new System.Drawing.Point(206, 5);
             this.btnActivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivas.Name = "btnActivas";
-            this.btnActivas.Size = new System.Drawing.Size(72, 28);
+            this.btnActivas.Size = new System.Drawing.Size(20, 20);
             this.btnActivas.TabIndex = 5;
-            this.btnActivas.Text = "Activas";
             this.btnActivas.UseVisualStyleBackColor = true;
             // 
             // btnInactivas
             // 
-            this.btnInactivas.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnInactivas.Location = new System.Drawing.Point(188, 359);
+            this.btnInactivas.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnInactivas.FlatAppearance.BorderSize = 0;
+            this.btnInactivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnInactivas.Image = ((System.Drawing.Image)(resources.GetObject("btnInactivas.Image")));
+            this.btnInactivas.Location = new System.Drawing.Point(234, 5);
             this.btnInactivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnInactivas.Name = "btnInactivas";
-            this.btnInactivas.Size = new System.Drawing.Size(72, 28);
+            this.btnInactivas.Size = new System.Drawing.Size(20, 20);
             this.btnInactivas.TabIndex = 4;
-            this.btnInactivas.Text = "Inactivas";
             this.btnInactivas.UseVisualStyleBackColor = true;
             // 
             // btnActivar
             // 
             this.btnActivar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnActivar.Location = new System.Drawing.Point(36, 359);
+            this.btnActivar.FlatAppearance.BorderSize = 0;
+            this.btnActivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnActivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActivar.Image")));
+            this.btnActivar.Location = new System.Drawing.Point(127, 331);
             this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivar.Name = "btnActivar";
-            this.btnActivar.Size = new System.Drawing.Size(72, 28);
+            this.btnActivar.Size = new System.Drawing.Size(20, 20);
             this.btnActivar.TabIndex = 7;
-            this.btnActivar.Text = "Activar";
             this.btnActivar.UseVisualStyleBackColor = true;
             // 
             // btnDesactivar
             // 
             this.btnDesactivar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDesactivar.Location = new System.Drawing.Point(36, 327);
+            this.btnDesactivar.FlatAppearance.BorderSize = 0;
+            this.btnDesactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDesactivar.Image = ((System.Drawing.Image)(resources.GetObject("btnDesactivar.Image")));
+            this.btnDesactivar.Location = new System.Drawing.Point(151, 331);
             this.btnDesactivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesactivar.Name = "btnDesactivar";
-            this.btnDesactivar.Size = new System.Drawing.Size(72, 28);
+            this.btnDesactivar.Size = new System.Drawing.Size(20, 20);
             this.btnDesactivar.TabIndex = 6;
-            this.btnDesactivar.Text = "Desactivar";
             this.btnDesactivar.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
@@ -177,10 +177,10 @@
             this.btnConfirmar.FlatAppearance.BorderSize = 0;
             this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmar.Image = ((System.Drawing.Image)(resources.GetObject("btnConfirmar.Image")));
-            this.btnConfirmar.Location = new System.Drawing.Point(463, 327);
+            this.btnConfirmar.Location = new System.Drawing.Point(461, 331);
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
-            this.btnConfirmar.Size = new System.Drawing.Size(30, 28);
+            this.btnConfirmar.Size = new System.Drawing.Size(20, 20);
             this.btnConfirmar.TabIndex = 9;
             this.btnConfirmar.UseVisualStyleBackColor = true;
             // 
@@ -201,7 +201,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(191, 335);
+            this.label1.Location = new System.Drawing.Point(199, 335);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 12;
@@ -210,47 +210,42 @@
             // btnAgregar
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAgregar.Location = new System.Drawing.Point(112, 327);
+            this.btnAgregar.FlatAppearance.BorderSize = 0;
+            this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
+            this.btnAgregar.Location = new System.Drawing.Point(175, 331);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(72, 28);
+            this.btnAgregar.Size = new System.Drawing.Size(20, 20);
             this.btnAgregar.TabIndex = 14;
-            this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnExcel
             // 
-            this.btnExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExcel.Location = new System.Drawing.Point(264, 359);
+            this.btnExcel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnExcel.FlatAppearance.BorderSize = 0;
+            this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
+            this.btnExcel.Location = new System.Drawing.Point(290, 5);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(2);
             this.btnExcel.Name = "btnExcel";
-            this.btnExcel.Size = new System.Drawing.Size(72, 28);
+            this.btnExcel.Size = new System.Drawing.Size(20, 20);
             this.btnExcel.TabIndex = 15;
-            this.btnExcel.Text = "Excel";
             this.btnExcel.UseVisualStyleBackColor = true;
             // 
             // toolStrip
             // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tSBComienzo,
             this.tSBAtras,
             this.tSBTextBox,
             this.tSBLabel,
             this.tSBAdelante,
-            this.tSBFinal,
-            this.tSBAgregar,
-            this.tSBConfirmar,
-            this.tSBDesactivar,
-            this.tSBActivas,
-            this.tSBInactivas,
-            this.tSBActivar,
-            this.tSBInactivar,
-            this.tSBImprimir,
-            this.tSBExcel,
-            this.tSBSalir});
+            this.tSBFinal});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
-            this.toolStrip.Size = new System.Drawing.Size(503, 25);
+            this.toolStrip.Size = new System.Drawing.Size(198, 25);
             this.toolStrip.TabIndex = 18;
             this.toolStrip.Text = "toolStrip1";
             // 
@@ -300,96 +295,6 @@
             this.tSBFinal.Name = "tSBFinal";
             this.tSBFinal.Size = new System.Drawing.Size(23, 22);
             this.tSBFinal.Text = "Final";
-            // 
-            // tSBAgregar
-            // 
-            this.tSBAgregar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBAgregar.Image = ((System.Drawing.Image)(resources.GetObject("tSBAgregar.Image")));
-            this.tSBAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBAgregar.Name = "tSBAgregar";
-            this.tSBAgregar.Size = new System.Drawing.Size(23, 22);
-            this.tSBAgregar.Text = "Agregar";
-            // 
-            // tSBConfirmar
-            // 
-            this.tSBConfirmar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBConfirmar.Image = ((System.Drawing.Image)(resources.GetObject("tSBConfirmar.Image")));
-            this.tSBConfirmar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBConfirmar.Name = "tSBConfirmar";
-            this.tSBConfirmar.Size = new System.Drawing.Size(23, 22);
-            this.tSBConfirmar.Text = "Confirmar";
-            // 
-            // tSBDesactivar
-            // 
-            this.tSBDesactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBDesactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBDesactivar.Image")));
-            this.tSBDesactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBDesactivar.Name = "tSBDesactivar";
-            this.tSBDesactivar.Size = new System.Drawing.Size(23, 22);
-            this.tSBDesactivar.Text = "Desactivar";
-            // 
-            // tSBActivas
-            // 
-            this.tSBActivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBActivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivas.Image")));
-            this.tSBActivas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBActivas.Name = "tSBActivas";
-            this.tSBActivas.Size = new System.Drawing.Size(23, 22);
-            this.tSBActivas.Text = "Activas";
-            // 
-            // tSBInactivas
-            // 
-            this.tSBInactivas.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBInactivas.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivas.Image")));
-            this.tSBInactivas.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBInactivas.Name = "tSBInactivas";
-            this.tSBInactivas.Size = new System.Drawing.Size(23, 22);
-            this.tSBInactivas.Text = "Inactivas";
-            // 
-            // tSBActivar
-            // 
-            this.tSBActivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBActivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBActivar.Image")));
-            this.tSBActivar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBActivar.Name = "tSBActivar";
-            this.tSBActivar.Size = new System.Drawing.Size(23, 22);
-            this.tSBActivar.Text = "Activar";
-            // 
-            // tSBInactivar
-            // 
-            this.tSBInactivar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBInactivar.Image = ((System.Drawing.Image)(resources.GetObject("tSBInactivar.Image")));
-            this.tSBInactivar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBInactivar.Name = "tSBInactivar";
-            this.tSBInactivar.Size = new System.Drawing.Size(23, 22);
-            this.tSBInactivar.Text = "Inactivar";
-            // 
-            // tSBImprimir
-            // 
-            this.tSBImprimir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBImprimir.Image = ((System.Drawing.Image)(resources.GetObject("tSBImprimir.Image")));
-            this.tSBImprimir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBImprimir.Name = "tSBImprimir";
-            this.tSBImprimir.Size = new System.Drawing.Size(23, 22);
-            this.tSBImprimir.Text = "Imprimir";
-            // 
-            // tSBExcel
-            // 
-            this.tSBExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBExcel.Image = ((System.Drawing.Image)(resources.GetObject("tSBExcel.Image")));
-            this.tSBExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBExcel.Name = "tSBExcel";
-            this.tSBExcel.Size = new System.Drawing.Size(23, 22);
-            this.tSBExcel.Text = "Excel";
-            // 
-            // tSBSalir
-            // 
-            this.tSBSalir.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tSBSalir.Image = ((System.Drawing.Image)(resources.GetObject("tSBSalir.Image")));
-            this.tSBSalir.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tSBSalir.Name = "tSBSalir";
-            this.tSBSalir.Size = new System.Drawing.Size(23, 22);
-            this.tSBSalir.Text = "Salir";
             // 
             // FormMarcas
             // 
@@ -446,15 +351,5 @@
         private System.Windows.Forms.ToolStripLabel tSBLabel;
         private System.Windows.Forms.ToolStripButton tSBAdelante;
         private System.Windows.Forms.ToolStripButton tSBFinal;
-        private System.Windows.Forms.ToolStripButton tSBAgregar;
-        private System.Windows.Forms.ToolStripButton tSBConfirmar;
-        private System.Windows.Forms.ToolStripButton tSBDesactivar;
-        private System.Windows.Forms.ToolStripButton tSBActivar;
-        private System.Windows.Forms.ToolStripButton tSBImprimir;
-        private System.Windows.Forms.ToolStripButton tSBExcel;
-        private System.Windows.Forms.ToolStripButton tSBSalir;
-        private System.Windows.Forms.ToolStripButton tSBActivas;
-        private System.Windows.Forms.ToolStripButton tSBInactivas;
-        private System.Windows.Forms.ToolStripButton tSBInactivar;
     }
 }
