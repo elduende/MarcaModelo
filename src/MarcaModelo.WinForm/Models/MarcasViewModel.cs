@@ -60,7 +60,14 @@ namespace MarcaModelo.WinForm.Models
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
 
-            RefreshGrid(marcaRepository);
+            //if (MuestraMarcasActivas)
+            //{
+            //    RefreshGrid(_marcaRepository);
+            //}
+            //else
+            //{
+            //    RefreshGridInactivas(_marcaRepository);
+            //}
         }
 
         [DisplayName("ID Marca")]
@@ -117,7 +124,7 @@ namespace MarcaModelo.WinForm.Models
 
         public ICommand InactivasCommand => _inactivasCommand;
 
-        private bool MuestraMarcasActivas 
+        public bool MuestraMarcasActivas 
         {
             get { return _muestraMarcasActivas; }
             set
@@ -189,6 +196,16 @@ namespace MarcaModelo.WinForm.Models
             if (sn.Accepted)
             {
                 _marcaRepository.Activate(IdMarca);
+                RefreshGridInactivas(_marcaRepository);
+            }
+        }
+
+        public void Refresh(bool activas)
+        {
+            if (activas)
+                RefreshGrid(_marcaRepository);
+            else
+            {
                 RefreshGridInactivas(_marcaRepository);
             }
         }
