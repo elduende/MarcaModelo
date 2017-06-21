@@ -44,19 +44,6 @@ namespace MarcaModelo.WinForm
 
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
-            //dGV.AutoGenerateColumns = false;
-            //IDMarcaColumn.Bind<MarcasViewModel>(m => m.IdMarca);
-            //DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
-            //EstadoColumn.Bind<MarcasViewModel>(m => m.Estado);
-            
-            //var pPagina = 0;
-            //var pTamanoPagina = 0;
-            //var estadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
-            //FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref estadoRegistrosGrilla, dGV);
-            //model.Refresh(estadoRegistrosGrilla == Enums.EstadoRegistros.Habilitados);
-
-            //dGV.BindSource(model, m => m.Marcas);
-            
             //[CMS] ¿Se hace así esto?
             dGV.Click += (sender, args) => 
             {
