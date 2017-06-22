@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using MarcaModelo.Data;
 using MarcaModelo.WinForm.Common;
@@ -18,6 +19,7 @@ namespace MarcaModelo.WinForm.Models
         private bool _cierreControlado;
         
         private bool _esValido;
+        private bool _puedeAgregar;
         private bool _muestraMarcasActivas;
 
 
@@ -31,6 +33,7 @@ namespace MarcaModelo.WinForm.Models
         private readonly RelayCommand _activarCommand;
         private readonly RelayCommand _activasCommand;
         private readonly RelayCommand _inactivasCommand;
+        private readonly RelayCommand _agregarCommand;
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
         {
@@ -54,12 +57,12 @@ namespace MarcaModelo.WinForm.Models
             PropertyChanged += (sender, args) => { CheckIsValid(); };
 
             _confirmarCommand = new RelayCommand(Persist, () => EsValido);
-            _activasCommand = new RelayCommand(() => RefreshGrid(marcaRepository), () => !MuestraMarcasActivas);
-            _inactivasCommand = new RelayCommand(() => RefreshGridInactivas(marcaRepository), () => MuestraMarcasActivas);
+            _activasCommand = new RelayCommand(() => Refresh(Enums.EstadoRegistros.Habilitados), () => !MuestraMarcasActivas);
+            _inactivasCommand = new RelayCommand(() => Refresh(Enums.EstadoRegistros.Inhabilitados), () => MuestraMarcasActivas);
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
-            //TODO - No se entera cuando la grilla queda vacía
             _imprimirCommand = new RelayCommand(Imprimir, () => _marcas.Count > 0);
+            _agregarCommand = new RelayCommand(Agregar, () => PuedeAgregar);
         }
 
         [DisplayName("ID Marca")]
@@ -77,7 +80,7 @@ namespace MarcaModelo.WinForm.Models
         [Required(ErrorMessage = "La Descripción es obligatoria")]
         public string Descripcion
         {
-            get { return _descripcion; }
+            get => _descripcion;
             set
             {
                 SetProperty(ref _descripcion, value, nameof(Descripcion));
@@ -116,6 +119,8 @@ namespace MarcaModelo.WinForm.Models
 
         public ICommand InactivasCommand => _inactivasCommand;
 
+        public ICommand AgregarCommand => _agregarCommand;
+
         public bool MuestraMarcasActivas 
         {
             get { return _muestraMarcasActivas; }
@@ -127,7 +132,9 @@ namespace MarcaModelo.WinForm.Models
                     _activasCommand.CheckCanExecute();
                     _desactivarCommand.CheckCanExecute();
                     _activarCommand.CheckCanExecute();
+                    _agregarCommand.CheckCanExecute();
                 }
+                _imprimirCommand.CheckCanExecute();
             }
         }
 
@@ -155,6 +162,11 @@ namespace MarcaModelo.WinForm.Models
             base.Dispose(disposing);
         }
 
+        public void Agregar()
+        {
+            
+        }
+
         public void Imprimir()
         {
             var marca = new Marca();
@@ -165,7 +177,7 @@ namespace MarcaModelo.WinForm.Models
         {
             var marca = new Marca { IdMarca = IdMarca, Descripcion = Descripcion };
             _marcaRepository.Persist(marca);
-            RefreshGrid(_marcaRepository);
+            Refresh(Enums.EstadoRegistros.Habilitados);
         }
 
         public void Inactivate()
@@ -177,7 +189,7 @@ namespace MarcaModelo.WinForm.Models
             if (sn.Accepted)
             {
                 _marcaRepository.Inactivate(IdMarca);
-                RefreshGrid(_marcaRepository);
+                Refresh(Enums.EstadoRegistros.Habilitados);
             }
         }
 
@@ -190,42 +202,21 @@ namespace MarcaModelo.WinForm.Models
             if (sn.Accepted)
             {
                 _marcaRepository.Activate(IdMarca);
-                RefreshGridInactivas(_marcaRepository);
+                Refresh(Enums.EstadoRegistros.Inhabilitados);
             }
         }
 
-        public void Refresh(bool activas)
-        {
-            if (activas)
-                RefreshGrid(_marcaRepository);
-            else
-            {
-                RefreshGridInactivas(_marcaRepository);
-            }
-        }
-
-        private void RefreshGrid(IMarcaRepository marcaRepository)
+        public void Refresh(Enums.EstadoRegistros estadoRegistros)
         {
             //TODO - ¿Está bien así?
             _marcas.Clear();
-            foreach (var m in marcaRepository.GetMarcas())
+            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
             {
-                marcaRepository.IdMarca = m.IdMarca;
-                _marcas.Add(new MarcaViewModel(marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+                _marcaRepository.IdMarca = m.IdMarca;
+                _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
 
-            MuestraMarcasActivas = true;
-        }
-
-        private void RefreshGridInactivas(IMarcaRepository marcaRepository)
-        {
-            //TODO - ¿Está bien así?
-            _marcas.Clear();
-            foreach (var m in marcaRepository.GetMarcasInactivas())
-            {
-                _marcas.Add(new MarcaViewModel(marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
-            }
-            MuestraMarcasActivas = false;
+            MuestraMarcasActivas = estadoRegistros == Enums.EstadoRegistros.Habilitados;
         }
 
         private void CheckIsValid()
@@ -244,7 +235,23 @@ namespace MarcaModelo.WinForm.Models
                 }
             }
         }
-        
+
+        private bool PuedeAgregar
+        {
+            get
+            {
+                _puedeAgregar = MuestraMarcasActivas;
+                return _puedeAgregar;
+            }
+            set
+            {
+                if (SetProperty(ref _puedeAgregar, value, () => PuedeAgregar))
+                {
+                    _agregarCommand.CheckCanExecute();
+                }
+            }
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext context)
         {
             if (Descripcion != null)

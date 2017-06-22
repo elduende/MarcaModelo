@@ -85,7 +85,7 @@
             this.EstadoColumn});
             this.dGV.Location = new System.Drawing.Point(12, 28);
             this.dGV.Name = "dGV";
-            this.dGV.Size = new System.Drawing.Size(479, 284);
+            this.dGV.Size = new System.Drawing.Size(479, 331);
             this.dGV.TabIndex = 2;
             // 
             // IDMarcaColumn
@@ -151,7 +151,7 @@
             this.btnActivar.FlatAppearance.BorderSize = 0;
             this.btnActivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActivar.Image = ((System.Drawing.Image)(resources.GetObject("btnActivar.Image")));
-            this.btnActivar.Location = new System.Drawing.Point(127, 331);
+            this.btnActivar.Location = new System.Drawing.Point(127, 373);
             this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(20, 20);
@@ -164,7 +164,7 @@
             this.btnDesactivar.FlatAppearance.BorderSize = 0;
             this.btnDesactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDesactivar.Image = ((System.Drawing.Image)(resources.GetObject("btnDesactivar.Image")));
-            this.btnDesactivar.Location = new System.Drawing.Point(151, 331);
+            this.btnDesactivar.Location = new System.Drawing.Point(151, 373);
             this.btnDesactivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesactivar.Name = "btnDesactivar";
             this.btnDesactivar.Size = new System.Drawing.Size(20, 20);
@@ -177,7 +177,7 @@
             this.btnConfirmar.FlatAppearance.BorderSize = 0;
             this.btnConfirmar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConfirmar.Image = ((System.Drawing.Image)(resources.GetObject("btnConfirmar.Image")));
-            this.btnConfirmar.Location = new System.Drawing.Point(461, 331);
+            this.btnConfirmar.Location = new System.Drawing.Point(461, 373);
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(20, 20);
@@ -187,7 +187,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtDescripcion.Location = new System.Drawing.Point(266, 332);
+            this.txtDescripcion.Location = new System.Drawing.Point(266, 374);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(174, 20);
             this.txtDescripcion.TabIndex = 11;
@@ -201,7 +201,7 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(199, 335);
+            this.label1.Location = new System.Drawing.Point(199, 377);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
             this.label1.TabIndex = 12;
@@ -213,7 +213,7 @@
             this.btnAgregar.FlatAppearance.BorderSize = 0;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("btnAgregar.Image")));
-            this.btnAgregar.Location = new System.Drawing.Point(175, 331);
+            this.btnAgregar.Location = new System.Drawing.Point(175, 373);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(20, 20);
@@ -300,7 +300,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 398);
+            this.ClientSize = new System.Drawing.Size(503, 404);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.btnAgregar);

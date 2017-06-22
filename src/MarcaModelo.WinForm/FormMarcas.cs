@@ -25,7 +25,7 @@ namespace MarcaModelo.WinForm
             var pTamanoPagina = 0;
             var estadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
             FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref estadoRegistrosGrilla, dGV);
-            model.Refresh(estadoRegistrosGrilla == Enums.EstadoRegistros.Habilitados);
+            model.Refresh(estadoRegistrosGrilla);
 
             dGV.BindSource(model, m => m.Marcas);
 
@@ -58,7 +58,7 @@ namespace MarcaModelo.WinForm
             btnActivar.Bind(model.ActivarCommand);
             btnActivas.Bind(model.ActivasCommand);
             btnInactivas.Bind(model.InactivasCommand);
-            btnAgregar.Bind(model.DesactivarCommand);
+            btnAgregar.Bind(model.AgregarCommand);
 
             btnAgregar.Click += (sender, args) =>
             {
