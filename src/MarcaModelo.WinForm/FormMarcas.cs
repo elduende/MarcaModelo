@@ -62,9 +62,9 @@ namespace MarcaModelo.WinForm
 
             btnAgregar.Click += (sender, args) =>
             {
-                model.IdMarca = 0;
-                model.Descripcion = null;
-                model.Estado = Enums.EstadoRegistrosDb.Habilitados.ToString();
+                //model.IdMarca = 0;
+                //model.Descripcion = null;
+                //model.Estado = Enums.EstadoRegistrosDb.Habilitados.ToString();
                 txtDescripcion.Focus();
             };
 
