@@ -106,7 +106,7 @@ namespace MarcaModelo.Data
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
-                if (marca.IdMarca == null)
+                if (marca.IdMarca == 0)
                     SqlMapper.Query<Marca>(connection, 
                                            "MarcaAgregar", 
                                            new { marca.Descripcion }, 
