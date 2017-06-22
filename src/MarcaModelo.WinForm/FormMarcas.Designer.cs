@@ -301,11 +301,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 404);
+            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.toolStrip);
             this.Controls.Add(this.btnExcel);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtDescripcion);
             this.Controls.Add(this.btnConfirmar);
             this.Controls.Add(this.btnActivar);
             this.Controls.Add(this.btnDesactivar);
@@ -314,6 +313,7 @@
             this.Controls.Add(this.btnImprimir);
             this.Controls.Add(this.dGV);
             this.Controls.Add(this.btnCerrar);
+            this.Controls.Add(this.label1);
             this.Name = "FormMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "FormMarcas";

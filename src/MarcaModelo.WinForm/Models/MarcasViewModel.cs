@@ -162,12 +162,10 @@ namespace MarcaModelo.WinForm.Models
             base.Dispose(disposing);
         }
 
-        //TODO - Podría estar vacía ¿cómo eliminarla?
+        //TODO - ¿Cómo eliminar esto?
         public void Agregar()
         {
-            //IdMarca = null;
-            Descripcion = null;
-            Estado = Enums.EstadoRegistrosDb.Habilitados.ToString();
+            
         }
 
         public void Imprimir()
