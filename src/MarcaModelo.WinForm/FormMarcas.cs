@@ -25,7 +25,7 @@ namespace MarcaModelo.WinForm
             var pTamanoPagina = 0;
             var estadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
             FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref estadoRegistrosGrilla, dGV);
-            model.Refresh(estadoRegistrosGrilla);
+            model.RefreshMarcas(estadoRegistrosGrilla);
 
             dGV.BindSource(model, m => m.Marcas);
 

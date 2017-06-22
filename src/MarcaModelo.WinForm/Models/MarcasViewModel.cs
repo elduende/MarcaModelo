@@ -57,8 +57,8 @@ namespace MarcaModelo.WinForm.Models
             PropertyChanged += (sender, args) => { CheckIsValid(); };
 
             _confirmarCommand = new RelayCommand(Persist, () => EsValido);
-            _activasCommand = new RelayCommand(() => Refresh(Enums.EstadoRegistros.Habilitados), () => !MuestraMarcasActivas);
-            _inactivasCommand = new RelayCommand(() => Refresh(Enums.EstadoRegistros.Inhabilitados), () => MuestraMarcasActivas);
+            _activasCommand = new RelayCommand(() => RefreshMarcas(Enums.EstadoRegistros.Habilitados), () => !MuestraMarcasActivas);
+            _inactivasCommand = new RelayCommand(() => RefreshMarcas(Enums.EstadoRegistros.Inhabilitados), () => MuestraMarcasActivas);
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _imprimirCommand = new RelayCommand(Imprimir, () => _marcas.Count > 0);
@@ -177,7 +177,7 @@ namespace MarcaModelo.WinForm.Models
         {
             var marca = new Marca { IdMarca = IdMarca, Descripcion = Descripcion };
             _marcaRepository.Persist(marca);
-            Refresh(Enums.EstadoRegistros.Habilitados);
+            RefreshMarcas(Enums.EstadoRegistros.Habilitados);
         }
 
         public void Inactivate()
@@ -189,7 +189,7 @@ namespace MarcaModelo.WinForm.Models
             if (sn.Accepted)
             {
                 _marcaRepository.Inactivate(IdMarca);
-                Refresh(Enums.EstadoRegistros.Habilitados);
+                RefreshMarcas(Enums.EstadoRegistros.Habilitados);
             }
         }
 
@@ -202,11 +202,11 @@ namespace MarcaModelo.WinForm.Models
             if (sn.Accepted)
             {
                 _marcaRepository.Activate(IdMarca);
-                Refresh(Enums.EstadoRegistros.Inhabilitados);
+                RefreshMarcas(Enums.EstadoRegistros.Inhabilitados);
             }
         }
 
-        public void Refresh(Enums.EstadoRegistros estadoRegistros)
+        public void RefreshMarcas(Enums.EstadoRegistros estadoRegistros)
         {
             //TODO - ¿Está bien así?
             _marcas.Clear();
