@@ -30,6 +30,7 @@ namespace MarcaModelo.WinForm.Models
         private readonly IMarcaRepository _marcaRepository;
         // private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
         private BindingList<MarcaViewModel> _marcas = new BindingList<MarcaViewModel>();
+        private BindingList<MarcaViewModel> _marcasCompleta = new BindingList<MarcaViewModel>();
         private readonly RelayCommand _imprimirCommand;
         private readonly RelayCommand _confirmarCommand;
         private readonly RelayCommand _desactivarCommand;
@@ -79,7 +80,7 @@ namespace MarcaModelo.WinForm.Models
 
         [DisplayName("Descripción")]
         [ReadOnly(false)]
-        [StringLength(50, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 3)]
         [Required(ErrorMessage = "La Descripción es obligatoria")]
         public string Descripcion
         {
@@ -94,6 +95,7 @@ namespace MarcaModelo.WinForm.Models
                 }
                 _desactivarCommand.CheckCanExecute();
                 _activarCommand.CheckCanExecute();
+                _confirmarCommand.CheckCanExecute();
             }
         }
 
@@ -276,12 +278,18 @@ namespace MarcaModelo.WinForm.Models
         {
             //TODO - ¿Está bien así?
             _marcas.Clear();
-            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas())
+            _marcasCompleta.Clear();
+            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina))
             {
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
-            
+            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
+            {
+                _marcaRepository.IdMarca = m.IdMarca;
+                _marcasCompleta.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
+            }
+
             MuestraMarcasActivas = estadoRegistros == Enums.EstadoRegistros.Habilitados;
             CantidadRegistros = estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcasCantidad() : _marcaRepository.GetMarcasInactivasCantidad();
         }
@@ -335,10 +343,22 @@ namespace MarcaModelo.WinForm.Models
                     yield return new ValidationResult("La Descripción comienza con un espacio en blanco.", new[] { nameof(Descripcion) });
                 }
 
-                if (_marcas.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase)))
+                //if (_marcasCompleta.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase) && x.IdMarca != IdMarca))
+                if (_marcasCompleta.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase)))
                 {
                     yield return new ValidationResult("Ya existe una marca con la misma Descripción.", new[] { nameof(Descripcion) });
                 }
+
+                if (Descripcion.Length < 3)
+                {
+                    yield return new ValidationResult("La Descripción no debe ser inferior a dos caracteres.", new[] { nameof(Descripcion) });
+                }
+
+                if (Descripcion.Length > 50)
+                {
+                    yield return new ValidationResult("La Descripción no debe superar los 50 caracteres.", new[] { nameof(Descripcion) });
+                }
+
             }
         }
     }
