@@ -343,8 +343,7 @@ namespace MarcaModelo.WinForm.Models
                     yield return new ValidationResult("La Descripción comienza con un espacio en blanco.", new[] { nameof(Descripcion) });
                 }
 
-                //if (_marcasCompleta.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase) && x.IdMarca != IdMarca))
-                if (_marcasCompleta.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase)))
+                if (_marcasCompleta.Any(x => string.Equals(x.Descripcion, Descripcion, StringComparison.CurrentCultureIgnoreCase) && x.IdMarca != IdMarca))
                 {
                     yield return new ValidationResult("Ya existe una marca con la misma Descripción.", new[] { nameof(Descripcion) });
                 }
