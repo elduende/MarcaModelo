@@ -14,7 +14,7 @@ namespace MarcaModelo.WinForm.Models
             _reportsProvider = reportsProvider;
         }
 
-        public IEnumerable<Marca> Marcas { get; private set; }
+        public IEnumerable<Marca> Marcas { get; set; }
         public Marca Marca { get; set; }
         public override string Titulo => "Marcas";
 

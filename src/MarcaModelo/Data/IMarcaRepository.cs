@@ -10,7 +10,10 @@ namespace MarcaModelo.Data
         IEnumerable<Modelo> Modelos();
         Marca GetById(int idMarca);
         IEnumerable<Marca> GetMarcas();
+        IEnumerable<Marca> GetMarcas(int pPagina, int pTamanoPagina);
         IEnumerable<Marca> GetMarcasInactivas();
+        int GetMarcasCantidad();
+        int GetMarcasInactivasCantidad();
         void Persist(Marca marca);
         void AddModelo(Modelo modelo);
         void RemoveModelo(Modelo modelo);

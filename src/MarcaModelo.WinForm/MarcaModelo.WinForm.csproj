@@ -67,6 +67,7 @@
     <Compile Include="Common\ICommandText.cs" />
     <Compile Include="Common\IViewModelExposer.cs" />
     <Compile Include="Common\ObservableObject.cs" />
+    <Compile Include="Common\Pagina.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\ReportModelExtensions.cs" />
     <Compile Include="Common\ValidatablePropertiesObject.cs" />

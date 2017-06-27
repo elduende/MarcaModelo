@@ -19,7 +19,6 @@ namespace MarcaModelo.WinForm
         private void MapReports()
         {
             Register<MarcaReportViewModel, FormPreviewReport>();
-            
         }
     }
 }

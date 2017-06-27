@@ -15,6 +15,9 @@ namespace MarcaModelo.WinForm.Models
         private int _idMarca;
         private string _descripcion;
         private string _estado;
+        private string _cantidadRegistrosLiteral;
+        private int _selectedPagina;
+
 
         private bool _cierreControlado;
         
@@ -121,6 +124,59 @@ namespace MarcaModelo.WinForm.Models
 
         public ICommand AgregarCommand => _agregarCommand;
 
+        private int CantidadRegistros { get; set; }
+
+        public string CantidadRegistrosLiteral
+        {
+            get
+            {
+                if (CantidadRegistros == 0)
+                    _cantidadRegistrosLiteral = "";
+                else if (CantidadRegistros == 1)
+                    _cantidadRegistrosLiteral = "Una marca";
+                else
+                    _cantidadRegistrosLiteral = string.Format("{0} marcas", CantidadRegistros);
+                return _cantidadRegistrosLiteral;
+            }
+        }
+
+        public Pagina[] paginas(int CantidadPaginas)
+        {
+            Pagina[] v = new Pagina[CantidadPaginas];
+            for (int i = 0; i < CantidadPaginas; i++)
+            {
+                v[i] = new Pagina { Id = i + 1, Descripcion = (i + 1).ToString() };
+            }
+            return v;
+        }
+
+        public IEnumerable<Pagina> Paginas
+        {
+            get
+            {
+                
+                return paginas(CantidadRegistros % TamanoPagina == 0 ? CantidadRegistros / TamanoPagina : CantidadRegistros / TamanoPagina + 1);
+            }
+        }
+
+        public int PaginaNumero { get; set; }
+        public int TamanoPagina { get; set; }
+
+        public int SelectedPagina
+        {
+            get { return _selectedPagina; }
+            set
+            {
+                if (!Equals(_selectedPagina, value))
+                {
+                    _selectedPagina = value;
+                    PaginaNumero = value;
+                    OnPropertyChanged("SelectedPagina");
+                    //ResetAnomalias();
+                }
+            }
+        }
+
         public bool MuestraMarcasActivas 
         {
             get { return _muestraMarcasActivas; }
@@ -142,7 +198,7 @@ namespace MarcaModelo.WinForm.Models
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
         //public IEnumerable<MarcaViewModel> Marcas => marcas;
         public IEnumerable<MarcaViewModel> Marcas => _marcas ?? (_marcas = new BindingList<MarcaViewModel>
-            (_marcaRepository.GetMarcas().Select(m => new MarcaViewModel(_marcaRepository)
+            (_marcaRepository.GetMarcas(PaginaNumero, TamanoPagina).Select(m => new MarcaViewModel(_marcaRepository)
             { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
         
         public override bool CanClose()
@@ -171,8 +227,16 @@ namespace MarcaModelo.WinForm.Models
 
         public void Imprimir()
         {
-            var marca = new Marca();
-            _exposer.Expose<MarcaReportViewModel>((m => { m.Marca = marca; m.Initialize(); }));
+            IList<Marca> marcasIList = new List<Marca>();
+            Marca marcaLocal = new Marca();
+            foreach (var m in _marcas)
+            {
+                marcaLocal.IdMarca = m.IdMarca;
+                marcaLocal.Descripcion = m.Descripcion;
+                marcaLocal.Estado = m.Estado;
+                marcasIList.Add(marcaLocal);
+            }
+            _exposer.Expose<MarcaReportViewModel>(m => { m.Marcas = marcasIList; m.Initialize(); });
         }
 
         public void Persist()
@@ -212,13 +276,14 @@ namespace MarcaModelo.WinForm.Models
         {
             //TODO - ¿Está bien así?
             _marcas.Clear();
-            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
+            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas())
             {
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
 
             MuestraMarcasActivas = estadoRegistros == Enums.EstadoRegistros.Habilitados;
+            CantidadRegistros = estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcasCantidad() : _marcaRepository.GetMarcasInactivasCantidad();
         }
 
         private void CheckIsValid()

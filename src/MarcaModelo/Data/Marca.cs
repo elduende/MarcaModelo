@@ -73,21 +73,30 @@ namespace MarcaModelo.Data
             }
         }
 
+        IEnumerable<Marca> IMarcaRepository.GetMarcas(int pPagina, int pTamanoPagina)
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            {
+                connection.Open();
+                return SqlMapper.Query<Marca>(connection,
+                                              "MarcaTraer",
+                                              commandType: CommandType.StoredProcedure).Skip((pPagina - 1) * pTamanoPagina).Take(pTamanoPagina);
+            }
+        }
+
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
             {
                 connection.Open();
-                //return SqlMapper.Query<Marca>(connection,
-                //                              "MarcaTraer",
-                //                              commandType: CommandType.StoredProcedure).Skip((3 - 1) * 10).Take(10);
                 return SqlMapper.Query<Marca>(connection,
                                               "MarcaTraer",
                                               commandType: CommandType.StoredProcedure);
             }
         }
-        
+
         IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas()
         {
             IDbConnection connection;
@@ -95,8 +104,30 @@ namespace MarcaModelo.Data
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
-                                              "MarcaInactivaTraer",
-                                              commandType: CommandType.StoredProcedure);
+                    "MarcaInactivaTraer",
+                    commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        int IMarcaRepository.GetMarcasCantidad()
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            {
+                connection.Open();
+                return connection.ExecuteScalar<int>("SELECT COUNT(*) AS Cantidad FROM Marca WHERE Estado = 'A'",
+                    commandType: CommandType.Text);
+            }
+        }
+
+        int IMarcaRepository.GetMarcasInactivasCantidad()
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            {
+                connection.Open();
+                return connection.ExecuteScalar<int>("SELECT COUNT(*) AS Cantidad FROM Marca WHERE Estado = 'B'",
+                    commandType: CommandType.Text);
             }
         }
 

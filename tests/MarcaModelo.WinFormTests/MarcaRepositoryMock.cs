@@ -75,6 +75,16 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
+        public int GetMarcasCantidad()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetMarcasInactivasCantidad()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Persist(Marca marca)
         {
             throw new NotImplementedException();
@@ -95,7 +105,7 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
-        IEnumerable<Marca> IMarcaRepository.GetMarcas()
+        IEnumerable<Marca> IMarcaRepository.GetMarcas(int pPagina, int pTamanoPagina)
         {
             throw new NotImplementedException();
         }

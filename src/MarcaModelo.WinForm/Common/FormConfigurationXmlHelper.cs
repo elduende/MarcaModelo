@@ -46,7 +46,7 @@ namespace MarcaModelo.WinForm.Common
                     new XAttribute("Pagina", pPagina),
                     new XAttribute("TamanoPagina", pTamanoPagina),
                     new XAttribute("RegistrosGrilla", pRegistrosGrilla));
-                
+
                 foreach (DataGridViewColumn columna in pDataGrid.Columns)
                 {
                     if (columna.Visible)
@@ -105,6 +105,8 @@ namespace MarcaModelo.WinForm.Common
 
                     pPagina = Convert.ToInt32(((XmlElement)grilla[0]).GetAttribute("Pagina"));
                     pTamanoPagina = Convert.ToInt32(((XmlElement)grilla[0]).GetAttribute("TamanoPagina"));
+                    if (pTamanoPagina == 0) pTamanoPagina = 25;
+                    if (pPagina == 0) pPagina = 1;
                     pRegistrosGrilla = ((XmlElement)grilla[0]).GetAttribute("RegistrosGrilla") == Enums.EstadoRegistros.Habilitados.ToString()
                         ? Enums.EstadoRegistros.Habilitados
                         : Enums.EstadoRegistros.Inhabilitados;
