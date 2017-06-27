@@ -133,9 +133,10 @@ namespace MarcaModelo.WinForm.Models
                 if (CantidadRegistros == 0)
                     _cantidadRegistrosLiteral = "";
                 else if (CantidadRegistros == 1)
-                    _cantidadRegistrosLiteral = "Una marca";
+                    _cantidadRegistrosLiteral = string.Format("Una marca {0}", MuestraMarcasActivas ? "activa" : "inactiva");
                 else
-                    _cantidadRegistrosLiteral = string.Format("{0} marcas", CantidadRegistros);
+                    //_cantidadRegistrosLiteral = string.Format("{0} marcas", CantidadRegistros);
+                    _cantidadRegistrosLiteral = string.Format("{0} marcas {1}", CantidadRegistros, MuestraMarcasActivas ? "activas" : "inactivas");
                 return _cantidadRegistrosLiteral;
             }
         }
@@ -154,7 +155,6 @@ namespace MarcaModelo.WinForm.Models
         {
             get
             {
-                
                 return paginas(CantidadRegistros % TamanoPagina == 0 ? CantidadRegistros / TamanoPagina : CantidadRegistros / TamanoPagina + 1);
             }
         }
@@ -281,7 +281,7 @@ namespace MarcaModelo.WinForm.Models
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
-
+            
             MuestraMarcasActivas = estadoRegistros == Enums.EstadoRegistros.Habilitados;
             CantidadRegistros = estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcasCantidad() : _marcaRepository.GetMarcasInactivasCantidad();
         }

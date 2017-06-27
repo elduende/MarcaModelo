@@ -24,11 +24,11 @@ namespace MarcaModelo.WinForm
 
             var pPagina = 0;
             var pTamanoPagina = 0;
-            var estadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
-            FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref estadoRegistrosGrilla, dGV);
+            var pEstadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
+            FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref pEstadoRegistrosGrilla, dGV);
             model.TamanoPagina = pTamanoPagina;
 
-            model.RefreshMarcas(estadoRegistrosGrilla);
+            model.RefreshMarcas(pEstadoRegistrosGrilla);
 
             dGV.BindSource(model, m => m.Marcas);
 
@@ -58,7 +58,7 @@ namespace MarcaModelo.WinForm
             cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             cboPagina.SelectedIndexChanged += (sender, args) => model.RefreshMarcas(model.MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
             cboPagina.BindValue(model, m => m.SelectedPagina);
-            model.SelectedPagina = pPagina + 1;
+            model.SelectedPagina = pPagina;
 
             btnProximo.Click += (sender, args) => cboPagina.SelectedIndex += cboPagina.SelectedIndex < cboPagina.Items.Count - 1 ? 1 : 0;
             btnAnterior.Click += (sender, args) => cboPagina.SelectedIndex -= cboPagina.SelectedIndex > 0 ? 1 : 0;
@@ -76,7 +76,9 @@ namespace MarcaModelo.WinForm
             btnDesactivar.Bind(model.DesactivarCommand);
             btnActivar.Bind(model.ActivarCommand);
             btnActivas.Bind(model.ActivasCommand);
+            btnActivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             btnInactivas.Bind(model.InactivasCommand);
+            btnInactivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             btnAgregar.Bind(model.AgregarCommand);
 
             btnAgregar.Click += (sender, args) =>
@@ -110,6 +112,11 @@ namespace MarcaModelo.WinForm
             toolTip.SetToolTip(btnImprimir, "Imprimir");
             toolTip.SetToolTip(btnCerrar, "Cerrar");
             toolTip.SetToolTip(nudTamanoPagina, "Cantidad de registros por página");
+            toolTip.SetToolTip(btnPrimero, "Primer registro");
+            toolTip.SetToolTip(btnAnterior, "Registro anterior");
+            toolTip.SetToolTip(btnProximo, "Próximo registro");
+            toolTip.SetToolTip(btnUltimo, "Último registro");
+            toolTip.SetToolTip(cboPagina, "Página número");
         }
     }
 }

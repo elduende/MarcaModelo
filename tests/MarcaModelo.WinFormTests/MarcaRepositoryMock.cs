@@ -110,6 +110,11 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
+        IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas(int pPagina, int pTamanoPagina)
+        {
+            throw new NotImplementedException();
+        }
+
         IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas()
         {
             throw new NotImplementedException();

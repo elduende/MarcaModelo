@@ -43,7 +43,7 @@ namespace MarcaModelo.WinForm.Common
             {
                 var columnas = new XElement("Grilla",
                     new XAttribute("Name", pForm.Text),
-                    new XAttribute("Pagina", pPagina),
+                    new XAttribute("Pagina", pPagina + 1),
                     new XAttribute("TamanoPagina", pTamanoPagina),
                     new XAttribute("RegistrosGrilla", pRegistrosGrilla));
 

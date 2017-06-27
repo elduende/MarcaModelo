@@ -61,7 +61,7 @@ namespace MarcaModelo.Data
         Marca IMarcaRepository.GetById(int idMarca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 DynamicParameters param = new DynamicParameters();
@@ -76,7 +76,7 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> IMarcaRepository.GetMarcas(int pPagina, int pTamanoPagina)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
@@ -85,10 +85,22 @@ namespace MarcaModelo.Data
             }
         }
 
+        IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas(int pPagina, int pTamanoPagina)
+        {
+            IDbConnection connection;
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
+            {
+                connection.Open();
+                return SqlMapper.Query<Marca>(connection,
+                    "MarcaInactivaTraer",
+                    commandType: CommandType.StoredProcedure).Skip((pPagina - 1) * pTamanoPagina).Take(pTamanoPagina);
+            }
+        }
+
         IEnumerable<Marca> IMarcaRepository.GetMarcas()
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
@@ -100,7 +112,7 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas()
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
@@ -112,7 +124,7 @@ namespace MarcaModelo.Data
         int IMarcaRepository.GetMarcasCantidad()
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return connection.ExecuteScalar<int>("SELECT COUNT(*) AS Cantidad FROM Marca WHERE Estado = 'A'",
@@ -123,7 +135,7 @@ namespace MarcaModelo.Data
         int IMarcaRepository.GetMarcasInactivasCantidad()
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return connection.ExecuteScalar<int>("SELECT COUNT(*) AS Cantidad FROM Marca WHERE Estado = 'B'",
@@ -134,7 +146,7 @@ namespace MarcaModelo.Data
         void IMarcaRepository.Persist(Marca marca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 if (marca.IdMarca == 0)
@@ -158,7 +170,7 @@ namespace MarcaModelo.Data
         public virtual void Inactivate(int iDMarca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,
@@ -171,7 +183,7 @@ namespace MarcaModelo.Data
         public virtual void Activate(int iDMarca)
         {
             IDbConnection connection;
-            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString.ToString()].ConnectionString.ToString()))
+            using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 SqlMapper.Query<Marca>(connection,
