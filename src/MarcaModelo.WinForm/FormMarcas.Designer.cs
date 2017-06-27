@@ -64,7 +64,7 @@
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-            this.btnCerrar.Location = new System.Drawing.Point(316, 5);
+            this.btnCerrar.Location = new System.Drawing.Point(350, 5);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(20, 20);
@@ -84,7 +84,7 @@
             this.IDMarcaColumn,
             this.DescripcionColumn,
             this.EstadoColumn});
-            this.dGV.Location = new System.Drawing.Point(12, 30);
+            this.dGV.Location = new System.Drawing.Point(11, 30);
             this.dGV.Name = "dGV";
             this.dGV.Size = new System.Drawing.Size(592, 342);
             this.dGV.TabIndex = 2;
@@ -113,7 +113,7 @@
             this.btnImprimir.FlatAppearance.BorderSize = 0;
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimir.Image")));
-            this.btnImprimir.Location = new System.Drawing.Point(260, 5);
+            this.btnImprimir.Location = new System.Drawing.Point(294, 5);
             this.btnImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(20, 20);
@@ -126,7 +126,7 @@
             this.btnActivas.FlatAppearance.BorderSize = 0;
             this.btnActivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActivas.Image = ((System.Drawing.Image)(resources.GetObject("btnActivas.Image")));
-            this.btnActivas.Location = new System.Drawing.Point(204, 5);
+            this.btnActivas.Location = new System.Drawing.Point(238, 5);
             this.btnActivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivas.Name = "btnActivas";
             this.btnActivas.Size = new System.Drawing.Size(20, 20);
@@ -139,7 +139,7 @@
             this.btnInactivas.FlatAppearance.BorderSize = 0;
             this.btnInactivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInactivas.Image = ((System.Drawing.Image)(resources.GetObject("btnInactivas.Image")));
-            this.btnInactivas.Location = new System.Drawing.Point(232, 5);
+            this.btnInactivas.Location = new System.Drawing.Point(266, 5);
             this.btnInactivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnInactivas.Name = "btnInactivas";
             this.btnInactivas.Size = new System.Drawing.Size(20, 20);
@@ -227,7 +227,7 @@
             this.btnExcel.FlatAppearance.BorderSize = 0;
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
-            this.btnExcel.Location = new System.Drawing.Point(288, 5);
+            this.btnExcel.Location = new System.Drawing.Point(322, 5);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(2);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(20, 20);
@@ -316,7 +316,7 @@
             // 
             // nudTamanoPagina
             // 
-            this.nudTamanoPagina.Location = new System.Drawing.Point(379, 5);
+            this.nudTamanoPagina.Location = new System.Drawing.Point(198, 5);
             this.nudTamanoPagina.Minimum = new decimal(new int[] {
             10,
             0,

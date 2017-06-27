@@ -58,7 +58,13 @@ namespace MarcaModelo.WinForm
             cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             cboPagina.SelectedIndexChanged += (sender, args) => model.RefreshMarcas(model.MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
             cboPagina.BindValue(model, m => m.SelectedPagina);
-            
+            model.SelectedPagina = pPagina + 1;
+
+            btnProximo.Click += (sender, args) => cboPagina.SelectedIndex += cboPagina.SelectedIndex < cboPagina.Items.Count - 1 ? 1 : 0;
+            btnAnterior.Click += (sender, args) => cboPagina.SelectedIndex -= cboPagina.SelectedIndex > 0 ? 1 : 0;
+            btnPrimero.Click += (sender, args) => cboPagina.SelectedIndex = 0;
+            btnUltimo.Click += (sender, args) => cboPagina.SelectedIndex = cboPagina.Items.Count - 1;
+
             lblCantidadRegistros.BindValue(model, m => m.CantidadRegistrosLiteral);
 
             btnImprimir.Bind(model.ImprimirCommand);
