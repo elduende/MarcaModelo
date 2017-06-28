@@ -40,7 +40,7 @@ namespace MarcaModelo.Data
 
         public virtual void AddModelo(Modelo modelo)
         {
-            if (modelo.Marca != null && modelo.Marca != this)
+            if (modelo.Marca != null && !Equals(modelo.Marca, this))
             {
                 modelo.Marca.RemoveModelo(modelo);
             }
@@ -51,7 +51,7 @@ namespace MarcaModelo.Data
 
         public virtual void RemoveModelo(Modelo modelo)
         {
-            if (modelo.Marca != null && modelo.Marca == this)
+            if (modelo.Marca != null && Equals(modelo.Marca, this))
             {
                 _modelos.Remove(modelo);
                 modelo.Marca = null;
