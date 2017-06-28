@@ -1,12 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Media;
-using System.Reflection;
 using System.Text;
 using System.Windows.Forms;
 using MarcaModelo.Data;
@@ -81,8 +80,8 @@ namespace MarcaModelo.WinForm.Models
         [Hidden]
         public int IdMarca
         {
-            get { return _idMarca; }
-            set { SetProperty(ref _idMarca, value, nameof(IdMarca)); }
+            get => _idMarca;
+            set => SetProperty(ref _idMarca, value, nameof(IdMarca));
         }
 
         [DisplayName("Descripción")]
@@ -253,56 +252,72 @@ namespace MarcaModelo.WinForm.Models
 
         public void Excel()
         {
-            var sfd = new SaveFileDialog {Filter = @"csv files (*.csv)|*.csv"};
-
+            var sfd = new SaveFileDialog { Filter = @"csv files (*.csv)|*.csv" };
             if (sfd.ShowDialog() != DialogResult.OK || sfd.FileName.Length <= 0) return;
-
-            Cursor.Current = Cursors.WaitCursor;
-
-            var sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8);
-                
-            var mvm = new MarcaViewModel(null);
-            foreach (var propInfo in mvm.GetType().GetProperties())
+            try
             {
-                if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == mvm.GetType().Name)
-                {
-                    if (propInfo.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
-                    {
-                        var myAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(propInfo, typeof(DisplayNameAttribute));
-                        sw.Write(myAttribute.DisplayName);
-                        sw.Write("\t");
-                    }
-                }
-            }
-            sw.Write(sw.NewLine);
+                Cursor.Current = Cursors.WaitCursor;
 
-            foreach (var marcaViewModel in _marcasCompleta)
-            {
-                foreach (var propInfo in marcaViewModel.GetType().GetProperties())
+                var sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8);
+
+                var mvm = new MarcaViewModel(null);
+                foreach (var propInfo in mvm.GetType().GetProperties())
                 {
-                    if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == marcaViewModel.GetType().Name)
+                    if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == mvm.GetType().Name)
                     {
                         if (propInfo.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
                         {
-                            sw.Write(propInfo.GetValue(marcaViewModel, null));
+                            var myAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(propInfo, typeof(DisplayNameAttribute));
+                            sw.Write(myAttribute.DisplayName);
+                            sw.Write("\t");
                         }
                     }
-                    sw.Write("\t");
                 }
                 sw.Write(sw.NewLine);
-            }
-            sw.Close();
 
-            Cursor.Current = Cursors.Default;
-            var simpleSound = new SoundPlayer(@"c:\Windows\Media\chimes.wav");
-            simpleSound.Play();
-            MessageBox.Show(@"Proceso finalizado exitosamente", 
-                @"Excel", 
-                MessageBoxButtons.OK, 
-                MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1,
-                MessageBoxOptions.RightAlign,
-                false);
+                foreach (var marcaViewModel in _marcasCompleta)
+                {
+                    foreach (var propInfo in marcaViewModel.GetType().GetProperties())
+                    {
+                        if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == marcaViewModel.GetType().Name)
+                        {
+                            if (propInfo.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
+                            {
+                                sw.Write(propInfo.GetValue(marcaViewModel, null));
+                            }
+                        }
+                        sw.Write("\t");
+                    }
+                    sw.Write(sw.NewLine);
+                }
+                sw.Close();
+
+                Cursor.Current = Cursors.Default;
+            }
+            catch (System.IO.IOException e)
+            {
+                Cursor.Current = Cursors.Default;
+                Console.WriteLine(@"Error al intentar escribir en el archivo {0}. Mensaje = {1}", sfd.FileName, e.Message);
+            }
+            catch (Exception e)
+            {
+                Cursor.Current = Cursors.Default;
+                Console.WriteLine(e);
+                throw;
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+                var simpleSound = new SoundPlayer(@"c:\Windows\Media\chimes.wav");
+                simpleSound.Play();
+                MessageBox.Show(@"Proceso finalizado exitosamente",
+                    @"Excel",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1,
+                    MessageBoxOptions.RightAlign,
+                    false);
+            }
         }
 
         public void Persist()
