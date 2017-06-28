@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq;
+using System.Media;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using MarcaModelo.Data;
 using MarcaModelo.WinForm.Common;
@@ -216,7 +219,7 @@ namespace MarcaModelo.WinForm.Models
             {
                 return true;
             }
-            var sn = new YesNoQuestionViewModel { Title = "Cerrar", Question = "¿Realmente quiere cerrar el formulario?" };
+            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Cerrar", Question = "¿Realmente quiere cerrar el formulario?" };
             _exposer.ExposeSync(sn);
             return sn.Accepted;
         }
@@ -236,8 +239,8 @@ namespace MarcaModelo.WinForm.Models
 
         public void Imprimir()
         {
-            IList<Marca> marcasIList = new List<Marca>();
-            Marca marcaLocal = new Marca();
+            var marcasIList = new List<Marca>();
+            var marcaLocal = new Marca();
             foreach (var m in _marcas)
             {
                 marcaLocal.IdMarca = m.IdMarca;
@@ -250,31 +253,56 @@ namespace MarcaModelo.WinForm.Models
 
         public void Excel()
         {
-            MarcaViewModel ma = new MarcaViewModel(null);
-            foreach (var p in ma.GetType().GetProperties())
+            var sfd = new SaveFileDialog {Filter = @"csv files (*.csv)|*.csv"};
+
+            if (sfd.ShowDialog() != DialogResult.OK || sfd.FileName.Length <= 0) return;
+
+            Cursor.Current = Cursors.WaitCursor;
+
+            var sw = new StreamWriter(sfd.FileName, false, Encoding.UTF8);
+                
+            var mvm = new MarcaViewModel(null);
+            foreach (var propInfo in mvm.GetType().GetProperties())
             {
-                if (p.DeclaringType.Name == ma.GetType().Name)
+                if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == mvm.GetType().Name)
                 {
-                    if (p.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
+                    if (propInfo.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
                     {
-                        DisplayNameAttribute myAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(p, typeof(DisplayNameAttribute));
-                        Console.WriteLine(myAttribute.DisplayName);
+                        var myAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(propInfo, typeof(DisplayNameAttribute));
+                        sw.Write(myAttribute.DisplayName);
+                        sw.Write("\t");
                     }
                 }
             }
-            foreach (MarcaViewModel m in _marcasCompleta)
+            sw.Write(sw.NewLine);
+
+            foreach (var marcaViewModel in _marcasCompleta)
             {
-                foreach (var p in m.GetType().GetProperties())
+                foreach (var propInfo in marcaViewModel.GetType().GetProperties())
                 {
-                    if (p.DeclaringType.Name == m.GetType().Name)
+                    if (propInfo.DeclaringType != null && propInfo.DeclaringType.Name == marcaViewModel.GetType().Name)
                     {
-                        if (p.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
+                        if (propInfo.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
                         {
-                            Console.WriteLine(m.GetType().GetProperty(p.Name).GetValue(m, null));
+                            sw.Write(propInfo.GetValue(marcaViewModel, null));
                         }
                     }
+                    sw.Write("\t");
                 }
+                sw.Write(sw.NewLine);
             }
+            sw.Close();
+
+            Cursor.Current = Cursors.Default;
+            var simpleSound = new SoundPlayer(@"c:\Windows\Media\chimes.wav");
+            simpleSound.Play();
+            MessageBox.Show(@"Proceso finalizado exitosamente", 
+                @"Excel", 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1,
+                MessageBoxOptions.RightAlign,
+                false);
         }
 
         public void Persist()
@@ -290,16 +318,14 @@ namespace MarcaModelo.WinForm.Models
                 $"¿Desea desactivar la marca {Descripcion}?"
             };
             _exposer.ExposeSync(sn);
-            if (sn.Accepted)
-            {
-                _marcaRepository.Inactivate(IdMarca);
-                RefreshMarcas(Enums.EstadoRegistros.Habilitados);
-            }
+            if (!sn.Accepted) return;
+            _marcaRepository.Inactivate(IdMarca);
+            RefreshMarcas(Enums.EstadoRegistros.Habilitados);
         }
 
         public void Activate()
         {
-            var sn = new YesNoQuestionViewModel { Title = "Activar", Question =
+            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Activar", Question =
                 $"¿Desea activar la marca {Descripcion}?"
             };
             _exposer.ExposeSync(sn);
@@ -315,12 +341,12 @@ namespace MarcaModelo.WinForm.Models
             //TODO - ¿Está bien así?
             _marcas.Clear();
             _marcasCompleta.Clear();
-            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina))
+            foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina))
             {
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
-            foreach (var m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
+            foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
             {
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcasCompleta.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
@@ -337,7 +363,7 @@ namespace MarcaModelo.WinForm.Models
 
         private bool EsValido
         {
-            get { return _esValido; }
+            get => _esValido;
             set
             {
                 if (SetProperty(ref _esValido, value, () => EsValido))
