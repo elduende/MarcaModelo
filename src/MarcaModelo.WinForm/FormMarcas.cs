@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Channels;
 using System.Windows.Forms;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Models;
@@ -100,16 +99,12 @@ namespace MarcaModelo.WinForm
 
             btnAgregar.Bind(model.AgregarCommand);
             agregarToolStripMenuItem.Bind(model.AgregarCommand);
-            btnAgregar.Click += (sender, args) =>
-            {
-                txtDescripcion.Focus();
-            };
-            agregarToolStripMenuItem.Click += (sender, args) =>
-            {
-                txtDescripcion.Focus();
-            };
+            btnAgregar.Click += (sender, args) => { txtDescripcion.Focus(); };
+            agregarToolStripMenuItem.Click += (sender, args) => { txtDescripcion.Focus(); };
 
             txtDescripcion.BindValue(model, m => m.Descripcion);
+
+            txtBuscar.BindValue(model, m => m.Buscar);
 
             SetToolTips();
 

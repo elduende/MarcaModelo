@@ -73,7 +73,7 @@ namespace MarcaModelo.Data
             }
         }
 
-        IEnumerable<Marca> IMarcaRepository.GetMarcas(int pPagina, int pTamanoPagina)
+        IEnumerable<Marca> IMarcaRepository.GetMarcas(int pPagina, int pTamanoPagina, string pBuscar)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
@@ -81,19 +81,25 @@ namespace MarcaModelo.Data
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
                                               "MarcaTraer",
-                                              commandType: CommandType.StoredProcedure).Skip((pPagina - 1) * pTamanoPagina).Take(pTamanoPagina);
+                                              commandType: CommandType.StoredProcedure)
+                                              .Skip((pPagina - 1) * pTamanoPagina)
+                                              .Take(pTamanoPagina)
+                                              .Where(m => m.Descripcion.ToLower().Contains(pBuscar.ToLower()));
             }
         }
 
-        IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas(int pPagina, int pTamanoPagina)
+        IEnumerable<Marca> IMarcaRepository.GetMarcasInactivas(int pPagina, int pTamanoPagina, string pBuscar)
         {
             IDbConnection connection;
             using (connection = new SqlConnection(ConfigurationManager.ConnectionStrings[Properties.Settings.Default.ConnectionString].ConnectionString))
             {
                 connection.Open();
                 return SqlMapper.Query<Marca>(connection,
-                    "MarcaInactivaTraer",
-                    commandType: CommandType.StoredProcedure).Skip((pPagina - 1) * pTamanoPagina).Take(pTamanoPagina);
+                                              "MarcaInactivaTraer",
+                                              commandType: CommandType.StoredProcedure)
+                                              .Skip((pPagina - 1) * pTamanoPagina)
+                                              .Take(pTamanoPagina)
+                                              .Where(m => m.Descripcion.ToLower().Contains(pBuscar.ToLower()));
             }
         }
 

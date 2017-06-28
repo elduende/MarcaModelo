@@ -87,7 +87,7 @@ namespace MarcaModelo.WinForm.Models
 
         [DisplayName("Descripción")]
         [ReadOnly(false)]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2)]
         [Required(ErrorMessage = "La Descripción es obligatoria")]
         public string Descripcion
         {
@@ -224,7 +224,7 @@ namespace MarcaModelo.WinForm.Models
         //Lo que hace eso es que la propiedad en el model solo se inicializa cuando se pide (es un detalle, no te preocupes)
         //public IEnumerable<MarcaViewModel> Marcas => marcas;
         public IEnumerable<MarcaViewModel> Marcas => _marcas ?? (_marcas = new BindingList<MarcaViewModel>
-            (_marcaRepository.GetMarcas(PaginaNumero, TamanoPagina).Select(m => new MarcaViewModel(_marcaRepository)
+            (_marcaRepository.GetMarcas(PaginaNumero, TamanoPagina, Buscar).Select(m => new MarcaViewModel(_marcaRepository)
             { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado }).ToList()));
         
         public override bool CanClose()
@@ -366,12 +366,26 @@ namespace MarcaModelo.WinForm.Models
             }
         }
 
+        private string _buscar = "";
+
+        public string Buscar
+        {
+            get { return _buscar; }
+            set
+            {
+                if (SetProperty(ref _buscar, value))
+                {
+                    RefreshMarcas(MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
+                }
+            }
+        }
+
         public void RefreshMarcas(Enums.EstadoRegistros estadoRegistros)
         {
             //TODO - ¿Está bien así?
             _marcas.Clear();
             _marcasCompleta.Clear();
-            foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina))
+            foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina, Buscar) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina, Buscar))
             {
                 _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
@@ -440,7 +454,7 @@ namespace MarcaModelo.WinForm.Models
                     yield return new ValidationResult("Ya existe una marca con la misma Descripción.", new[] { nameof(Descripcion) });
                 }
 
-                if (Descripcion.Length < 3)
+                if (Descripcion.Length < 2)
                 {
                     yield return new ValidationResult("La Descripción no debe ser inferior a dos caracteres.", new[] { nameof(Descripcion) });
                 }
@@ -454,3 +468,4 @@ namespace MarcaModelo.WinForm.Models
         }
     }
 }
+

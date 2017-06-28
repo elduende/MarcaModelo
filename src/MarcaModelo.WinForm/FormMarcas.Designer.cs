@@ -67,6 +67,7 @@
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtBuscar = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTamanoPagina)).BeginInit();
@@ -98,10 +99,10 @@
             this.IDMarcaColumn,
             this.DescripcionColumn,
             this.EstadoColumn});
-            this.dGV.Location = new System.Drawing.Point(11, 58);
+            this.dGV.Location = new System.Drawing.Point(11, 78);
             this.dGV.Name = "dGV";
-            this.dGV.Size = new System.Drawing.Size(592, 314);
-            this.dGV.TabIndex = 2;
+            this.dGV.Size = new System.Drawing.Size(592, 294);
+            this.dGV.TabIndex = 13;
             // 
             // IDMarcaColumn
             // 
@@ -170,7 +171,7 @@
             this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(20, 20);
-            this.btnActivar.TabIndex = 12;
+            this.btnActivar.TabIndex = 14;
             this.btnActivar.UseVisualStyleBackColor = true;
             // 
             // btnDesactivar
@@ -183,7 +184,7 @@
             this.btnDesactivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesactivar.Name = "btnDesactivar";
             this.btnDesactivar.Size = new System.Drawing.Size(20, 20);
-            this.btnDesactivar.TabIndex = 13;
+            this.btnDesactivar.TabIndex = 15;
             this.btnDesactivar.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
@@ -196,7 +197,7 @@
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(20, 20);
-            this.btnConfirmar.TabIndex = 17;
+            this.btnConfirmar.TabIndex = 19;
             this.btnConfirmar.UseVisualStyleBackColor = true;
             // 
             // txtDescripcion
@@ -205,7 +206,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(379, 387);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(174, 20);
-            this.txtDescripcion.TabIndex = 16;
+            this.txtDescripcion.TabIndex = 18;
             // 
             // errorProvider
             // 
@@ -219,7 +220,7 @@
             this.label1.Location = new System.Drawing.Point(312, 390);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 15;
+            this.label1.TabIndex = 17;
             this.label1.Text = "Descripción: ";
             // 
             // btnAgregar
@@ -232,7 +233,7 @@
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(20, 20);
-            this.btnAgregar.TabIndex = 14;
+            this.btnAgregar.TabIndex = 16;
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnExcel
@@ -437,11 +438,21 @@
             this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cerrarToolStripMenuItem.Text = "&Cerrar";
             // 
+            // txtBuscar
+            // 
+            this.txtBuscar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtBuscar.Location = new System.Drawing.Point(13, 57);
+            this.txtBuscar.Name = "txtBuscar";
+            this.txtBuscar.Size = new System.Drawing.Size(590, 20);
+            this.txtBuscar.TabIndex = 12;
+            // 
             // FormMarcas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(616, 417);
+            this.Controls.Add(this.txtBuscar);
             this.Controls.Add(this.nudTamanoPagina);
             this.Controls.Add(this.lblCantidadRegistros);
             this.Controls.Add(this.cboPagina);
@@ -516,5 +527,6 @@
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
+        private System.Windows.Forms.TextBox txtBuscar;
     }
 }
