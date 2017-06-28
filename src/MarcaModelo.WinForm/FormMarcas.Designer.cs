@@ -54,9 +54,23 @@
             this.cboPagina = new System.Windows.Forms.ComboBox();
             this.lblCantidadRegistros = new System.Windows.Forms.Label();
             this.nudTamanoPagina = new System.Windows.Forms.NumericUpDown();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.marcasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.agregarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desactivarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.activasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inactivasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.imprimirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTamanoPagina)).BeginInit();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCerrar
@@ -64,11 +78,11 @@
             this.btnCerrar.FlatAppearance.BorderSize = 0;
             this.btnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCerrar.Image = ((System.Drawing.Image)(resources.GetObject("btnCerrar.Image")));
-            this.btnCerrar.Location = new System.Drawing.Point(350, 5);
+            this.btnCerrar.Location = new System.Drawing.Point(350, 31);
             this.btnCerrar.Margin = new System.Windows.Forms.Padding(2);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(20, 20);
-            this.btnCerrar.TabIndex = 1;
+            this.btnCerrar.TabIndex = 11;
             this.btnCerrar.UseVisualStyleBackColor = true;
             // 
             // dGV
@@ -84,9 +98,9 @@
             this.IDMarcaColumn,
             this.DescripcionColumn,
             this.EstadoColumn});
-            this.dGV.Location = new System.Drawing.Point(11, 30);
+            this.dGV.Location = new System.Drawing.Point(11, 58);
             this.dGV.Name = "dGV";
-            this.dGV.Size = new System.Drawing.Size(592, 342);
+            this.dGV.Size = new System.Drawing.Size(592, 314);
             this.dGV.TabIndex = 2;
             // 
             // IDMarcaColumn
@@ -113,11 +127,11 @@
             this.btnImprimir.FlatAppearance.BorderSize = 0;
             this.btnImprimir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImprimir.Image = ((System.Drawing.Image)(resources.GetObject("btnImprimir.Image")));
-            this.btnImprimir.Location = new System.Drawing.Point(294, 5);
+            this.btnImprimir.Location = new System.Drawing.Point(294, 31);
             this.btnImprimir.Margin = new System.Windows.Forms.Padding(2);
             this.btnImprimir.Name = "btnImprimir";
             this.btnImprimir.Size = new System.Drawing.Size(20, 20);
-            this.btnImprimir.TabIndex = 3;
+            this.btnImprimir.TabIndex = 9;
             this.btnImprimir.UseVisualStyleBackColor = true;
             // 
             // btnActivas
@@ -126,11 +140,11 @@
             this.btnActivas.FlatAppearance.BorderSize = 0;
             this.btnActivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnActivas.Image = ((System.Drawing.Image)(resources.GetObject("btnActivas.Image")));
-            this.btnActivas.Location = new System.Drawing.Point(238, 5);
+            this.btnActivas.Location = new System.Drawing.Point(238, 31);
             this.btnActivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivas.Name = "btnActivas";
             this.btnActivas.Size = new System.Drawing.Size(20, 20);
-            this.btnActivas.TabIndex = 5;
+            this.btnActivas.TabIndex = 7;
             this.btnActivas.UseVisualStyleBackColor = true;
             // 
             // btnInactivas
@@ -139,11 +153,11 @@
             this.btnInactivas.FlatAppearance.BorderSize = 0;
             this.btnInactivas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnInactivas.Image = ((System.Drawing.Image)(resources.GetObject("btnInactivas.Image")));
-            this.btnInactivas.Location = new System.Drawing.Point(266, 5);
+            this.btnInactivas.Location = new System.Drawing.Point(266, 31);
             this.btnInactivas.Margin = new System.Windows.Forms.Padding(2);
             this.btnInactivas.Name = "btnInactivas";
             this.btnInactivas.Size = new System.Drawing.Size(20, 20);
-            this.btnInactivas.TabIndex = 4;
+            this.btnInactivas.TabIndex = 8;
             this.btnInactivas.UseVisualStyleBackColor = true;
             // 
             // btnActivar
@@ -156,7 +170,7 @@
             this.btnActivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnActivar.Name = "btnActivar";
             this.btnActivar.Size = new System.Drawing.Size(20, 20);
-            this.btnActivar.TabIndex = 7;
+            this.btnActivar.TabIndex = 12;
             this.btnActivar.UseVisualStyleBackColor = true;
             // 
             // btnDesactivar
@@ -169,7 +183,7 @@
             this.btnDesactivar.Margin = new System.Windows.Forms.Padding(2);
             this.btnDesactivar.Name = "btnDesactivar";
             this.btnDesactivar.Size = new System.Drawing.Size(20, 20);
-            this.btnDesactivar.TabIndex = 6;
+            this.btnDesactivar.TabIndex = 13;
             this.btnDesactivar.UseVisualStyleBackColor = true;
             // 
             // btnConfirmar
@@ -182,7 +196,7 @@
             this.btnConfirmar.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmar.Name = "btnConfirmar";
             this.btnConfirmar.Size = new System.Drawing.Size(20, 20);
-            this.btnConfirmar.TabIndex = 9;
+            this.btnConfirmar.TabIndex = 17;
             this.btnConfirmar.UseVisualStyleBackColor = true;
             // 
             // txtDescripcion
@@ -191,7 +205,7 @@
             this.txtDescripcion.Location = new System.Drawing.Point(379, 387);
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(174, 20);
-            this.txtDescripcion.TabIndex = 11;
+            this.txtDescripcion.TabIndex = 16;
             // 
             // errorProvider
             // 
@@ -205,7 +219,7 @@
             this.label1.Location = new System.Drawing.Point(312, 390);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(69, 13);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 15;
             this.label1.Text = "Descripción: ";
             // 
             // btnAgregar
@@ -227,11 +241,11 @@
             this.btnExcel.FlatAppearance.BorderSize = 0;
             this.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExcel.Image")));
-            this.btnExcel.Location = new System.Drawing.Point(322, 5);
+            this.btnExcel.Location = new System.Drawing.Point(322, 31);
             this.btnExcel.Margin = new System.Windows.Forms.Padding(2);
             this.btnExcel.Name = "btnExcel";
             this.btnExcel.Size = new System.Drawing.Size(20, 20);
-            this.btnExcel.TabIndex = 15;
+            this.btnExcel.TabIndex = 10;
             this.btnExcel.UseVisualStyleBackColor = true;
             // 
             // btnUltimo
@@ -240,11 +254,11 @@
             this.btnUltimo.FlatAppearance.BorderSize = 0;
             this.btnUltimo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUltimo.Image = ((System.Drawing.Image)(resources.GetObject("btnUltimo.Image")));
-            this.btnUltimo.Location = new System.Drawing.Point(171, 5);
+            this.btnUltimo.Location = new System.Drawing.Point(171, 31);
             this.btnUltimo.Margin = new System.Windows.Forms.Padding(2);
             this.btnUltimo.Name = "btnUltimo";
             this.btnUltimo.Size = new System.Drawing.Size(20, 20);
-            this.btnUltimo.TabIndex = 22;
+            this.btnUltimo.TabIndex = 5;
             this.btnUltimo.UseVisualStyleBackColor = true;
             // 
             // btnPrimero
@@ -253,11 +267,11 @@
             this.btnPrimero.FlatAppearance.BorderSize = 0;
             this.btnPrimero.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrimero.Image = ((System.Drawing.Image)(resources.GetObject("btnPrimero.Image")));
-            this.btnPrimero.Location = new System.Drawing.Point(13, 5);
+            this.btnPrimero.Location = new System.Drawing.Point(13, 31);
             this.btnPrimero.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrimero.Name = "btnPrimero";
             this.btnPrimero.Size = new System.Drawing.Size(20, 20);
-            this.btnPrimero.TabIndex = 21;
+            this.btnPrimero.TabIndex = 0;
             this.btnPrimero.UseVisualStyleBackColor = true;
             // 
             // btnAnterior
@@ -266,11 +280,11 @@
             this.btnAnterior.FlatAppearance.BorderSize = 0;
             this.btnAnterior.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAnterior.Image = ((System.Drawing.Image)(resources.GetObject("btnAnterior.Image")));
-            this.btnAnterior.Location = new System.Drawing.Point(35, 5);
+            this.btnAnterior.Location = new System.Drawing.Point(35, 31);
             this.btnAnterior.Margin = new System.Windows.Forms.Padding(2);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(20, 20);
-            this.btnAnterior.TabIndex = 20;
+            this.btnAnterior.TabIndex = 1;
             this.btnAnterior.UseVisualStyleBackColor = true;
             // 
             // btnProximo
@@ -278,20 +292,20 @@
             this.btnProximo.FlatAppearance.BorderSize = 0;
             this.btnProximo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnProximo.Image = ((System.Drawing.Image)(resources.GetObject("btnProximo.Image")));
-            this.btnProximo.Location = new System.Drawing.Point(147, 5);
+            this.btnProximo.Location = new System.Drawing.Point(147, 31);
             this.btnProximo.Margin = new System.Windows.Forms.Padding(2);
             this.btnProximo.Name = "btnProximo";
             this.btnProximo.Size = new System.Drawing.Size(20, 20);
-            this.btnProximo.TabIndex = 19;
+            this.btnProximo.TabIndex = 4;
             this.btnProximo.UseVisualStyleBackColor = true;
             // 
             // lblPaginas
             // 
             this.lblPaginas.AutoSize = true;
-            this.lblPaginas.Location = new System.Drawing.Point(107, 9);
+            this.lblPaginas.Location = new System.Drawing.Point(107, 35);
             this.lblPaginas.Name = "lblPaginas";
             this.lblPaginas.Size = new System.Drawing.Size(36, 13);
-            this.lblPaginas.TabIndex = 24;
+            this.lblPaginas.TabIndex = 3;
             this.lblPaginas.Text = "de {0}";
             // 
             // cboPagina
@@ -299,10 +313,10 @@
             this.cboPagina.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPagina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cboPagina.FormattingEnabled = true;
-            this.cboPagina.Location = new System.Drawing.Point(63, 5);
+            this.cboPagina.Location = new System.Drawing.Point(63, 31);
             this.cboPagina.Name = "cboPagina";
             this.cboPagina.Size = new System.Drawing.Size(42, 21);
-            this.cboPagina.TabIndex = 25;
+            this.cboPagina.TabIndex = 2;
             // 
             // lblCantidadRegistros
             // 
@@ -316,7 +330,7 @@
             // 
             // nudTamanoPagina
             // 
-            this.nudTamanoPagina.Location = new System.Drawing.Point(198, 5);
+            this.nudTamanoPagina.Location = new System.Drawing.Point(198, 31);
             this.nudTamanoPagina.Minimum = new decimal(new int[] {
             10,
             0,
@@ -324,13 +338,104 @@
             0});
             this.nudTamanoPagina.Name = "nudTamanoPagina";
             this.nudTamanoPagina.Size = new System.Drawing.Size(33, 20);
-            this.nudTamanoPagina.TabIndex = 27;
+            this.nudTamanoPagina.TabIndex = 6;
             this.nudTamanoPagina.TabStop = false;
             this.nudTamanoPagina.Value = new decimal(new int[] {
             25,
             0,
             0,
             0});
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.marcasToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(616, 24);
+            this.menuStrip.TabIndex = 28;
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // marcasToolStripMenuItem
+            // 
+            this.marcasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.agregarToolStripMenuItem,
+            this.desactivarToolStripMenuItem,
+            this.activarToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.activasToolStripMenuItem,
+            this.inactivasToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.imprimirToolStripMenuItem,
+            this.excelToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.cerrarToolStripMenuItem});
+            this.marcasToolStripMenuItem.Name = "marcasToolStripMenuItem";
+            this.marcasToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.marcasToolStripMenuItem.Text = "Marcas";
+            // 
+            // agregarToolStripMenuItem
+            // 
+            this.agregarToolStripMenuItem.Name = "agregarToolStripMenuItem";
+            this.agregarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.agregarToolStripMenuItem.Text = "&Agregar";
+            // 
+            // desactivarToolStripMenuItem
+            // 
+            this.desactivarToolStripMenuItem.Name = "desactivarToolStripMenuItem";
+            this.desactivarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.desactivarToolStripMenuItem.Text = "&Desactivar";
+            // 
+            // activarToolStripMenuItem
+            // 
+            this.activarToolStripMenuItem.Name = "activarToolStripMenuItem";
+            this.activarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.activarToolStripMenuItem.Text = "A&ctivar";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // activasToolStripMenuItem
+            // 
+            this.activasToolStripMenuItem.Name = "activasToolStripMenuItem";
+            this.activasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.activasToolStripMenuItem.Text = "Acti&vas";
+            // 
+            // inactivasToolStripMenuItem
+            // 
+            this.inactivasToolStripMenuItem.Name = "inactivasToolStripMenuItem";
+            this.inactivasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.inactivasToolStripMenuItem.Text = "&Inactivas";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // imprimirToolStripMenuItem
+            // 
+            this.imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
+            this.imprimirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.imprimirToolStripMenuItem.Text = "&Imprimir";
+            // 
+            // excelToolStripMenuItem
+            // 
+            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.excelToolStripMenuItem.Text = "&Excel";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cerrarToolStripMenuItem
+            // 
+            this.cerrarToolStripMenuItem.Name = "cerrarToolStripMenuItem";
+            this.cerrarToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cerrarToolStripMenuItem.Text = "&Cerrar";
             // 
             // FormMarcas
             // 
@@ -357,12 +462,16 @@
             this.Controls.Add(this.dGV);
             this.Controls.Add(this.btnCerrar);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "FormMarcas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "FormMarcas";
+            this.Text = "Marcas";
             ((System.ComponentModel.ISupportInitialize)(this.dGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudTamanoPagina)).EndInit();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,5 +503,18 @@
         private System.Windows.Forms.Label lblCantidadRegistros;
         private System.Windows.Forms.ComboBox cboPagina;
         private System.Windows.Forms.NumericUpDown nudTamanoPagina;
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem marcasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem agregarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desactivarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem activasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem inactivasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem imprimirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cerrarToolStripMenuItem;
     }
 }

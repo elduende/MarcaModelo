@@ -20,6 +20,7 @@ namespace MarcaModelo.WinForm.Models
         private string _descripcion;
         private string _estado;
         private string _cantidadRegistrosLiteral;
+        private string _cantidadPaginasLiteral;
         private int _selectedPagina;
 
 
@@ -145,9 +146,23 @@ namespace MarcaModelo.WinForm.Models
                 else if (CantidadRegistros == 1)
                     _cantidadRegistrosLiteral = string.Format("Una marca {0}", MuestraMarcasActivas ? "activa" : "inactiva");
                 else
-                    //_cantidadRegistrosLiteral = string.Format("{0} marcas", CantidadRegistros);
                     _cantidadRegistrosLiteral = string.Format("{0} marcas {1}", CantidadRegistros, MuestraMarcasActivas ? "activas" : "inactivas");
                 return _cantidadRegistrosLiteral;
+            }
+        }
+
+        public string CantidadPaginasLiteral
+        {
+            get
+            {
+                var cantidadPaginas = Paginas.Count();
+                if (cantidadPaginas == 0)
+                    _cantidadPaginasLiteral = "";
+                else if (cantidadPaginas == 1)
+                    _cantidadPaginasLiteral = " de una";
+                else
+                    _cantidadPaginasLiteral = string.Format(" de {0}", cantidadPaginas);
+                return _cantidadPaginasLiteral;
             }
         }
 
