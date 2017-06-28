@@ -68,6 +68,9 @@ namespace MarcaModelo.WinForm
             lblCantidadRegistros.BindValue(model, m => m.CantidadRegistrosLiteral);
 
             btnImprimir.Bind(model.ImprimirCommand);
+
+            btnExcel.Bind(model.ExcelCommand);
+
             btnCerrar.Click += (sender, args) => model.Close();
             btnConfirmar
                 .BindErrors(model, errorProvider)

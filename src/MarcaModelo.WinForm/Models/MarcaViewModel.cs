@@ -1,7 +1,9 @@
 ﻿using MarcaModelo.Data;
 using MarcaModelo.WinForm.Common;
 using System;
+using System.ComponentModel;
 using System.Linq;
+using MarcaModelo.WinForm.Common.Attributes;
 
 namespace MarcaModelo.WinForm.Models
 {
@@ -19,12 +21,15 @@ namespace MarcaModelo.WinForm.Models
             _marcaRepository = marcaRepository;
         }
 
+        [Hidden]
         public int IdMarca
         { get; set; }
-        
+
+        [DisplayName("Descripción")]
         public string Descripcion
         { get; set; }
-        
+
+        [Hidden]
         public string Estado
         { get; set; }
     }

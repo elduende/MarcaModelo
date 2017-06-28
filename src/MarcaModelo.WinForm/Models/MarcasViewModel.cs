@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 using MarcaModelo.Data;
 using MarcaModelo.WinForm.Common;
 using MarcaModelo.WinForm.Common.Attributes;
@@ -32,6 +34,7 @@ namespace MarcaModelo.WinForm.Models
         private BindingList<MarcaViewModel> _marcas = new BindingList<MarcaViewModel>();
         private BindingList<MarcaViewModel> _marcasCompleta = new BindingList<MarcaViewModel>();
         private readonly RelayCommand _imprimirCommand;
+        private readonly RelayCommand _excelCommand;
         private readonly RelayCommand _confirmarCommand;
         private readonly RelayCommand _desactivarCommand;
         private readonly RelayCommand _activarCommand;
@@ -66,6 +69,7 @@ namespace MarcaModelo.WinForm.Models
             _activarCommand = new RelayCommand(Activate, () => !MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _desactivarCommand = new RelayCommand(Inactivate, () => MuestraMarcasActivas && (string.IsNullOrEmpty(Descripcion) ? "" : Descripcion) != "");
             _imprimirCommand = new RelayCommand(Imprimir, () => _marcas.Count > 0);
+            _excelCommand = new RelayCommand(Excel, () => _marcas.Count > 0);
             _agregarCommand = new RelayCommand(Agregar, () => PuedeAgregar);
         }
 
@@ -113,6 +117,8 @@ namespace MarcaModelo.WinForm.Models
         public RelayCommand CloseCommand { get; set; }
 
         public ICommand ImprimirCommand => _imprimirCommand;
+
+        public ICommand ExcelCommand => _excelCommand;
 
         public ICommand ConfirmarCommand => _confirmarCommand;
 
@@ -193,6 +199,7 @@ namespace MarcaModelo.WinForm.Models
                     _agregarCommand.CheckCanExecute();
                 }
                 _imprimirCommand.CheckCanExecute();
+                _excelCommand.CheckCanExecute();
             }
         }
 
@@ -239,6 +246,35 @@ namespace MarcaModelo.WinForm.Models
                 marcasIList.Add(marcaLocal);
             }
             _exposer.Expose<MarcaReportViewModel>(m => { m.Marcas = marcasIList; m.Initialize(); });
+        }
+
+        public void Excel()
+        {
+            MarcaViewModel ma = new MarcaViewModel(null);
+            foreach (var p in ma.GetType().GetProperties())
+            {
+                if (p.DeclaringType.Name == ma.GetType().Name)
+                {
+                    if (p.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
+                    {
+                        DisplayNameAttribute myAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(p, typeof(DisplayNameAttribute));
+                        Console.WriteLine(myAttribute.DisplayName);
+                    }
+                }
+            }
+            foreach (MarcaViewModel m in _marcasCompleta)
+            {
+                foreach (var p in m.GetType().GetProperties())
+                {
+                    if (p.DeclaringType.Name == m.GetType().Name)
+                    {
+                        if (p.CustomAttributes.Any(t => t.AttributeType.Name == "DisplayNameAttribute"))
+                        {
+                            Console.WriteLine(m.GetType().GetProperty(p.Name).GetValue(m, null));
+                        }
+                    }
+                }
+            }
         }
 
         public void Persist()
