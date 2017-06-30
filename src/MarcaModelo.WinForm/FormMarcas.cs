@@ -105,6 +105,7 @@ namespace MarcaModelo.WinForm
             txtDescripcion.BindValue(model, m => m.Descripcion);
 
             txtBuscar.BindValue(model, m => m.Buscar);
+            txtBuscar.KeyUp += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
 
             SetToolTips();
 

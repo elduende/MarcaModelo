@@ -65,6 +65,11 @@ namespace MarcaModelo.WinFormTests
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Marca> GetMarcas(string pBuscar)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Marca> GetMarcas()
         {
             throw new NotImplementedException();
@@ -131,6 +136,16 @@ namespace MarcaModelo.WinFormTests
         }
 
         void IMarcaRepository.Inactivate(int iDMarca)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetMarcasCantidad(string pBuscar)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetMarcasInactivasCantidad(string pBuscar)
         {
             throw new NotImplementedException();
         }

@@ -14,7 +14,7 @@ namespace MarcaModelo.WinFormTests.ModeloViewModelTests
             marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
             IModeloRepository modeloRepository = new ModeloRepositoryMock();
-            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository = new Modelo((Marca)marcaRepository) { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
             modeloRepository.IdModelo.Should().Be(1);
         }
 
@@ -25,7 +25,7 @@ namespace MarcaModelo.WinFormTests.ModeloViewModelTests
             marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
             IModeloRepository modeloRepository = new ModeloRepositoryMock();
-            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository = new Modelo((Marca)marcaRepository) { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
             modeloRepository.Descripcion.Should().Be("2050 PLUS");
         }
 
@@ -36,7 +36,7 @@ namespace MarcaModelo.WinFormTests.ModeloViewModelTests
             marcaRepository = new Marca { IdMarca = 19, Descripcion = "Epson", Estado = "A" };
 
             IModeloRepository modeloRepository = new ModeloRepositoryMock();
-            modeloRepository = new Modelo() { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
+            modeloRepository = new Modelo((Marca)marcaRepository) { IdModelo = 1, Descripcion = "2050 PLUS", Estado = "A" };
             modeloRepository.Estado.Should().Be("A");
         }
 

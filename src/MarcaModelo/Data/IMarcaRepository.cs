@@ -13,8 +13,8 @@ namespace MarcaModelo.Data
         IEnumerable<Marca> GetMarcas(int pPagina, int pTamanoPagina, string pBuscar);
         IEnumerable<Marca> GetMarcasInactivas();
         IEnumerable<Marca> GetMarcasInactivas(int pPagina, int pTamanoPagina, string pBuscar);
-        int GetMarcasCantidad();
-        int GetMarcasInactivasCantidad();
+        int GetMarcasCantidad(string pBuscar);
+        int GetMarcasInactivasCantidad(string pBuscar);
         void Persist(Marca marca);
         void AddModelo(Modelo modelo);
         void RemoveModelo(Modelo modelo);

@@ -22,20 +22,14 @@ namespace MarcaModelo.WinForm.Models
         private string _cantidadRegistrosLiteral;
         private string _cantidadPaginasLiteral;
         private int _selectedPagina;
-
-
+        private string _buscar = "";
         private bool _cierreControlado;
-        
         private bool _esValido;
         private bool _puedeAgregar;
         private bool _muestraMarcasActivas;
-
-
+        
         private readonly IViewModelExposer _exposer;
         private readonly IMarcaRepository _marcaRepository;
-        // private readonly BindingList<MarcaViewModel> marcas = new BindingList<MarcaViewModel>();
-        private BindingList<MarcaViewModel> _marcas = new BindingList<MarcaViewModel>();
-        private BindingList<MarcaViewModel> _marcasCompleta = new BindingList<MarcaViewModel>();
         private readonly RelayCommand _imprimirCommand;
         private readonly RelayCommand _excelCommand;
         private readonly RelayCommand _confirmarCommand;
@@ -44,6 +38,9 @@ namespace MarcaModelo.WinForm.Models
         private readonly RelayCommand _activasCommand;
         private readonly RelayCommand _inactivasCommand;
         private readonly RelayCommand _agregarCommand;
+
+        private BindingList<MarcaViewModel> _marcas = new BindingList<MarcaViewModel>();
+        private BindingList<MarcaViewModel> _marcasCompleta = new BindingList<MarcaViewModel>();
 
         public MarcasViewModel(IViewModelExposer exposer, IMarcaRepository marcaRepository)
         {
@@ -159,7 +156,7 @@ namespace MarcaModelo.WinForm.Models
                 if (cantidadPaginas == 0)
                     _cantidadPaginasLiteral = "";
                 else if (cantidadPaginas == 1)
-                    _cantidadPaginasLiteral = " de una";
+                    _cantidadPaginasLiteral = " de 1";
                 else
                     _cantidadPaginasLiteral = string.Format(" de {0}", cantidadPaginas);
                 return _cantidadPaginasLiteral;
@@ -366,8 +363,6 @@ namespace MarcaModelo.WinForm.Models
             }
         }
 
-        private string _buscar = "";
-
         public string Buscar
         {
             get { return _buscar; }
@@ -387,17 +382,15 @@ namespace MarcaModelo.WinForm.Models
             _marcasCompleta.Clear();
             foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas(PaginaNumero, TamanoPagina, Buscar) : _marcaRepository.GetMarcasInactivas(PaginaNumero, TamanoPagina, Buscar))
             {
-                _marcaRepository.IdMarca = m.IdMarca;
                 _marcas.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
             foreach (Marca m in estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcas() : _marcaRepository.GetMarcasInactivas())
             {
-                _marcaRepository.IdMarca = m.IdMarca;
                 _marcasCompleta.Add(new MarcaViewModel(_marcaRepository) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
 
             MuestraMarcasActivas = estadoRegistros == Enums.EstadoRegistros.Habilitados;
-            CantidadRegistros = estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcasCantidad() : _marcaRepository.GetMarcasInactivasCantidad();
+            CantidadRegistros = estadoRegistros == Enums.EstadoRegistros.Habilitados ? _marcaRepository.GetMarcasCantidad(Buscar) : _marcaRepository.GetMarcasInactivasCantidad(Buscar);
         }
 
         private void CheckIsValid()

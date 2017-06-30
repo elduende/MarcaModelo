@@ -90,26 +90,26 @@ namespace MarcaModelo.Data.Tests
         //    marca.Modelos.Count().Should().Be(2);
         //}
 
-        [TestMethod]
-        public void MarcaModelosNotAdmitDuplicates()
-        {
-            var marca = MarcaBuilder.DefaultPersistent();
-            marca.AddModelo(ModeloBuilder.Default());
-            marca.AddModelo(ModeloBuilder.Default());
-            marca.Modelos.Count().Should().Be(1);
-        }
+        //[TestMethod]
+        //public void MarcaModelosNotAdmitDuplicates()
+        //{
+        //    var marca = MarcaBuilder.DefaultPersistent();
+        //    marca.AddModelo(ModeloBuilder.Default());
+        //    marca.AddModelo(ModeloBuilder.Default());
+        //    marca.Modelos.Count().Should().Be(1);
+        //}
 
-        [TestMethod]
-        public void MarcaDeleteInstanceModeloDeleteIt()
-        {
-            var marca = MarcaBuilder.Default();
-            var modelo = ModeloBuilder.Default();
+        //[TestMethod]
+        //public void MarcaDeleteInstanceModeloDeleteIt()
+        //{
+        //    var marca = MarcaBuilder.Default();
+        //    var modelo = ModeloBuilder.Default();
             
-            modelo.Marca = marca;
-            marca.AddModelo(modelo);
-            marca.RemoveModelo(modelo);
-            marca.Modelos.Should().Be.Empty();
-        }
+        //    modelo.Marca = marca;
+        //    marca.AddModelo(modelo);
+        //    marca.RemoveModelo(modelo);
+        //    marca.Modelos.Should().Be.Empty();
+        //}
 
         [TestMethod]
         public void MarcaChangeDescripcionToNullMayCalculateTheHash()

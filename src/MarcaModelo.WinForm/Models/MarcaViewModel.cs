@@ -17,7 +17,7 @@ namespace MarcaModelo.WinForm.Models
             //TODO - Lazyload ¿Está bien así?
             _modelos = new Lazy<ModeloViewModel[]>(() =>
             marcaRepository.Modelos().ToArray()
-            .Select(x => new ModeloViewModel { IdMarca = marcaRepository.IdMarca }).ToArray());
+            .Select(x => new ModeloViewModel { IdMarca = marcaRepository.IdMarca, Descripcion = marcaRepository.Descripcion, Estado = marcaRepository.Estado}).ToArray());
             _marcaRepository = marcaRepository;
         }
 

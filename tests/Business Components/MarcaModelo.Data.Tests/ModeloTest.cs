@@ -10,7 +10,7 @@ namespace MarcaModelo.Data.Tests
         public void ModeloCtrProtection()
         {
             //ActionAssert.NotThrow(() => new Modelo());
-            Executing.This(() => new Modelo());
+            Executing.This(() => new Modelo(MarcaBuilder.Default()));
         }
 
         [TestMethod]
@@ -32,8 +32,8 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenSameDescripcionAreEquals()
         {
-            var oldModelo = new Modelo { Descripcion = "Descripcion 1" };
-            var newModelo = new Modelo { Descripcion = "Descripcion 1" };
+            var oldModelo = new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 1" };
+            var newModelo = new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 1" };
             oldModelo.Should().Be(newModelo);
         }
 
@@ -43,8 +43,8 @@ namespace MarcaModelo.Data.Tests
             var oldMarca = MarcaBuilder.Default();
             var newMarca = MarcaBuilder.Default();
             newMarca.Descripcion = "Descripcion 2";
-            var oldModelo = new Modelo { Descripcion = "Descripcion 1", Marca = oldMarca };
-            var newModelo = new Modelo { Descripcion = "Descripcion 1", Marca = newMarca };
+            var oldModelo = new Modelo(oldMarca) { Descripcion = "Descripcion 1", IdMarca = oldMarca.IdMarca };
+            var newModelo = new Modelo(newMarca) { Descripcion = "Descripcion 1", IdMarca = newMarca.IdMarca };
             oldModelo.Should().Not.Be(newModelo);
         }
 
@@ -58,7 +58,7 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenDiferentDescripcionAreNotEquals()
         {
-            var newModelo = new Modelo { Descripcion = "Descripcion 2" };
+            var newModelo = new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 2" };
             ModeloBuilder.Default()
                 .Should().Not.Be(newModelo);
         }
@@ -66,8 +66,8 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenSameDescripcionSameHashCode()
         {
-            var oldModelo = new Modelo { Descripcion = "Descripcion 1" };
-            var newModelo = new Modelo { Descripcion = "Descripcion 1" };
+            var oldModelo = new Modelo(new Marca()) { Descripcion = "Descripcion 1" };
+            var newModelo = new Modelo(new Marca()) { Descripcion = "Descripcion 1" };
             oldModelo.GetHashCode().Should().Be(newModelo.GetHashCode());
         }
 
@@ -75,7 +75,7 @@ namespace MarcaModelo.Data.Tests
         public void ModeloWhenDiferentDescripcionDiferentHashCode()
         {
             ModeloBuilder.Default().GetHashCode()
-                .Should().Not.Be(new Modelo { Descripcion = "Descripcion 2" }.GetHashCode());
+                .Should().Not.Be(new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 2" }.GetHashCode());
         }
     }
 }
