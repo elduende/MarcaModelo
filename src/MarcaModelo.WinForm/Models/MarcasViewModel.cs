@@ -153,14 +153,7 @@ namespace MarcaModelo.WinForm.Models
         #region Cerrar
         private bool _cierreControlado;
         public RelayCommand CloseCommand { get; set; }
-        #endregion
 
-        #region Confirmar
-        private readonly RelayCommand _confirmarCommand;
-        public ICommand ConfirmarCommand => _confirmarCommand;
-        #endregion
-
-        #region Control
         public override bool CanClose()
         {
             if (_cierreControlado)
@@ -171,7 +164,14 @@ namespace MarcaModelo.WinForm.Models
             _exposer.ExposeSync(sn);
             return sn.Accepted;
         }
+        #endregion
 
+        #region Confirmar
+        private readonly RelayCommand _confirmarCommand;
+        public ICommand ConfirmarCommand => _confirmarCommand;
+        #endregion
+
+        #region Control
         private void CheckIsValid()
         {
             EsValido = this.IsValid(ValidationContext);
