@@ -11,23 +11,23 @@ namespace MarcaModelo.TestDataBuilders
             this._modelo = modelo;
         }
 
-        public static Modelo DefaultPersistent()
+        public static Modelo DefaultPersistent(Marca pMarca)
         {
             return StartRec().
                 WithId(1).
-                With(m => m.IdMarca = 1).
+                With(m => m.IdModelo = 1).
                 With(m => m.Descripcion = "Descripcion 1").
                 With(m => m.Estado = "A").
-                With(m => m.IdMarca = 1).
+                With(m => m.IdMarca = pMarca.IdMarca).
                 Build();
         }
 
-        public static Modelo Default()
+        public static Modelo Default(Marca pMarca)
         {
             return StartRec().
                 With(m => m.Descripcion = "Descripcion 1").
                 With(m => m.Estado = "A").
-                With(m => m.IdMarca = 1).
+                With(m => m.IdMarca = pMarca.IdMarca).
                 Build();
         }
 

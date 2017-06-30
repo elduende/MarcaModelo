@@ -11,7 +11,6 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void MarcaCtrProtection()
         {
-            //ActionAssert.NotThrow(() => new Marca());
             Executing.This(() => new Marca());
         }
 
@@ -73,8 +72,7 @@ namespace MarcaModelo.Data.Tests
         public void MarcaMayAddModeloImmediately()
         {
             var marca = MarcaBuilder.DefaultPersistent();
-            //ActionAssert.NotThrow(() => marca.AddModelo(ModeloBuilder.DefaultPersistent()));
-            Executing.This(() => marca.AddModelo(ModeloBuilder.DefaultPersistent()));
+            Executing.This(() => marca.AddModelo(ModeloBuilder.DefaultPersistent(MarcaBuilder.DefaultPersistent())));
         }
 
         //[TestMethod]
@@ -105,7 +103,6 @@ namespace MarcaModelo.Data.Tests
         //    var marca = MarcaBuilder.Default();
         //    var modelo = ModeloBuilder.Default();
             
-        //    modelo.Marca = marca;
         //    marca.AddModelo(modelo);
         //    marca.RemoveModelo(modelo);
         //    marca.Modelos.Should().Be.Empty();

@@ -16,7 +16,7 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenChangeDescripcionAsignItToProperty()
         {
-            var modelo = ModeloBuilder.Default();
+            var modelo = ModeloBuilder.Default(MarcaBuilder.DefaultPersistent());
             modelo.Descripcion = "Descripcion 2";
             modelo.Descripcion.Should().Be("Descripcion 2");
         }
@@ -24,7 +24,7 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenChangeEstadoAsignItToProperty()
         {
-            var modelo = ModeloBuilder.Default();
+            var modelo = ModeloBuilder.Default(MarcaBuilder.DefaultPersistent());
             modelo.Estado = "B";
             modelo.Estado.Should().Be("B");
         }
@@ -51,7 +51,7 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenAnotherObjetAreNotEquals()
         {
-            (ModeloBuilder.Default())
+            (ModeloBuilder.Default(MarcaBuilder.DefaultPersistent()))
                 .Should().Not.Be(new object());
         }
 
@@ -59,7 +59,7 @@ namespace MarcaModelo.Data.Tests
         public void ModeloWhenDiferentDescripcionAreNotEquals()
         {
             var newModelo = new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 2" };
-            ModeloBuilder.Default()
+            ModeloBuilder.Default(MarcaBuilder.DefaultPersistent())
                 .Should().Not.Be(newModelo);
         }
 
@@ -74,7 +74,7 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenDiferentDescripcionDiferentHashCode()
         {
-            ModeloBuilder.Default().GetHashCode()
+            ModeloBuilder.Default(MarcaBuilder.DefaultPersistent()).GetHashCode()
                 .Should().Not.Be(new Modelo(MarcaBuilder.Default()) { Descripcion = "Descripcion 2" }.GetHashCode());
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -181,7 +180,7 @@ namespace MarcaModelo.WinForm.Models
         private bool _esMarcaActiva;
         public bool EsMarcaActiva
         {
-            get { return _esMarcaActiva; }
+            get => _esMarcaActiva;
             set
             {
                 if (SetProperty(ref _esMarcaActiva, value, () => EsMarcaActiva))
@@ -329,7 +328,7 @@ namespace MarcaModelo.WinForm.Models
 
                 Cursor.Current = Cursors.Default;
             }
-            catch (System.IO.IOException e)
+            catch (IOException e)
             {
                 Cursor.Current = Cursors.Default;
                 Console.WriteLine(@"Error al intentar escribir en el archivo {0}. Mensaje = {1}", sfd.FileName, e.Message);
