@@ -419,7 +419,8 @@ namespace MarcaModelo.WinForm.Models
         public int PaginaNumero { get; set; }
         public int TamanoPagina { get; set; }
 
-        public IEnumerable<Pagina> Paginas => paginas(CantidadRegistros % TamanoPagina == 0 ? CantidadRegistros / TamanoPagina : CantidadRegistros / TamanoPagina + 1);
+        //public IEnumerable<Pagina> Paginas => paginas(CantidadRegistros % TamanoPagina == 0 ? CantidadRegistros / TamanoPagina : CantidadRegistros / TamanoPagina + 1);
+        public IEnumerable<Pagina> Paginas => paginas(TamanoPagina == 0 ? 1 : CantidadRegistros / TamanoPagina + 1);
 
         private Pagina[] paginas(int pCantidadPaginas)
         {

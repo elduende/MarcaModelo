@@ -8,7 +8,7 @@ namespace MarcaModelo.WinForm.Common
 {
     public static class FormConfigurationXmlHelper
     {
-        public static void GuardarXml(Form pForm, int pPagina, int pTamanoPagina, Enums.EstadoRegistros pRegistrosGrilla, DataGridView pDataGrid = null)
+        public static void GuardarXml(Form pForm, int pPagina, int pTamanoPagina, Enums.EstadoRegistros pRegistrosGrilla, string pBuscar, DataGridView pDataGrid = null)
         {
             var archivo = @"FormSettings\" + pForm.Text + ".xml";
 
@@ -45,7 +45,8 @@ namespace MarcaModelo.WinForm.Common
                     new XAttribute("Name", pForm.Text),
                     new XAttribute("Pagina", pPagina + 1),
                     new XAttribute("TamanoPagina", pTamanoPagina),
-                    new XAttribute("RegistrosGrilla", pRegistrosGrilla));
+                    new XAttribute("RegistrosGrilla", pRegistrosGrilla),
+                    new XAttribute("Buscar", pBuscar));
 
                 foreach (DataGridViewColumn columna in pDataGrid.Columns)
                 {
@@ -65,7 +66,7 @@ namespace MarcaModelo.WinForm.Common
             xmlDoc.Save(archivo);
         }
 
-        public static void LeerXml(Form pForm, ref int pPagina, ref int pTamanoPagina, ref Enums.EstadoRegistros pRegistrosGrilla, DataGridView pDataGrid = null)
+        public static void LeerXml(Form pForm, ref int pPagina, ref int pTamanoPagina, ref Enums.EstadoRegistros pRegistrosGrilla, ref string pBuscar, DataGridView pDataGrid = null)
         {
             var archivo = @"FormSettings\" + pForm.Text + ".xml";
 
@@ -110,6 +111,7 @@ namespace MarcaModelo.WinForm.Common
                     pRegistrosGrilla = ((XmlElement)grilla[0]).GetAttribute("RegistrosGrilla") == Enums.EstadoRegistros.Habilitados.ToString()
                         ? Enums.EstadoRegistros.Habilitados
                         : Enums.EstadoRegistros.Inhabilitados;
+                    pBuscar = ((XmlElement)grilla[0]).GetAttribute("Buscar");
 
                     XmlNodeList columnas = xmlDoc.GetElementsByTagName("Grilla");
                     XmlNodeList columnaLista = ((XmlElement)columnas[0]).GetElementsByTagName("Columna");
@@ -145,6 +147,13 @@ namespace MarcaModelo.WinForm.Common
                         }
                     }
                 }
+            }
+            else
+            {
+                pPagina = 1;
+                pTamanoPagina = 20;
+                pRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
+                pBuscar = "";
             }
         }
     }

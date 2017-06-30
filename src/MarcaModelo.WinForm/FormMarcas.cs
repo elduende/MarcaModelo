@@ -19,16 +19,20 @@ namespace MarcaModelo.WinForm
             Model = model;
             #endregion
 
+            #region LeerXml
+            var pPagina = 0;
+            var pTamanoPagina = 0;
+            var pBuscar = "";
+            var pEstadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
+            FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref pEstadoRegistrosGrilla, ref pBuscar, dGV);
+            #endregion
+
             #region Grilla
             dGV.AutoGenerateColumns = false;
             IDMarcaColumn.Bind<MarcasViewModel>(m => m.IdMarca);
             DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
             EstadoColumn.Bind<MarcasViewModel>(m => m.Estado);
 
-            var pPagina = 0;
-            var pTamanoPagina = 0;
-            var pEstadoRegistrosGrilla = Enums.EstadoRegistros.Habilitados;
-            FormConfigurationXmlHelper.LeerXml(this, ref pPagina, ref pTamanoPagina, ref pEstadoRegistrosGrilla, dGV);
             model.TamanoPagina = pTamanoPagina;
 
             model.RefreshMarcas(pEstadoRegistrosGrilla);
@@ -130,6 +134,7 @@ namespace MarcaModelo.WinForm
             #endregion
 
             #region Buscar
+            model.Buscar = pBuscar;
             txtBuscar.BindValue(model, m => m.Buscar);
             txtBuscar.KeyUp += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             #endregion
@@ -141,7 +146,7 @@ namespace MarcaModelo.WinForm
 
         protected override void OnClosed(EventArgs e)
         {
-            FormConfigurationXmlHelper.GuardarXml(this, Convert.ToInt32(cboPagina.SelectedIndex == -1 ? "0" : cboPagina.SelectedIndex.ToString()), pTamanoPagina: Convert.ToInt32(nudTamanoPagina.Value), pRegistrosGrilla: Model.EsMarcaActiva ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados, pDataGrid: dGV);
+            FormConfigurationXmlHelper.GuardarXml(this, Convert.ToInt32(cboPagina.SelectedIndex == -1 ? "0" : cboPagina.SelectedIndex.ToString()), pTamanoPagina: Convert.ToInt32(nudTamanoPagina.Value), pRegistrosGrilla: Model.EsMarcaActiva ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados, pBuscar: txtBuscar.Text, pDataGrid: dGV);
         }
 
         private void SetToolTips()
