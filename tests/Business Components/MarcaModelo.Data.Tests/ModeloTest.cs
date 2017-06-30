@@ -40,9 +40,9 @@ namespace MarcaModelo.Data.Tests
         [TestMethod]
         public void ModeloWhenAnotherMarcaAreNotEquals()
         {
-            var oldMarca = MarcaBuilder.Default();
-            var newMarca = MarcaBuilder.Default();
-            newMarca.Descripcion = "Descripcion 2";
+            var oldMarca = MarcaBuilder.DefaultPersistent();
+            var newMarca = MarcaBuilder.DefaultPersistent();
+            newMarca.IdMarca = 2;
             var oldModelo = new Modelo(oldMarca) { Descripcion = "Descripcion 1", IdMarca = oldMarca.IdMarca };
             var newModelo = new Modelo(newMarca) { Descripcion = "Descripcion 1", IdMarca = newMarca.IdMarca };
             oldModelo.Should().Not.Be(newModelo);

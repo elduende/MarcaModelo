@@ -15,6 +15,7 @@ namespace MarcaModelo.TestDataBuilders
         {
             return StartRec().
                 WithId(1).
+                With(m => m.IdMarca = 1).
                 With(m => m.Descripcion = "Descripcion 1").
                 With(m => m.Estado = "A").
                 With(m => m.IdMarca = 1).

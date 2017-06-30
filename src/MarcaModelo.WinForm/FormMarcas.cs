@@ -12,10 +12,14 @@ namespace MarcaModelo.WinForm
         public FormMarcas(MarcasViewModel model)
         {
             InitializeComponent();
+            
+            #region Inicio
             Text = @"Marcas";
             this.Bind(model);
             Model = model;
+            #endregion
 
+            #region Grilla
             dGV.AutoGenerateColumns = false;
             IDMarcaColumn.Bind<MarcasViewModel>(m => m.IdMarca);
             DescripcionColumn.Bind<MarcasViewModel>(m => m.Descripcion);
@@ -52,10 +56,10 @@ namespace MarcaModelo.WinForm
 
             nudTamanoPagina.BindValue(model, m => m.TamanoPagina);
             nudTamanoPagina.TextChanged += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
-            nudTamanoPagina.ValueChanged += (sender, args) => model.RefreshMarcas(model.MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
+            nudTamanoPagina.ValueChanged += (sender, args) => model.RefreshMarcas(model.EsMarcaActiva ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
 
             cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
-            cboPagina.SelectedIndexChanged += (sender, args) => model.RefreshMarcas(model.MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
+            cboPagina.SelectedIndexChanged += (sender, args) => model.RefreshMarcas(model.EsMarcaActiva ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados);
             cboPagina.BindValue(model, m => m.SelectedPagina);
             model.SelectedPagina = pPagina;
 
@@ -67,46 +71,69 @@ namespace MarcaModelo.WinForm
             lblCantidadRegistros.BindValue(model, m => m.CantidadRegistrosLiteral);
 
             lblPaginas.BindValue(model, m => m.CantidadPaginasLiteral);
+            #endregion Grilla
 
+            #region Imprimir
             btnImprimir.Bind(model.ImprimirCommand);
             imprimirToolStripMenuItem.Bind(model.ImprimirCommand);
+            #endregion
 
+            #region Excel
             btnExcel.Bind(model.ExcelCommand);
             excelToolStripMenuItem.Bind(model.ExcelCommand);
+            #endregion
 
+            #region Cerrar
             btnCerrar.Click += (sender, args) => model.Close();
             cerrarToolStripMenuItem.Click += (sender, args) => model.Close();
+            #endregion
 
+            #region Confirmar
             btnConfirmar
                 .BindErrors(model, errorProvider)
                 .Bind(model.ConfirmarCommand);
+            #endregion
 
+            #region Desactivar
             btnDesactivar.Bind(model.DesactivarCommand);
             desactivarToolStripMenuItem.Bind(model.DesactivarCommand);
-            
+            #endregion
+
+            #region Activar
             btnActivar.Bind(model.ActivarCommand);
             activarToolStripMenuItem.Bind(model.ActivarCommand);
+            #endregion
 
+            #region Activas
             btnActivas.Bind(model.ActivasCommand);
             activasToolStripMenuItem.Bind(model.ActivasCommand);
             btnActivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             activasToolStripMenuItem.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
+            #endregion
 
+            #region Inactivas
             btnInactivas.Bind(model.InactivasCommand);
             inactivasToolStripMenuItem.Bind(model.InactivasCommand);
             btnInactivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             inactivasToolStripMenuItem.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
+            #endregion
 
+            #region Agregar
             btnAgregar.Bind(model.AgregarCommand);
             agregarToolStripMenuItem.Bind(model.AgregarCommand);
             btnAgregar.Click += (sender, args) => { txtDescripcion.Focus(); };
             agregarToolStripMenuItem.Click += (sender, args) => { txtDescripcion.Focus(); };
+            #endregion
 
+            #region Descripcion
             txtDescripcion.BindValue(model, m => m.Descripcion);
+            #endregion
 
+            #region Buscar
             txtBuscar.BindValue(model, m => m.Buscar);
             txtBuscar.KeyUp += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
-
+            #endregion
+            
             SetToolTips();
 
             errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades
@@ -114,7 +141,7 @@ namespace MarcaModelo.WinForm
 
         protected override void OnClosed(EventArgs e)
         {
-            FormConfigurationXmlHelper.GuardarXml(this, Convert.ToInt32(cboPagina.SelectedIndex == -1 ? "0" : cboPagina.SelectedIndex.ToString()), pTamanoPagina: Convert.ToInt32(nudTamanoPagina.Value), pRegistrosGrilla: Model.MuestraMarcasActivas ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados, pDataGrid: dGV);
+            FormConfigurationXmlHelper.GuardarXml(this, Convert.ToInt32(cboPagina.SelectedIndex == -1 ? "0" : cboPagina.SelectedIndex.ToString()), pTamanoPagina: Convert.ToInt32(nudTamanoPagina.Value), pRegistrosGrilla: Model.EsMarcaActiva ? Enums.EstadoRegistros.Habilitados : Enums.EstadoRegistros.Inhabilitados, pDataGrid: dGV);
         }
 
         private void SetToolTips()

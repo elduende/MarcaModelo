@@ -8,41 +8,19 @@ using Dapper;
 
 namespace MarcaModelo.Data
 {
-    public class Modelo : BaseEntity, IModeloRepository
+    public sealed class Modelo : BaseEntity, IModeloRepository
     {
-        //private Marca marca { get; set; }
-
-        //TODO - Le tuve que sacar el constructor que recibe Marca como parámetro
-        public Modelo(Marca pMarca)
+        public Modelo(IMarcaRepository pMarca)
         {
-            //marca = pMarca;
             IdMarca = pMarca.IdMarca;
         }
-        public Modelo()
-        {
-
-        }
-
-        public virtual int IdModelo { get; set; }
-        public virtual int IdMarca { get; set; }
-        public virtual string Descripcion { get; set; }
-        public virtual string Estado { get; set; }
-        //public virtual Marca Marca { get; set; }
-
-        //Marca IModeloRepository.Marca
-        //{
-        //    get
-        //    {
-        //        return marca;
-        //    }
-
-        //    set
-        //    {
-        //        marca = marca;
-        //    }
-        //}
-
-        public virtual bool Equals(Modelo that)
+        
+        public int IdModelo { get; set; }
+        public int IdMarca { get; set; }
+        public string Descripcion { get; set; }
+        public string Estado { get; set; }
+        
+        public bool Equals(Modelo that)
         {
             if (base.Equals(that))
             {
@@ -59,11 +37,8 @@ namespace MarcaModelo.Data
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int result = (Descripcion != null ? Descripcion.GetHashCode() : 0);
-                return result;
-            }
+            int result = (Descripcion != null ? Descripcion.GetHashCode() : 0);
+            return result;
         }
 
         Modelo IModeloRepository.GetById(int idModelo)

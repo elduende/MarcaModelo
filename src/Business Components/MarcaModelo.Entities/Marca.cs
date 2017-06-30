@@ -18,7 +18,7 @@ namespace MarcaModelo.Entities
 
         public virtual void AddModelo(Modelo modelo)
         {
-            if (modelo.Marca != null && modelo.Marca != this)
+            if (modelo.Marca != null && !Equals(modelo.Marca, this))
             {
                 modelo.Marca.RemoveModelo(modelo);
             }
@@ -29,7 +29,7 @@ namespace MarcaModelo.Entities
 
         public virtual void RemoveModelo(Modelo modelo)
         {
-            if (modelo.Marca != null && modelo.Marca == this)
+            if (modelo.Marca != null && Equals(modelo.Marca, this))
             {
                 _modelos.Remove(modelo);
                 modelo.Marca = null;
@@ -53,11 +53,8 @@ namespace MarcaModelo.Entities
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int result = (Descripcion != null ? Descripcion.GetHashCode() : 0);
-                return result;
-            }
+            var result = (Descripcion != null ? Descripcion.GetHashCode() : 0);
+            return result;
         }
     }
 }
