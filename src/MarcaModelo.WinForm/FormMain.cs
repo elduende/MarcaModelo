@@ -18,8 +18,7 @@ namespace MarcaModelo.WinForm
 
             marcasToolStripMenuItem.Bind(model.Marcas);
             cerrarToolStripMenuItem.Click += (sender, args) => model.Close();
-
-            errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades
+            btnCerrar.Click += (sender, args) => model.Close();
         }
     }
 }

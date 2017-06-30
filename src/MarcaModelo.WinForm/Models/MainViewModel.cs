@@ -40,7 +40,7 @@ namespace MarcaModelo.WinForm.Models
             {
                 return true;
             }
-            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Cerrar", Question = "¿Realmente quiere cerrar HDF.Net?" };
+            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Cerrar HDF.Net", Question = "¿Desea cerrar HDF.Net?" };
             _exposer.ExposeSync(sn);
             return sn.Accepted;
         }

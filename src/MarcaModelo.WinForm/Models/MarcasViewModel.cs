@@ -160,7 +160,7 @@ namespace MarcaModelo.WinForm.Models
             {
                 return true;
             }
-            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Cerrar", Question = "¿Realmente quiere cerrar el formulario?" };
+            YesNoQuestionViewModel sn = new YesNoQuestionViewModel { Title = "Cerrar Marcas", Question = "¿Desea cerrar Marcas?" };
             _exposer.ExposeSync(sn);
             return sn.Accepted;
         }
