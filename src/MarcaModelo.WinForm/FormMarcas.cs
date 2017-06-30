@@ -77,14 +77,29 @@ namespace MarcaModelo.WinForm
             lblPaginas.BindValue(model, m => m.CantidadPaginasLiteral);
             #endregion Grilla
 
-            #region Imprimir
-            btnImprimir.Bind(model.ImprimirCommand);
-            imprimirToolStripMenuItem.Bind(model.ImprimirCommand);
+            #region Activar
+            btnActivar.Bind(model.ActivarCommand);
+            activarToolStripMenuItem.Bind(model.ActivarCommand);
             #endregion
 
-            #region Excel
-            btnExcel.Bind(model.ExcelCommand);
-            excelToolStripMenuItem.Bind(model.ExcelCommand);
+            #region Activas
+            btnActivas.Bind(model.ActivasCommand);
+            activasToolStripMenuItem.Bind(model.ActivasCommand);
+            btnActivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
+            activasToolStripMenuItem.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
+            #endregion
+
+            #region Agregar
+            btnAgregar.Bind(model.AgregarCommand);
+            agregarToolStripMenuItem.Bind(model.AgregarCommand);
+            btnAgregar.Click += (sender, args) => { txtDescripcion.Focus(); };
+            agregarToolStripMenuItem.Click += (sender, args) => { txtDescripcion.Focus(); };
+            #endregion
+
+            #region Buscar
+            model.Buscar = pBuscar;
+            txtBuscar.BindValue(model, m => m.Buscar);
+            txtBuscar.KeyUp += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             #endregion
 
             #region Cerrar
@@ -103,16 +118,18 @@ namespace MarcaModelo.WinForm
             desactivarToolStripMenuItem.Bind(model.DesactivarCommand);
             #endregion
 
-            #region Activar
-            btnActivar.Bind(model.ActivarCommand);
-            activarToolStripMenuItem.Bind(model.ActivarCommand);
+            #region Descripcion
+            txtDescripcion.BindValue(model, m => m.Descripcion);
             #endregion
 
-            #region Activas
-            btnActivas.Bind(model.ActivasCommand);
-            activasToolStripMenuItem.Bind(model.ActivasCommand);
-            btnActivas.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
-            activasToolStripMenuItem.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
+            #region Excel
+            btnExcel.Bind(model.ExcelCommand);
+            excelToolStripMenuItem.Bind(model.ExcelCommand);
+            #endregion
+
+            #region Imprimir
+            btnImprimir.Bind(model.ImprimirCommand);
+            imprimirToolStripMenuItem.Bind(model.ImprimirCommand);
             #endregion
 
             #region Inactivas
@@ -122,23 +139,6 @@ namespace MarcaModelo.WinForm
             inactivasToolStripMenuItem.Click += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
             #endregion
 
-            #region Agregar
-            btnAgregar.Bind(model.AgregarCommand);
-            agregarToolStripMenuItem.Bind(model.AgregarCommand);
-            btnAgregar.Click += (sender, args) => { txtDescripcion.Focus(); };
-            agregarToolStripMenuItem.Click += (sender, args) => { txtDescripcion.Focus(); };
-            #endregion
-
-            #region Descripcion
-            txtDescripcion.BindValue(model, m => m.Descripcion);
-            #endregion
-
-            #region Buscar
-            model.Buscar = pBuscar;
-            txtBuscar.BindValue(model, m => m.Buscar);
-            txtBuscar.KeyUp += (sender, args) => cboPagina.BindSource(model, m => m.Paginas, p => p.Id, p => p.Descripcion);
-            #endregion
-            
             SetToolTips();
 
             errorProvider.DataSource = model; // <=== es importante que esté luego de bindear los otros controles de las propiedades
