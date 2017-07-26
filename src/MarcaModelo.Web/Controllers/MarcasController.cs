@@ -7,26 +7,28 @@ namespace MarcaModelo.Web.Controllers
 {
     public class MarcasController : Controller
     {
-
-        // GET: Marca/MarcaTraer
-        public ActionResult MarcasTraer()
+        // GET: Marca/Index
+        public ActionResult Index(string pActivas = "A")
         {
+            ViewData["Activas"] = pActivas;
             IMarcaRepository marca = new Marca();
             BindingList<MarcasModel> marcas = new BindingList<MarcasModel>();
-            foreach (Marca m in marca.GetMarcas())
+            foreach (Marca m in pActivas == "A" ? marca.GetMarcas() : marca.GetMarcasInactivas())
             {
                 marcas.Add(new MarcasModel(marca) { IdMarca = m.IdMarca, Descripcion = m.Descripcion, Estado = m.Estado });
             }
             return View(marcas);
         }
-        // GET: Marca/MarcaAgregar
-        public ActionResult MarcasAgregar()
+        
+        // GET: Marca/Create
+        public ActionResult Create()
         {
             return View();
         }
-        // POST: Marca/MarcaAgregar
+
+        // POST: Marca/Create
         [HttpPost]
-        public ActionResult MarcasAgregar(MarcasModel marca)
+        public ActionResult Create(MarcasModel marca)
         {
             try
             {
@@ -37,103 +39,8 @@ namespace MarcaModelo.Web.Controllers
                     marcaRepo.Persist((Marca)marcaRepo);
                     ViewBag.Message = "Marca agregada exitosamente.";
                 }
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        // GET: Bind controls to Update details
-        public ActionResult MarcasModificar(int idMarca)
-        {
-            IMarcaRepository marca = new Marca();
-            marca = marca.GetById(idMarca);
-            return View(new MarcasModel(marca) { IdMarca = marca.IdMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
-        }
-        // POST:Update the details into database
-        [HttpPost]
-        public ActionResult MarcasModificar(int idMarca, MarcasModel marca)
-        {
-            try
-            {
-                IMarcaRepository marcaRepo = new Marca();
-                marcaRepo.IdMarca = idMarca;
-                marcaRepo.Descripcion = marca.Descripcion;
-                marcaRepo.Persist((Marca)marcaRepo);
-                return RedirectToAction("MarcasTraer");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        // GET: Delete  Employee details by id
-        public ActionResult MarcasEliminar(int idMarca)
-        {
-            try
-            {
-                Marca marcaRepo = new Marca();
-                marcaRepo.Inactivate(idMarca);
-                ViewBag.AlertMsg = "Marca eliminada exitosamente.";
-                return RedirectToAction("MarcasTraer");
-            }
-            catch
-            {
-                return RedirectToAction("MarcasTraer");
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // GET: Marca
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: Marca/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Marca/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Marca/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Index", new { pActivas = "A" });
             }
             catch
             {
@@ -142,19 +49,23 @@ namespace MarcaModelo.Web.Controllers
         }
 
         // GET: Marca/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int idMarca)
         {
-            return View();
+            IMarcaRepository marca = new Marca();
+            marca = marca.GetById(idMarca);
+            return View(new MarcasModel(marca) { IdMarca = marca.IdMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
         }
 
         // POST: Marca/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int idMarca, MarcasModel marca)
         {
             try
             {
-                // TODO: Add update logic here
-
+                IMarcaRepository marcaRepo = new Marca();
+                marcaRepo.IdMarca = idMarca;
+                marcaRepo.Descripcion = marca.Descripcion;
+                marcaRepo.Persist((Marca)marcaRepo);
                 return RedirectToAction("Index");
             }
             catch
@@ -162,27 +73,55 @@ namespace MarcaModelo.Web.Controllers
                 return View();
             }
         }
-
+        
         // GET: Marca/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Marca/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int IdMarca)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                Marca marcaRepo = new Marca();
+                marcaRepo.Inactivate(IdMarca);
+                ViewBag.AlertMsg = "Marca desactivada exitosamente.";
+                return RedirectToAction("Index", new { pActivas = "A" });
             }
             catch
             {
-                return View();
+                return Index("A");
             }
+        }
+        
+        // GET: Marca/Reactivar/5
+        public ActionResult Reactivar(int IdMarca)
+        {
+            try
+            {
+                Marca marcaRepo = new Marca();
+                marcaRepo.Activate(IdMarca);
+                ViewBag.AlertMsg = "Marca reactivada exitosamente.";
+                return RedirectToAction("Index", new { pActivas = "B" });
+            }
+            catch
+            {
+                return Index("B");
+            }
+        }
+        
+        // GET: Marca/Details/5
+        public ActionResult Details(int idMarca)
+        {
+            IMarcaRepository marca = new Marca();
+            marca = marca.GetById(idMarca);
+            return View(new MarcasModel(marca) { IdMarca = marca.IdMarca, Descripcion = marca.Descripcion, Estado = marca.Estado });
+        }
+
+        public ActionResult Excel()
+        {
+            return Index();
+        }
+
+        public ActionResult Imprimir()
+        {
+            return Index();
         }
     }
 }

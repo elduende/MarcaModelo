@@ -242,11 +242,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Marcas\MarcasTraer.cshtml">
-      <BrowseToURL>~/Marcas/MarcasTraer</BrowseToURL>
-    </Content>
-    <Content Include="Views\Marcas\MarcasAgregar.cshtml" />
-    <Content Include="Views\Marcas\MarcasModificar.cshtml" />
+    <Content Include="Views\Marcas\Index.cshtml" />
+    <Content Include="Views\Marcas\Create.cshtml" />
+    <Content Include="Views\Marcas\Edit.cshtml" />
+    <Content Include="Views\Marcas\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

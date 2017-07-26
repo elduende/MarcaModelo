@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MarcaModelo.Web.Models.MarcasModel>
+
+<p>
+    
+    @Html.ActionLink("Agregar Marca Nueva", "Create") |
+    @{
+    @(ViewData["Activas"].ToString() == "A" ? 
+            Html.ActionLink("Inactivas", "Index", new {pActivas = "B"}) : 
+            Html.ActionLink("Activas", "Index", new { pActivas = "A" })
+    )} |
+    @Html.ActionLink("Excel", null, null, new { onclick = "return alert('Funcionalidad no implementada.');" }) |
+    @Html.ActionLink("Imprimir", null, null, new { onclick = "return alert('Funcionalidad no implementada.');" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Acciones
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @{
+                @(ViewData["Activas"].ToString() == "A" ?
+                      Html.ActionLink("Editar", "Edit", new { idMarca = item.IdMarca }) :
+                      null
+                      )}
+                @(ViewData["Activas"].ToString() == "A" ? "|" : null)
+            @{
+                @(ViewData["Activas"].ToString() == "A" ?
+                      Html.ActionLink("Detalles", "Details", new { idMarca = item.IdMarca }) :
+                      null
+                      )}
+                @(ViewData["Activas"].ToString() == "A" ? "|" : null)
+            @{
+                @(ViewData["Activas"].ToString() == "A" ? 
+                      Html.ActionLink("Desactivar", "Delete", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de desactivar la Marca?');" }) : 
+                      Html.ActionLink("Reactivar", "Reactivar", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de reactivar la Marca?');" })
+                 )}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+    </tr>
+}
+</table>

@@ -12,13 +12,17 @@ namespace MarcaModelo.Web.Models
         private readonly IMarcaRepository _marcaRepository;
         private readonly Lazy<ModeloModel[]> _modelos;
 
+        //TODO - Tuve que agregar este constructor sin parámetros porque sino el Create da error
+        public MarcasModel()
+        { }
+
         public MarcasModel(IMarcaRepository marcaRepository)
         {
             //TODO - Lazyload ¿Está bien así?
             _modelos = new Lazy<ModeloModel[]>(() =>
             marcaRepository.Modelos().ToArray()
             .Select(x => new ModeloModel { IdMarca = marcaRepository.IdMarca }).ToArray());
-            this._marcaRepository = marcaRepository;
+            _marcaRepository = marcaRepository;
         }
 
         [Display(Name = "IDMarca")]
