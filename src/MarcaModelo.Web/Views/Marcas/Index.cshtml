@@ -38,8 +38,8 @@
                 @(ViewData["Activas"].ToString() == "A" ? "|" : null)
             @{
                 @(ViewData["Activas"].ToString() == "A" ? 
-                      Html.ActionLink("Desactivar", "Delete", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de desactivar la Marca?');" }) : 
-                      Html.ActionLink("Reactivar", "Reactivar", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de reactivar la Marca?');" })
+                      Html.ActionLink("Desactivar", "Delete", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de desactivar la Marca " + item.Descripcion + "?');" }) : 
+                      Html.ActionLink("Reactivar", "Reactivar", new { idMarca = item.IdMarca }, new { onclick = "return confirm('¿Está seguro de reactivar la Marca " + item.Descripcion + "?');" })
                  )}
             </td>
             <td>
